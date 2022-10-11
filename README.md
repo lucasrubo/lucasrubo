@@ -20,7 +20,7 @@ Languages that I like to learn and study :arrow_down:
  - :wrench: Jenkins Pipelines
  
  My resume:
- https://lucasrubo.github.io/Portfolio/
+https://lucasrubo.github.io/lucasrubo/
  
 
   
