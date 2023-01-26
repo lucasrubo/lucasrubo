@@ -12,7 +12,7 @@ In my private life i like to pratice sports and in my free time.
 ### :computer: Stack
 Languages that I like to learn and study :arrow_down:
 
- - 👨 Front-End: HTML, CSS, JavaScript
+ - 👨 Front-End: HTML, CSS, JavaScript, React.js, Next.js
  - :computer: Back-End: JavaScript(NodeJS), C#, Python and PHP
  - :umbrella: Frameworks: .Net Core, Asp.Net MVC and Asp.Net WebForms
  - :cloud: Cloud: Amazon Web Services (AWS)
