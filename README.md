@@ -7,12 +7,12 @@
 <hr>
 
 I'm 22 years old. I started working with programming in 2019. I worked at IBM Brasil as a Systems Developer intern in the CI/CD team.
-In my private life i like to pratice sports and in my free time.
+In my private life I like to pratice sports and in my free time I play Games.
 
 ### :computer: Stack
 Languages that I like to learn and study :arrow_down:
 
- - 👨 Front-End: HTML, CSS, JavaScript
+ - 👨 Front-End: HTML, CSS, JavaScript, React.js, Next.js
  - :computer: Back-End: JavaScript(NodeJS), C#, Python and PHP
  - :umbrella: Frameworks: .Net Core, Asp.Net MVC and Asp.Net WebForms
  - :cloud: Cloud: Amazon Web Services (AWS)

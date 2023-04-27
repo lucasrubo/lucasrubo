@@ -23,4 +23,8 @@
     padding: 1.5rem 5rem 2rem !important; }
   .page-break {
     padding-top: 5rem;
-    page-break-before: always; } }
+    page-break-before: always; } 
+    .avatar{
+      display:none !important;
+    }
+  }

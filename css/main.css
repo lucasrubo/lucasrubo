@@ -4,6 +4,7 @@
 .mb-2 {
    margin-bottom: 0rem !important; 
 }
+
 @-webkit-keyframes fadeIn {
   0% { opacity: 0; }
   100% { opacity: 1; } 
@@ -148,6 +149,14 @@ footer a:not(.nav-link) {
     margin-bottom: -80px;
     margin-left: 0; } }
 
+
+.aparece-print{
+  display: none;
+}
+
+.coluna-print{
+  border-right:1px solid #e3e5e8;
+}
 @media print {
   body {
     background-color: #fff; }
@@ -165,7 +174,9 @@ footer a:not(.nav-link) {
   .avatar {
     margin-top: -10px; }
   .about-section {
-    padding: 6.5rem 5rem 2rem !important; }
+    padding: 6.5rem 5rem 2rem !important; 
+    margin-top:-80px !important;
+  }
   .skills-section,
   .work-experience-section,
   .education-section,
@@ -173,4 +184,66 @@ footer a:not(.nav-link) {
     padding: 1.5rem 5rem 2rem !important; }
   .page-break {
     padding-top: 5rem;
-    page-break-before: always; } }
+    page-break-before: always; } 
+  
+    .avatar{
+      display:none !important;
+    }
+    h2.h1.mt-2.aos-init.aos-animate {
+      margin-top: -60px !important;
+    }
+    p.aos-init.aos-animate{
+      margin-top: -23px !important;
+    }
+    .cover-bg {
+      height:30px !important;
+    }
+    .col-md-6{      
+      max-width: 400px !important;
+      display:inline-block !important;
+    }
+    .col-md-5{      
+      max-width: 230px !important;
+      display:inline-block !important;
+    }
+    
+    .col-md-3 {
+      max-width: 160px !important;
+    } 
+    .mb-3 {
+        margin-bottom: 0rem!important;
+    }
+    .esconde-print{
+      display:none;
+    }
+    .aparece-print{
+      display:block;
+    }
+    p {
+        margin-top: 0;
+        margin-bottom: 0rem !important;
+    }
+    .skills-section{
+      margin-top: -50px !important;
+    }
+    .tooltip_22 .tooltiptext {
+        visibility: visible !important ;
+        width: auto !important ;        
+        color: black !important ;
+        text-align: center !important ;
+        border-radius: 0 !important ;
+        padding: 0 !important ;
+        position: absolute!important;
+        z-index: 9999 !important;
+        bottom: 68% !important;
+        left: 70% !important;
+        margin-left: 0px !important ;
+        opacity: inherit !important ;
+        box-shadow: 2px 5px 0px white !important;
+        background: white!important;
+        border: 0!important;
+    }
+    .tooltip_22 .tooltiptext::after {    
+        border-color: #ffffff transparent transparent transparent!important;
+    }
+}
