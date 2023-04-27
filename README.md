@@ -7,7 +7,7 @@
 <hr>
 
 I'm 22 years old. I started working with programming in 2019. I worked at IBM Brasil as a Systems Developer intern in the CI/CD team.
-In my private life i like to pratice sports and in my free time.
+In my private life I like to pratice sports and in my free time I play Games.
 
 ### :computer: Stack
 Languages that I like to learn and study :arrow_down:
