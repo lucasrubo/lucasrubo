@@ -14,7 +14,7 @@ Languages that I like to learn and study :arrow_down:
 
  - 👨 Front-End: HTML, CSS, JavaScript, React.js, Next.js
  - :computer: Back-End: JavaScript(NodeJS), C#, Python and PHP
- - :umbrella: Frameworks: .Net Core, Asp.Net MVC and Asp.Net WebForms
+ - :umbrella: Frameworks: React, Laravel, .Net Core, Asp.Net MVC and Asp.Net WebForms
  - :cloud: Cloud: Amazon Web Services (AWS)
  - :thought_balloon: IDEs: Visual Studio, Visual Studio Code
  - :wrench: Jenkins Pipelines
