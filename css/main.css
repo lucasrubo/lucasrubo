@@ -5,6 +5,15 @@
    margin-bottom: 0rem !important; 
 }
 
+.linguagem{
+  color:white;
+  text-decoration: none;
+  
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0);
+}
+.linguagem:hover{
+  color:#d5d5d5;
+}
 @media (min-width: 992px) {
   #texto-aa {
     width: max-content;
@@ -127,7 +136,6 @@ html {
   background-image: url("images/Lethal.jpg");
   /*border-radius: 10px 10px 0 0; */  
 }
-
 .avatar {
   max-width: 216px;
   max-height: 216px;
