@@ -24,4 +24,4 @@ https://lucasrubo.github.io/lucasrubo/
  
 
   
- [![lucasrubo's github stats](https://github-readme-stats.vercel.app/api?username=lucasrubo)](https://github.com/lucasrubo/github-readme-stats)
+ [![lucasrubo's github stats](https://github-readme-stats.vercel.app/api?username=lucasrubo&theme=radical)](https://github.com/lucasrubo/github-readme-stats)
