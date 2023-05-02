@@ -6,8 +6,11 @@
 ### :large_blue_diamond: About Me
 <hr>
 
-I'm 22 years old. I started working with programming in 2019. I worked at IBM Brasil as a Systems Developer intern in the CI/CD team.
-In my private life I like to pratice sports and in my free time I play Games.
+I started working with programming in 2019. I worked at IBM Brasil as a Systems Developer intern in the CI/CD team.
+In my private life I like to pratice sports and in my free time I play Games. I constantly seek to improve my skills and knowledge in technology to contribute to the projects I work on.
+
+I hold a degree in Computer Science and aim to gain practical experience in the market and expand my knowledge in the field of development. I am eager to contribute with my technical ability and commitment to teamwork to achieve challenging goals.
+
 
 ### :computer: Stack
 Languages that I like to learn and study :arrow_down:
