@@ -11,6 +11,26 @@
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&amp;family=Roboto:wght@300;400;500;700&amp;display=swap"/>
     </noscript>
+    <script>
+      function idade(ano_aniversario, mes_aniversario, dia_aniversario) {
+          var d = new Date,
+              ano_atual = d.getFullYear(),
+              mes_atual = d.getMonth() + 1,
+              dia_atual = d.getDate(),
+
+              ano_aniversario = +ano_aniversario,
+              mes_aniversario = +mes_aniversario,
+              dia_aniversario = +dia_aniversario,
+
+              quantos_anos = ano_atual - ano_aniversario;
+
+          if (mes_atual < mes_aniversario || mes_atual == mes_aniversario && dia_atual < dia_aniversario) {
+              quantos_anos--;
+          }
+
+          return quantos_anos < 0 ? 0 : quantos_anos;
+      }
+    </script>
     <link href="../css/font-awesome/css/all.min.css?ver=1.2.0" rel="stylesheet">
     <link href="../css/bootstrap.min.css?ver=1.2.0" rel="stylesheet">
     <link href="../css/aos.css?ver=1.2.0" rel="stylesheet">
@@ -74,8 +94,8 @@
     <div class="row">
       <div class="col-md-8">
         <h2 class="h3 mb-3">About</h2>
-        <p style="text-indent: 1.5rem;">
-          I'm a 22-year-old Junior Developer. I have the ability to work on multiple tasks at the same time, keeping myself organized and focused to deliver the activities. I constantly seek to improve my skills and knowledge in technology to contribute to the projects I work on.
+        <p style="text-indent: 1.5rem;" id="idade1">
+          I'm a @@@@ years old Junior Developer. I have the ability to work on multiple tasks at the same time, keeping myself organized and focused to deliver the activities. I constantly seek to improve my skills and knowledge in technology to contribute to the projects I work on.
         </p>  
         <p style="text-indent: 1.5rem;" id="texto-aa">
           I hold a degree in Computer Science and aim to gain practical experience in the market and expand my knowledge in the field of development. I am eager to contribute with my technical ability and commitment to teamwork to achieve challenging goals. Thank you for the opportunity to present my profile and I am available for further clarification.
@@ -87,7 +107,7 @@
             <div class="pb-1">Age:</div>
           </div>
           <div class="col-sm-8" style="padding:0px;">
-            <div class="pb-1 text-secondary">22 years old</div>
+            <div class="pb-1 text-secondary" id="idade2">@@@@ years old</div>
           </div>
           <div class="col-sm-4" style="width: 5.2rem;padding: 0;">
             <div class="pb-1">Email:</div>
@@ -462,5 +482,15 @@
     <script src="../scripts/bootstrap.bundle.min.js?ver=1.2.0"></script>
     <script src="../scripts/aos.js?ver=1.2.0"></script>
     <script src="../scripts/main.js?ver=1.2.0"></script>
+    <script>      
+      var idade_lucas = idade(2000, 7, 12);
+      var conteudo_idade1 = document.getElementById("idade1").innerHTML;
+      var conteudo_idade2 = document.getElementById("idade2").innerHTML;
+      let result1 = conteudo_idade1.replace("@@@@", idade_lucas);
+      let result2 = conteudo_idade2.replace("@@@@", idade_lucas);
+      // console.log(result1 +"\n"+idade_lucas);
+      document.getElementById("idade1").innerHTML = result1;
+      document.getElementById("idade2").innerHTML = result2;
+    </script>
   </body>
 </html>

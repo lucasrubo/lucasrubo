@@ -17,6 +17,24 @@
     <link href="css/main.css?ver=1.2.0" rel="stylesheet">
     <link href="css/tooltip.css" rel="stylesheet">
     <script>
+      function idade(ano_aniversario, mes_aniversario, dia_aniversario) {
+          var d = new Date,
+              ano_atual = d.getFullYear(),
+              mes_atual = d.getMonth() + 1,
+              dia_atual = d.getDate(),
+
+              ano_aniversario = +ano_aniversario,
+              mes_aniversario = +mes_aniversario,
+              dia_aniversario = +dia_aniversario,
+
+              quantos_anos = ano_atual - ano_aniversario;
+
+          if (mes_atual < mes_aniversario || mes_atual == mes_aniversario && dia_atual < dia_aniversario) {
+              quantos_anos--;
+          }
+
+          return quantos_anos < 0 ? 0 : quantos_anos;
+      }
       var lingua = navigator.language;
       if(!lingua.includes("pt")){
         var url_atual = window.location.href;
@@ -84,8 +102,8 @@
     <div class="row">
       <div class="col-md-8">
         <h2 class="h3 mb-3">Sobre</h2>
-        <p style="text-indent: 1.5rem;">
-          Sou desenvolvedor Júnior com 22 anos. Tenho capacidade de trabalhar com múltiplas tarefas ao mesmo tempo, mantendo-me organizado e focado para entregar as atividades. Busco constantemente aprimorar minhas habilidades e conhecimentos em tecnologia para contribuir com os projetos em que atuo.
+        <p style="text-indent: 1.5rem;" id="idade1">
+          Sou desenvolvedor Júnior com @@@@ anos. Tenho capacidade de trabalhar com múltiplas tarefas ao mesmo tempo, mantendo-me organizado e focado para entregar as atividades. Busco constantemente aprimorar minhas habilidades e conhecimentos em tecnologia para contribuir com os projetos em que atuo.
         </p>  
         <p style="text-indent: 1.5rem;" id="texto-aa">
           Formado em Ciência da Computação, viso adquirir experiência prática no mercado e ampliar meus conhecimentos na área de desenvolvimento. Estou ansioso para contribuir com minha capacidade técnica e meu comprometimento em trabalhar em equipe para alcançar objetivos desafiadores.
@@ -98,7 +116,7 @@
             <div class="pb-1">Idade:</div>
           </div>
           <div class="col-sm-8" style="padding:0px;">
-            <div class="pb-1 text-secondary">22 anos</div>
+            <div class="pb-1 text-secondary" id="idade2">@@@@ anos</div>
           </div>
           <div class="col-sm-4" style="width: 5.2rem;padding: 0;">
             <div class="pb-1">Email:</div>
@@ -498,5 +516,15 @@
     <script src="scripts/bootstrap.bundle.min.js?ver=1.2.0"></script>
     <script src="scripts/aos.js?ver=1.2.0"></script>
     <script src="scripts/main.js?ver=1.2.0"></script>
+    <script>      
+      var idade_lucas = idade(2000, 7, 12);
+      var conteudo_idade1 = document.getElementById("idade1").innerHTML;
+      var conteudo_idade2 = document.getElementById("idade2").innerHTML;
+      let result1 = conteudo_idade1.replace("@@@@", idade_lucas);
+      let result2 = conteudo_idade2.replace("@@@@", idade_lucas);
+      // console.log(result1 +"\n"+idade_lucas);
+      document.getElementById("idade1").innerHTML = result1;
+      document.getElementById("idade2").innerHTML = result2;
+    </script>
   </body>
 </html>
