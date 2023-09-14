@@ -16,7 +16,7 @@ I hold a degree in Computer Science and aim to gain practical experience in the 
 Languages that I like to learn and study :arrow_down:
 
  - 👨 Front-End: HTML, CSS, JavaScript, React.js, Next.js
- - :computer: Back-End: JavaScript(NodeJS), C#, Python and PHP
+ - :computer: Back-End: JavaScript(NodeJS), C#, Python, Java and PHP
  - :umbrella: Frameworks: React, Laravel, .Net Core, Asp.Net MVC and Asp.Net WebForms
  - :cloud: Cloud: Amazon Web Services (AWS)
  - :thought_balloon: IDEs: Visual Studio, Visual Studio Code
