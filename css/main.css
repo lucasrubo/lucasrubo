@@ -176,7 +176,9 @@ h2.h1.mt-2.aos-init.aos-animate{
 }
 @media print {
   body {
-    background-color: #fff; }
+    background-color: #fff; 
+    color: rgb(48, 48, 48) !important;
+  }
   .container {
     width: auto;
     max-width: 100%;
@@ -191,8 +193,8 @@ h2.h1.mt-2.aos-init.aos-animate{
   .avatar {
     margin-top: -10px; }
   .about-section {
-    padding: 6rem 3.5rem 2rem !important; 
-    margin-top:-78px !important;
+    padding: 6rem 2.5rem 2rem !important; 
+    margin-top:-90px !important;
   }
   .skills-section,
   .work-experience-section,
@@ -206,7 +208,7 @@ h2.h1.mt-2.aos-init.aos-animate{
       font-size: 17px !important;
     }
     h2.h1.mt-2.aos-init.aos-animate{
-      color:white !important;text-shadow: 2px 2px 6px rgba(255, 255, 255, 0)!important;
+      color:black !important;text-shadow: 2px 2px 6px rgba(255, 255, 255, 0)!important;
     }
     .avatar{
       display:none !important;
@@ -286,4 +288,9 @@ h2.h1.mt-2.aos-init.aos-animate{
     .tooltip_22 .tooltiptext::after {    
         border-color: #ffffff transparent transparent transparent!important;
     }
+    a{
+      color: black !important;
+      text-decoration: none;
+    }
+    .cover-bg{background: white !important;color: black !important;}
 }
