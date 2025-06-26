@@ -58,17 +58,17 @@ const SideBar: React.FC = () => {
         <div className="separator"></div>
         <ul className="social-list">
           <li className="social-item">
-            <a href="#" className="social-link">
-              <IonIcon name="logo-facebook" role="img" className="md hydrated" aria-label="logo facebook"></IonIcon>
+            <a target='_blank' href={profile.about.github} className="social-link">
+              <IonIcon name="logo-github" role="img" className="md hydrated" aria-label="logo github"></IonIcon>
             </a>
           </li>
           <li className="social-item">
-            <a href="#" className="social-link">
-              <IonIcon name="logo-twitter" role="img" className="md hydrated" aria-label="logo twitter"></IonIcon>
+            <a target='_blank' href={profile.about.linkedin}  className="social-link">
+              <IonIcon name="logo-linkedin" role="img" className="md hydrated" aria-label="logo linkedin"></IonIcon>
             </a>
           </li>
           <li className="social-item">
-            <a href="#" className="social-link">
+            <a target='_blank' href={profile.about.instagram}  className="social-link">
               <IonIcon name="logo-instagram" role="img" className="md hydrated" aria-label="logo instagram"></IonIcon>
             </a>
           </li>
