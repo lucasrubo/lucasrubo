@@ -1177,6 +1177,9 @@ textarea.form-input::-webkit-resizer { display: none; }
     top: -30px;
     right: -30px;
     padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
   }
   .info_more-btn span { display: block; font-size: var(--fs-8); }
   .info_more-btn ion-icon { display: none; }

@@ -17,6 +17,9 @@ const profile = {
       `I am deeply passionate about front-end technologies, particularly React and TypeScript, and continuously seek to expand my expertise in modern frameworks and best practices. Additionally, I have experience with back-end languages like Java, Python, and C++, as well as database systems such as MySQL and PostgreSQL.`,
       `A strong believer in lifelong learning, I thrive in dynamic environments where I can apply my problem-solving skills and adaptability to deliver high-quality solutions. Whether working on complex systems or experimenting with new technologies, I am always eager to grow and contribute to impactful projects.`,
     ],
+    instagram: 'https://www.instagram.com/lucas.rubo/',
+    linkedin: 'https://www.linkedin.com/in/lucas-rubo/',
+    github: 'https://github.com/lucasrubo',
   },
 
   services: [
