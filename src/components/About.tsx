@@ -1,5 +1,20 @@
-import profile from '../data/profile';
+import profile from "../data/profile";
+function getAge(birthday: string) {
+  const birth = new Date(birthday);
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const m = today.getMonth() - birth.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
+    age--;
+  }
+  return age;
+}
+
 function About() {
+  const age = getAge(profile.birthday);
+  const aboutParagraphs = profile.about.paragraphs.map((p, i) =>
+    i === 0 ? p.replace(/\d{2}/, age.toString()) : p
+  );
   return (
     <article className="about  active" data-page="about">
       <header>
@@ -7,7 +22,9 @@ function About() {
       </header>
 
       <section className="about-text">
-        {profile.about.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+        {aboutParagraphs.map((p, i) => (
+          <p key={i}>{p}</p>
+        ))}
       </section>
 
       <section className="service">

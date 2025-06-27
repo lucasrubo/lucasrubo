@@ -7,9 +7,15 @@
   text-transform: capitalize;
 }
 
-.h2 { font-size: var(--fs-1); }
-.h3 { font-size: var(--fs-2); }
-.h4 { font-size: var(--fs-4); }
+.h2 {
+  font-size: var(--fs-1);
+}
+.h3 {
+  font-size: var(--fs-2);
+}
+.h4 {
+  font-size: var(--fs-4);
+}
 .h5 {
   font-size: var(--fs-7);
   font-weight: var(--fw-500);
@@ -29,4 +35,11 @@
   height: 3px;
   background: var(--text-gradient-yellow);
   border-radius: 3px;
+}
+
+p.copyright {
+  color: var(--light-gray);
+  justify-self: center;
+  margin-top: 8px;
+  font-size: 12px;
 }

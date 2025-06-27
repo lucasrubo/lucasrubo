@@ -1,26 +1,25 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Loader = () => {
   return (
-    <div className='loader-main'>
+    <div className="loader-main">
       <StyledWrapper>
         <div className="card">
           <div className="loader">
             <p>loading</p>
             <div className="words">
               <span className="word">profile</span>
-              <span className="word">text</span>
               <span className="word">about me</span>
               <span className="word">resume</span>
-              <span className="word">contact</span>
+              <span className="word">certificates</span>
             </div>
           </div>
         </div>
       </StyledWrapper>
     </div>
   );
-}
+};
 
 const StyledWrapper = styled.div`
   .card {
@@ -108,6 +107,7 @@ const StyledWrapper = styled.div`
       -webkit-transform: translateY(-400%);
       transform: translateY(-400%);
     }
-  }`;
+  }
+`;
 
 export default Loader;
