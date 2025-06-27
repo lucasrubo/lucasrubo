@@ -1,15 +1,14 @@
-import { useEffect, useState } from 'react';
-import SideBar from '../components/SideBar';
-import NavBar from '../components/NavBar';
-import About from '../components/About';
-import Resume from '../components/Resume';
-import Portfolio from '../components/Portfolio';
-import Blog from '../components/Blog';
-import Contact from '../components/Contact';
-import useUIInteractions from '../hooks/useUIInteractions';
-import Loader from '../components/Loader';
+import { useEffect, useState } from "react";
+import SideBar from "../components/SideBar";
+import NavBar from "../components/NavBar";
+import About from "../components/About";
+import Resume from "../components/Resume";
+import Certificates from "../components/Certificates";
+import Blog from "../components/Blog";
+import Contact from "../components/Contact";
+import useUIInteractions from "../hooks/useUIInteractions";
+import Loader from "../components/Loader";
 const Home: React.FC = () => {
-  
   const [loading, setLoading] = useState(true);
 
   useUIInteractions();
@@ -17,23 +16,22 @@ const Home: React.FC = () => {
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
-    return () => clearTimeout(timer); 
+    return () => clearTimeout(timer);
   }, []);
 
-
   return (
-      <main className="home-container">
+    <main className="home-container">
       {loading && <Loader />}
-        <SideBar />
-        <div className="main-content">
-          <NavBar />
-          <About />
-          <Resume />
-          <Portfolio />
-          <Blog />
-          <Contact />
-        </div>      
-      </main>
+      <SideBar />
+      <div className="main-content">
+        <NavBar />
+        <About />
+        <Resume />
+        <Certificates />
+        <Blog />
+        <Contact />
+      </div>
+    </main>
   );
 };
 

@@ -1,4 +1,4 @@
-
+import profile from "../data/profile";
 
 function NavBar() {
   return (
@@ -6,19 +6,25 @@ function NavBar() {
       <ul className="navbar-list">
         <li className="navbar-item">
           <button className="navbar-link  active" data-nav-link>
-            About
+            {profile.navBar.about}
           </button>
         </li>
 
         <li className="navbar-item">
           <button className="navbar-link" data-nav-link>
-            Resume
+            {profile.navBar.resume}
           </button>
         </li>
 
         <li className="navbar-item">
           <button className="navbar-link" data-nav-link>
-            Contact
+            Certificates
+          </button>
+        </li>
+
+        <li className="navbar-item">
+          <button className="navbar-link" data-nav-link>
+            {profile.navBar.contact}
           </button>
         </li>
       </ul>
