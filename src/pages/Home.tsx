@@ -16,22 +16,32 @@ const Home: React.FC = () => {
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
+    if (loading) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      clearTimeout(timer);
+      document.body.style.overflow = "";
+    };
+  }, [loading]);
 
   return (
-    <main className="home-container">
+    <>
       {loading && <Loader />}
-      <SideBar />
-      <div className="main-content">
-        <NavBar />
-        <About />
-        <Resume />
-        <Certificates />
-        <Blog />
-        <Contact />
-      </div>
-    </main>
+      <main className="home-container">
+        <SideBar />
+        <div className="main-content">
+          <NavBar />
+          <About />
+          <Resume />
+          <Certificates />
+          <Blog />
+          <Contact />
+        </div>
+      </main>
+    </>
   );
 };
 
