@@ -40,7 +40,8 @@ const Home: React.FC = () => {
           <Blog />
           <Contact />
         </div>
-      </main>
+      </main>      
+      <p className="copyright">&copy; 2019 - {new Date().getFullYear()} Rubo</p>
     </>
   );
 };

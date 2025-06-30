@@ -117,7 +117,6 @@ const SideBar: React.FC = () => {
           </ul>
         </div>
       </aside>
-      <p className="copyright">&copy; 2019 - 2025 Rubo</p>
     </div>
   );
 };
