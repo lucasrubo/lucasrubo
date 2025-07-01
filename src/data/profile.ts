@@ -1,7 +1,7 @@
 const profile = {
   name: "Lucas Gabriel Rubo",
   title: "Web developer",
-  avatar: "./images/avatar.jpg",
+  avatar: "./lucasrubo/images/avatar.jpg",
   email: "lucasrubo1@gmail.com",
   phone: "+55 (19) 9940-19804",
   birthday: "2000-07-12",
@@ -31,19 +31,19 @@ const profile = {
 
   services: [
     {
-      icon: "./images/icon-design.svg",
+      icon: "./lucasrubo/images/icon-design.svg",
       title: "Front-End Development",
       description:
         "Modern web apps with React, TypeScript, Blazor – fast, scalable, user-friendly.",
     },
     {
-      icon: "./images/icon-dev.svg",
+      icon: "./lucasrubo/images/icon-dev.svg",
       title: "Web development",
       description:
         "End-to-end solutions: APIs, databases, and dynamic interfaces.",
     },
     {
-      icon: "./images/icon-app.svg",
+      icon: "./lucasrubo/images/icon-app.svg",
       title: "Cross-Platform Applications",
       description: "iOS, Android & web apps with native performance.",
     },

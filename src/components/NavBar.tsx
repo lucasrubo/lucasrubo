@@ -1,5 +1,5 @@
 import profile from "../data/profile";
-
+import Toggle from "./Toggle";
 function NavBar() {
   return (
     <nav className="navbar">
@@ -26,6 +26,9 @@ function NavBar() {
           <button className="navbar-link" data-nav-link>
             {profile.navBar.contact}
           </button>
+        </li>
+        <li className="navbar-item">
+            <Toggle />
         </li>
       </ul>
     </nav>

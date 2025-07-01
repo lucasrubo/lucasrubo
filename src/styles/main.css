@@ -1218,6 +1218,9 @@ main {
   opacity: 0;
   z-index: 1;
   transition: var(--transition-1);
+  width: 60px;
+  height: 60px;
+  text-align: -webkit-center;
 }
 
 .project-item > a:hover .project-item-icon-box {
