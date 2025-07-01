@@ -69,7 +69,7 @@ function Certificates() {
                     <IonIcon name="eye-outline"></IonIcon>
                   </div>
                   <img
-                    src={`./lucasrubo/images/certificates/${cert.credentialId}.png`}
+                    src={`./images/images/certificates/${cert.credentialId}.png`}
                     alt={cert.name}
                     loading="lazy"
                   />
