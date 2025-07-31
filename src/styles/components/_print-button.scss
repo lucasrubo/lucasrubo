@@ -1,0 +1,62 @@
+/* Print button themed to match project design */
+.navbar-link.print-button {
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-8);
+  font-weight: var(--fw-500);
+  background: var(--border-gradient-onyx);
+  color: var(--orange-yellow-crayola);
+  border-radius: 14px;
+  padding: 8px 12px;
+  transition: var(--transition-1);
+  box-shadow: var(--shadow-2);
+  z-index: 1;
+}
+
+.navbar-link.print-button::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: var(--bg-gradient-jet);
+  border-radius: inherit;
+  transition: var(--transition-1);
+  z-index: -1;
+}
+
+.navbar-link.print-button:hover,
+.navbar-link.print-button:focus {
+  background: var(--bg-gradient-yellow-1);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-3);
+}
+
+.navbar-link.print-button:hover::before,
+.navbar-link.print-button:focus::before {
+  background: var(--bg-gradient-yellow-2);
+}
+
+.navbar-link.print-button:active {
+  transform: translateY(0);
+}
+
+/* Responsive adjustments for print button */
+@media (max-width: 768px) {
+  .navbar-link.print-button {
+    padding: 6px 10px;
+    font-size: var(--fs-8);
+    gap: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-link.print-button {
+    font-size: 0; /* Hide text on very small screens */
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    justify-content: center;
+  }
+}

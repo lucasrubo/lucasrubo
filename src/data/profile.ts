@@ -1,12 +1,12 @@
 const profile = {
   name: "Lucas Gabriel Rubo",
   title: "Web developer",
-  avatar: "./images/images/avatar.jpg",
+  avatar: "./images/avatar.jpg",
   email: "lucasrubo1@gmail.com",
   phone: "+55 (19) 9940-19804",
   birthday: "2000-07-12",
   birthdayText: "July 12, 2000",
-  location: "Valinhos, São Paulo, Brazil",
+  location: "São Paulo, Brazil",
   infoButton: "Show Contacts",
 
   navBar: {
@@ -31,19 +31,19 @@ const profile = {
 
   services: [
     {
-      icon: "./images/images/icon-design.svg",
+      icon: "./images/icon-design.svg",
       title: "Front-End Development",
       description:
         "Modern web apps with React, TypeScript, Blazor – fast, scalable, user-friendly.",
     },
     {
-      icon: "./images/images/icon-dev.svg",
+      icon: "./images/icon-dev.svg",
       title: "Web development",
       description:
         "End-to-end solutions: APIs, databases, and dynamic interfaces.",
     },
     {
-      icon: "./images/images/icon-app.svg",
+      icon: "./images/icon-app.svg",
       title: "Cross-Platform Applications",
       description: "iOS, Android & web apps with native performance.",
     },
@@ -73,7 +73,7 @@ const profile = {
       },
       {
         title: "Junior Developer",
-        company: "Areco",
+        company: "NB41",
         period: "2023 — 2024",
         description:
           "Remote work at NB41 Comunicação e Marketing LTDA. Development and maintenance of PHP systems, database modeling, and creation of dynamic interfaces to meet specific demands.",

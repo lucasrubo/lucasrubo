@@ -1,4 +1,7 @@
-@use 'themes/main';
+@use "themes/main";
+@use "components/print";
+@use "components/print-modal";
+@use "components/print-button";
 
 #svg-global {
   zoom: 1.2;
