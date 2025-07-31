@@ -30,7 +30,7 @@ function PrintModal({ isOpen, onClose }: PrintModalProps) {
     <div className="print-modal-overlay" onClick={onClose}>
       <div className="print-modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="print-modal-header">
-          <h2></h2>
+          <h2>Resume - PDF</h2>
           <div className="print-modal-buttons">
             <button
               className="print-btn primary"
