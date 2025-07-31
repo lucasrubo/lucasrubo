@@ -30,7 +30,7 @@ function PrintModal({ isOpen, onClose }: PrintModalProps) {
     <div className="print-modal-overlay" onClick={onClose}>
       <div className="print-modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="print-modal-header">
-          <h2>Visualização do Currículo - PDF</h2>
+          <h2></h2>
           <div className="print-modal-buttons">
             <button
               className="print-btn primary"
@@ -38,11 +38,11 @@ function PrintModal({ isOpen, onClose }: PrintModalProps) {
               disabled={isGenerating}
             >
               <IonIcon name="print-outline" />
-              {isGenerating ? "Gerando..." : "Imprimir/Salvar PDF"}
+              {isGenerating ? "Creating..." : "Print/Save PDF"}
             </button>
             <button className="print-btn secondary" onClick={onClose}>
               <IonIcon name="close-outline" />
-              Fechar
+              Close
             </button>
           </div>
         </div>
