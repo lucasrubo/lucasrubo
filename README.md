@@ -27,3 +27,6 @@ My resume:
 https://lucasrubo.github.io/lucasrubo/
 
 [![lucasrubo's github stats](https://github-readme-stats.vercel.app/api?username=lucasrubo&theme=radical)](https://github.com/lucasrubo/github-readme-stats)
+
+
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=lucasrubo&layout=compact&theme=radical)](https://github.com/VictorToledo36/github-readme-stats)
