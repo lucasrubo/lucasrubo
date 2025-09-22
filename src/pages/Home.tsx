@@ -10,12 +10,8 @@ import useUIInteractions from "../hooks/useUIInteractions";
 import Loader from "../components/Loader";
 import Toggle from "../components/Toggle";
 
-import PrintModal from "../components/PrintModal";
-import IonIcon from "@reacticons/ionicons";
-
 const Home: React.FC = () => {
   const [loading, setLoading] = useState(true);
-  const [isPrintModalOpen, setIsPrintModalOpen] = useState(false);
 
   useUIInteractions();
   useEffect(() => {
