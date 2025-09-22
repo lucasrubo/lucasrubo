@@ -1,0 +1,58 @@
+.experience-card {
+  background: var(--bg-gradient-onyx, #23232d);
+  border-radius: 1.2rem;
+  box-shadow: var(--shadow-2, 0 16px 30px hsla(0, 0%, 0%, 0.25));
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+  // margin-bottom: 2rem;
+  border: 2px solid var(--orange-yellow-crayola, #ffd600);
+  transition: box-shadow 0.3s;
+}
+
+.experience-card:hover {
+  box-shadow: var(--shadow-4, 0 25px 50px hsla(0, 0%, 0%, 0.15));
+}
+
+.exp-icon {
+  min-width: 56px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-gradient-yellow-1, #ffe066);
+  border-radius: 50%;
+  box-shadow: var(--shadow-1, -4px 8px 24px hsla(0, 0%, 0%, 0.25));
+  max-width: fit-content;
+  justify-self: center;
+}
+
+.exp-years {
+  background: var(
+    --text-gradient-yellow,
+    linear-gradient(to right, #ffd600, #ffe066)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: var(--fw-600, 600);
+  font-size: 2.2rem;
+  margin-right: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .experience-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .exp-icon {
+    min-width: 40px;
+    min-height: 40px;
+  }
+  .exp-years {
+    font-size: 1.5rem;
+  }
+}

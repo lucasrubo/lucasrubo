@@ -8,8 +8,14 @@ import Blog from "../components/Blog";
 import Contact from "../components/Contact";
 import useUIInteractions from "../hooks/useUIInteractions";
 import Loader from "../components/Loader";
+import Toggle from "../components/Toggle";
+
+import PrintModal from "../components/PrintModal";
+import IonIcon from "@reacticons/ionicons";
+
 const Home: React.FC = () => {
   const [loading, setLoading] = useState(true);
+  const [isPrintModalOpen, setIsPrintModalOpen] = useState(false);
 
   useUIInteractions();
   useEffect(() => {
@@ -30,6 +36,9 @@ const Home: React.FC = () => {
   return (
     <>
       {loading && <Loader />}
+      <div className="toggle-container">
+        <Toggle />
+      </div>
       <main className="home-container">
         <SideBar />
         <div className="main-content">
@@ -40,7 +49,7 @@ const Home: React.FC = () => {
           <Blog />
           <Contact />
         </div>
-      </main>      
+      </main>
       <p className="copyright">&copy; 2019 - {new Date().getFullYear()} Rubo</p>
     </>
   );

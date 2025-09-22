@@ -1,12 +1,12 @@
 const profile = {
   name: "Lucas Gabriel Rubo",
   title: "Web developer",
-  avatar: "./images/avatar.jpg",
+  avatar: "./lucasrubo/images/avatar.jpg",
   email: "lucasrubo1@gmail.com",
   phone: "+55 (19) 9940-19804",
   birthday: "2000-07-12",
   birthdayText: "July 12, 2000",
-  location: "São Paulo, Brazil",
+  location: "Valinhos, SP - Brazil",
   infoButton: "Show Contacts",
 
   navBar: {
@@ -31,19 +31,19 @@ const profile = {
 
   services: [
     {
-      icon: "./images/icon-design.svg",
+      icon: "./lucasrubo/images/icon-design.svg",
       title: "Front-End Development",
       description:
-        "Modern web apps with React, TypeScript, Blazor – fast, scalable, user-friendly.",
+        "Modern web apps with Next.js, React and Blazor – fast, scalable, user-friendly.",
     },
     {
-      icon: "./images/icon-dev.svg",
+      icon: "./lucasrubo/images/icon-dev.svg",
       title: "Web development",
       description:
         "End-to-end solutions: APIs, databases, and dynamic interfaces.",
     },
     {
-      icon: "./images/icon-app.svg",
+      icon: "./lucasrubo/images/icon-app.svg",
       title: "Cross-Platform Applications",
       description: "iOS, Android & web apps with native performance.",
     },
@@ -65,14 +65,14 @@ const profile = {
     ],
     experience: [
       {
-        title: "Junior Development Analyst B",
+        title: "Development Analyst",
         company: "Areco",
         period: "2024 — Present",
         description:
-          "Development of complementary systems using C# with Blazor. Integrations with Delphi, PHP, and SQL in a hybrid environment at Areco Sistemas Empresariais.",
+          "Development of complementary systems using C# with Blazor and Next.js with C#. Integrations with Delphi, PHP, and SQL in a hybrid environment at Areco Sistemas Empresariais.",
       },
       {
-        title: "Junior Developer",
+        title: "Developer",
         company: "NB41",
         period: "2023 — 2024",
         description:
@@ -101,8 +101,11 @@ const profile = {
       },
     ],
     skills: [
+      { name: "Next.jS", value: 95 },
+      { name: "Blazor", value: 95 },
       { name: "C#", value: 90 },
-      { name: "Blazor", value: 85 },
+      { name: "Tailwind", value: 95 },
+      { name: "Sass", value: 95 },
       { name: "React", value: 80 },
       { name: "TypeScript", value: 80 },
       { name: "NodeJS", value: 70 },
@@ -111,7 +114,7 @@ const profile = {
       { name: "JavaScript", value: 70 },
       { name: "Git", value: 75 },
       { name: "CI/CD (Jenkins)", value: 65 },
-      { name: "HTML/CSS", value: 70 },
+      { name: "HTML/CSS", value: 100 },
       { name: "PowerShell", value: 60 },
       { name: "Delphi", value: 55 },
     ],

@@ -3,6 +3,45 @@
 @use "components/print-modal";
 @use "components/print-button";
 
+@use "components/experience-card";
+
+@use "components/certificate-modal";
+
+// Transição global de tema para todos os elementos principais
+html,
+body,
+#root,
+main,
+.sidebar,
+.navbar,
+article,
+.service-item,
+.content-card,
+.about,
+.about-text,
+.service,
+.service-list,
+.service-content-box,
+.service-icon-box,
+.experience-card,
+.exp-icon,
+.exp-years,
+.modal-container,
+.testimonials,
+.clients,
+.skills-list,
+.timeline,
+.project-list,
+.project-item,
+.blog-posts,
+.blog-content,
+.contact-form,
+.form-btn {
+  transition: background 0.5s, color 0.5s, border-color 0.5s, box-shadow 0.5s,
+    filter 0.5s, outline-color 0.5s, fill 0.5s, stroke 0.5s, opacity 0.5s,
+    text-shadow 0.5s, var(--transition-2);
+}
+
 #svg-global {
   zoom: 1.2;
   overflow: visible;

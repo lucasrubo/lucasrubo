@@ -1,7 +1,6 @@
 import { useState } from "react";
 import IonIcon from "@reacticons/ionicons";
 import profile from "../data/profile";
-import Toggle from "./Toggle";
 import PrintModal from "./PrintModal";
 
 function NavBar() {
@@ -44,10 +43,6 @@ function NavBar() {
               <IonIcon name="print-outline" />
               PDF
             </button>
-          </li>
-
-          <li className="navbar-item">
-            <Toggle />
           </li>
         </ul>
       </nav>
