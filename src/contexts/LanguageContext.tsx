@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 
 type Language = "pt" | "en";
 
@@ -7,6 +13,39 @@ interface LanguageContextType {
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
 }
+
+// Função para detectar a linguagem do sistema/navegador
+const detectSystemLanguage = (): Language => {
+  // Verifica se estamos no navegador
+  if (typeof window === "undefined") return "pt";
+
+  // Lista de idiomas suportados
+  const supportedLanguages: Language[] = ["pt", "en"];
+
+  // Tenta detectar pela propriedade navigator.language
+  const browserLang = navigator.language || "en";
+
+  // Extrai apenas o código de idioma (ex: 'pt-BR' -> 'pt')
+  const langCode = browserLang.split("-")[0].toLowerCase();
+
+  // Verifica se o idioma detectado é suportado
+  if (supportedLanguages.includes(langCode as Language)) {
+    return langCode as Language;
+  }
+
+  // Também verifica navigator.languages (array de idiomas preferidos)
+  if (navigator.languages) {
+    for (const lang of navigator.languages) {
+      const code = lang.split("-")[0].toLowerCase();
+      if (supportedLanguages.includes(code as Language)) {
+        return code as Language;
+      }
+    }
+  }
+
+  // Fallback para português
+  return "pt";
+};
 function getIdadeNascimento(): number {
   const nascimento = new Date(2000, 7, 12);
   return new Date().getFullYear() - nascimento.getFullYear();
@@ -201,7 +240,9 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 );
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>("pt");
+  const [language, setLanguage] = useState<Language>(() =>
+    detectSystemLanguage()
+  );
 
   const t = (key: string): string => {
     return (
