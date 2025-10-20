@@ -26,7 +26,27 @@ Languages that I like to learn and study :arrow_down:
 My resume:
 https://lucasrubo.github.io/lucasrubo/
 
+## 🚀 Deploy
+
+This portfolio is automatically deployed to GitHub Pages using GitHub Actions.
+
+### How it works:
+
+- **Automatic Deploy**: Every push to the `develop` branch triggers a build and deploy to GitHub Pages
+- **Manual Deploy**: You can also deploy manually using `npm run deploy`
+- **Base Path**: Configured for GitHub Pages at `/lucasrubo/`
+
+### Local Development:
+
+```bash
+npm install
+npm run dev
+```
+
+### Manual Deploy:
+
+```bash
+npm run deploy
+```
+
 [![lucasrubo's github stats](https://github-readme-stats.vercel.app/api?username=lucasrubo&theme=radical)](https://github.com/lucasrubo/github-readme-stats)
-
-
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=lucasrubo&layout=compact&theme=radical)](https://github.com/VictorToledo36/github-readme-stats)
