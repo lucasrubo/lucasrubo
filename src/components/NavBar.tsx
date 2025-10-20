@@ -74,7 +74,7 @@ const Navbar = () => {
               variant="ghost"
               size="icon"
               onClick={toggleLanguage}
-              className="ml-4"
+              className="ml-4 w-16"
             >
               <Globe className="h-5 w-5" />
               <span className="ml-2 text-sm">{language.toUpperCase()}</span>
