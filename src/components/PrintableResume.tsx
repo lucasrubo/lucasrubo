@@ -23,13 +23,13 @@ const PrintableResume = React.forwardRef<HTMLDivElement>((_props, ref) => {
     {
       title:
         t("experience.title") === "Experiência Profissional"
-          ? "Desenvolvedor Front-end"
-          : "Front-end Developer",
+          ? "Analista de Desenvolvimento"
+          : "Development Analyst",
       company: "Areco",
       period:
         t("experience.title") === "Experiência Profissional"
-          ? "2023 - Presente"
-          : "2023 - Present",
+          ? "2024 - Presente"
+          : "2024 - Present",
       description:
         t("experience.title") === "Experiência Profissional"
           ? "Desenvolvimento front-end para sistema ERP Web usando Blazor. Construção de sistemas complementares com Blazor, Next.js e Delphi."
@@ -41,7 +41,7 @@ const PrintableResume = React.forwardRef<HTMLDivElement>((_props, ref) => {
           ? "Desenvolvedor"
           : "Developer",
       company: "NB41 Comunicação e Marketing LTDA",
-      period: "2022 - 2023",
+      period: "2022 - 2024",
       description:
         t("experience.title") === "Experiência Profissional"
           ? "Desenvolvimento e customização de sistemas PHP, design de layouts e gerenciamento de bancos de dados."
@@ -67,7 +67,7 @@ const PrintableResume = React.forwardRef<HTMLDivElement>((_props, ref) => {
         t("experience.title") === "Experiência Profissional"
           ? "Bacharelado em Ciência da Computação"
           : "Bachelor's in Computer Science",
-      period: "2018 - 2022",
+      period: "2019 - 2023",
       description:
         t("experience.title") === "Experiência Profissional"
           ? "Universidade Paulista - Conclusão com ênfase em desenvolvimento de software e tecnologias web."
@@ -252,16 +252,20 @@ const PrintableResume = React.forwardRef<HTMLDivElement>((_props, ref) => {
             <div className="space-y-2">
               {skills.map((skill, index) => (
                 <div key={index} className="flex justify-between items-center">
-                  <span className="text-sm text-gray-900">{skill.name}</span>
-                  <div className="flex-1 mx-2 bg-gray-200 rounded-full h-2">
-                    <div
-                      className="bg-blue-600 h-2 rounded-full"
-                      style={{ width: `${skill.value}%` }}
-                    ></div>
-                  </div>
-                  <span className="text-xs text-gray-600 w-8">
-                    {skill.value}%
+                  <span className="w-24 text-sm text-gray-900">
+                    {skill.name}
                   </span>
+                  <div className="flex w-full items-center">
+                    <div className="flex-1 mx-2 bg-gray-200 rounded-full h-2">
+                      <div
+                        className="bg-blue-600 h-2 rounded-full"
+                        style={{ width: `${skill.value}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-xs text-gray-600 w-8">
+                      {skill.value}%
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>

@@ -39,14 +39,22 @@ All colors MUST be HSL.
     --radius: 0.75rem;
 
     /* Gradient tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(195 100% 50%), hsl(260 60% 55%));
+    --gradient-primary: linear-gradient(
+      135deg,
+      hsl(195 100% 50%),
+      hsl(260 60% 55%)
+    );
     --gradient-hero: linear-gradient(180deg, hsl(220 25% 7%), hsl(220 20% 10%));
-    --gradient-card: linear-gradient(135deg, hsl(220 20% 12%), hsl(220 15% 10%));
-    
+    --gradient-card: linear-gradient(
+      135deg,
+      hsl(220 20% 12%),
+      hsl(220 15% 10%)
+    );
+
     /* Shadow tokens */
     --shadow-glow: 0 0 40px hsl(195 100% 50% / 0.3);
     --shadow-card: 0 10px 40px hsl(220 25% 5% / 0.5);
-    
+
     /* Animation tokens */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -76,3 +84,18 @@ All colors MUST be HSL.
   }
 }
 
+/* Otimizações para animações do Framer Motion */
+@layer utilities {
+  .motion-safe {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  .motion-optimize {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

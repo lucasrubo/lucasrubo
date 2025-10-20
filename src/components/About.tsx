@@ -55,9 +55,10 @@ const About = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-5xl mx-auto"
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="max-w-5xl mx-auto motion-optimize"
+          layout
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-8 text-center">
             {t("about.title")}
@@ -82,9 +83,14 @@ const About = () => {
                   key={index}
                   initial={{ opacity: 0, x: 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.2 }}
-                  className="flex items-start space-x-4 p-4 rounded-lg bg-card border border-border hover:border-primary/50 transition-all"
+                  viewport={{ once: true, margin: "-30px" }}
+                  transition={{
+                    delay: index * 0.1,
+                    duration: 0.6,
+                    ease: "easeOut",
+                  }}
+                  className="flex items-start space-x-4 p-4 rounded-lg bg-card border border-border hover:border-primary/50 transition-all transform-gpu motion-optimize"
+                  layout
                 >
                   <div className="p-3 rounded-lg bg-primary/10">
                     <feature.icon className="h-6 w-6 text-primary" />
