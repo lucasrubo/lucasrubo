@@ -1,86 +1,110 @@
-import profile from "../data/profile";
-function getAge(birthday: string) {
-  const birth = new Date(birthday);
-  const today = new Date();
-  let age = today.getFullYear() - birth.getFullYear();
-  const m = today.getMonth() - birth.getMonth();
-  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
-    age--;
-  }
-  return age;
-}
+import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { Code2, Rocket, Users, Smartphone } from "lucide-react";
 
-function About() {
-  const age = getAge(profile.birthday);
-  const aboutParagraphs = profile.about.paragraphs.map((p, i) =>
-    i === 0 ? p.replace(/\d{2}/, age.toString()) : p
-  );
-  // Calcular anos de experiência a partir de 2019
-  const firstYear = 2019;
-  const currentYear = new Date().getFullYear();
-  const yearsExp = currentYear - firstYear;
+const About = () => {
+  const { t, language } = useLanguage();
+
+  const features = [
+    {
+      icon: Code2,
+      title: language === "pt" ? "Clean Code" : "Clean Code",
+      description:
+        language === "pt"
+          ? "Código limpo, testável e mantível"
+          : "Clean, testable and maintainable code",
+    },
+    {
+      icon: Rocket,
+      title: language === "pt" ? "Performance" : "Performance",
+      description:
+        language === "pt"
+          ? "Otimização e alta performance"
+          : "Optimization and high performance",
+    },
+    {
+      icon: Users,
+      title: language === "pt" ? "Colaboração" : "Collaboration",
+      description:
+        language === "pt"
+          ? "Trabalho em equipe e comunicação"
+          : "Team work and communication",
+    },
+    {
+      icon: Smartphone,
+      title:
+        language === "pt"
+          ? "Aplicativos Cross-Platform"
+          : "Cross-Platform Applications",
+      description:
+        language === "pt"
+          ? "Aplicativos iOS, Android e web com desempenho nativo"
+          : "iOS, Android & web apps with native performance",
+    },
+  ];
+
+  const paragraphs = [
+    t("about.description1"),
+    t("about.description2"),
+    t("about.description3"),
+  ];
 
   return (
-    <article className="about  active" data-page="about">
-      <header>
-        <h2 className="h2 article-title">{profile.about.title}</h2>
-      </header>
+    <section id="about" className="py-20 md:py-32 bg-background relative">
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-5xl mx-auto"
+        >
+          <h2 className="text-3xl md:text-5xl font-bold mb-8 text-center">
+            {t("about.title")}
+          </h2>
+          <div className="h-1 w-20 bg-gradient-primary mx-auto mb-12" />
 
-      <section className="about-text">
-        {aboutParagraphs.map((p, i) => (
-          <p key={i}>{p}</p>
-        ))}
-      </section>
-
-      <section className="service">
-        <ul className="service-list">
-          {/* Card especial de anos de experiência */}
-          <li className="service-item">
-            <div className="service-icon-box exp-icon">
-              <svg
-                width="40"
-                height="40"
-                viewBox="0 0 40 40"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="20" cy="20" r="20" fill="#222224" />
-                <text
-                  x="50%"
-                  y="55%"
-                  textAnchor="middle"
-                  fill="#eccb68"
-                  fontSize="18"
-                  fontWeight="bold"
-                  dy=".3em"
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              {paragraphs.map((para, index) => (
+                <p
+                  key={index}
+                  className="text-lg text-muted-foreground leading-relaxed"
                 >
-                  {yearsExp}
-                </text>
-              </svg>
+                  {para}
+                </p>
+              ))}
             </div>
-            <div className="service-content-box">
-              <h4 className="h4 service-item-title">years of experience</h4>
-              <p className="service-item-text">
-                Professional experience in web development, UI, and modern
-                technologies since 2019.
-              </p>
+
+            <div className="space-y-6">
+              {features.map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.2 }}
+                  className="flex items-start space-x-4 p-4 rounded-lg bg-card border border-border hover:border-primary/50 transition-all"
+                >
+                  <div className="p-3 rounded-lg bg-primary/10">
+                    <feature.icon className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-1">
+                      {feature.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm">
+                      {feature.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
-          </li>
-          {/* Demais serviços */}
-          {profile.services.map((service, i) => (
-            <li key={i} className="service-item">
-              <div className="service-icon-box">
-                <img src={service.icon} alt={service.title} width="40" />
-              </div>
-              <div className="service-content-box">
-                <h4 className="h4 service-item-title">{service.title}</h4>
-                <p className="service-item-text">{service.description}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </article>
+          </div>
+        </motion.div>
+      </div>
+    </section>
   );
-}
+};
+
 export default About;

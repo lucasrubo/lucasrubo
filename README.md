@@ -31,17 +31,20 @@ https://lucasrubo.github.io/lucasrubo/
 This portfolio is automatically deployed to GitHub Pages using GitHub Actions.
 
 ### How it works:
+
 - **Automatic Deploy**: Every push to the `develop` branch triggers a build and deploy to GitHub Pages
 - **Manual Deploy**: You can also deploy manually using `npm run deploy`
 - **Base Path**: Configured for GitHub Pages at `/lucasrubo/`
 
 ### Local Development:
+
 ```bash
 npm install
 npm run dev
 ```
 
 ### Manual Deploy:
+
 ```bash
 npm run deploy
 ```

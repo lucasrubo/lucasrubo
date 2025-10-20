@@ -1,147 +1,319 @@
 import React from "react";
-import profile from "../data/profile";
-
-function getAge(birthday: string) {
-  const birth = new Date(birthday);
-  const today = new Date();
-  let age = today.getFullYear() - birth.getFullYear();
-  const m = today.getMonth() - birth.getMonth();
-  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
-    age--;
-  }
-  return age;
-}
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const PrintableResume = React.forwardRef<HTMLDivElement>((_props, ref) => {
-  const age = getAge(profile.birthday);
+  const { t } = useLanguage();
 
-  // Condensar o texto "About Me" para ser mais conciso
-  const condensedAbout = `I am ${age} years old with a Computer Science degree from Universidade Paulista. Currently working as a Developer at Areco, specializing in front-end development for ERP Web systems using Blazor, and contributing to supplementary systems with Blazor and Delphi. My passion lies in front-end development, crafting intuitive, responsive user interfaces. I have extensive experience with React, TypeScript, PHP systems, and database management. Previously worked at IBM in CI/CD automation and NB41 in web development.`;
+  // Calculate age dynamically
+  const age = new Date().getFullYear() - 2000; // Born in 2000
+
+  // Get condensed about text from translations
+  const condensedAbout =
+    t("profile.about.paragraph1") +
+    " " +
+    t("profile.about.paragraph2").split(". ")[0] +
+    ". " +
+    t("profile.about.paragraph3").split(". ")[0] +
+    ". " +
+    t("profile.about.paragraph4").split(". ")[0] +
+    ".";
+
+  // Resume data - should be translated based on language
+  const experience = [
+    {
+      title:
+        t("experience.title") === "Experiência Profissional"
+          ? "Desenvolvedor Front-end"
+          : "Front-end Developer",
+      company: "Areco",
+      period:
+        t("experience.title") === "Experiência Profissional"
+          ? "2023 - Presente"
+          : "2023 - Present",
+      description:
+        t("experience.title") === "Experiência Profissional"
+          ? "Desenvolvimento front-end para sistema ERP Web usando Blazor. Construção de sistemas complementares com Blazor, Next.js e Delphi."
+          : "Front-end development for ERP Web system using Blazor. Building supplementary systems with Blazor, Next.js and Delphi.",
+    },
+    {
+      title:
+        t("experience.title") === "Experiência Profissional"
+          ? "Desenvolvedor"
+          : "Developer",
+      company: "NB41 Comunicação e Marketing LTDA",
+      period: "2022 - 2023",
+      description:
+        t("experience.title") === "Experiência Profissional"
+          ? "Desenvolvimento e customização de sistemas PHP, design de layouts e gerenciamento de bancos de dados."
+          : "Development and customization of PHP systems, layout design and database management.",
+    },
+    {
+      title:
+        t("experience.title") === "Experiência Profissional"
+          ? "Estagiário Desenvolvedor de Sistemas"
+          : "Systems Developer Intern",
+      company: "IBM",
+      period: "2021 - 2022",
+      description:
+        t("experience.title") === "Experiência Profissional"
+          ? "Equipe CI/CD focada em automação de testes, criação de pipelines Jenkins e scripting (Docker, Git)."
+          : "CI/CD team focused on test automation, Jenkins pipeline creation and scripting (Docker, Git).",
+    },
+  ];
+
+  const education = [
+    {
+      title:
+        t("experience.title") === "Experiência Profissional"
+          ? "Bacharelado em Ciência da Computação"
+          : "Bachelor's in Computer Science",
+      period: "2018 - 2022",
+      description:
+        t("experience.title") === "Experiência Profissional"
+          ? "Universidade Paulista - Conclusão com ênfase em desenvolvimento de software e tecnologias web."
+          : "Universidade Paulista - Completion with emphasis on software development and web technologies.",
+    },
+  ];
+
+  const skills = [
+    { name: "Next.js", value: 95 },
+    { name: "Blazor", value: 95 },
+    { name: "C#", value: 90 },
+    { name: "Tailwind", value: 95 },
+    { name: "Sass", value: 95 },
+    { name: "React", value: 80 },
+    { name: "TypeScript", value: 80 },
+    { name: "Node.js", value: 70 },
+    { name: "PHP", value: 80 },
+    { name: "SQL", value: 80 },
+    { name: "JavaScript", value: 70 },
+    { name: "Git", value: 75 },
+    { name: "CI/CD", value: 65 },
+    { name: "HTML/CSS", value: 100 },
+    { name: "Python", value: 60 },
+    { name: "Delphi", value: 55 },
+  ];
+
+  const services = [
+    {
+      title:
+        t("experience.title") === "Experiência Profissional"
+          ? "Desenvolvimento Front-end"
+          : "Front-end Development",
+      description:
+        t("experience.title") === "Experiência Profissional"
+          ? "Interfaces de usuário intuitivas e performáticas"
+          : "Intuitive and high-performance user interfaces",
+    },
+    {
+      title:
+        t("experience.title") === "Experiência Profissional"
+          ? "Desenvolvimento Back-end"
+          : "Back-end Development",
+      description:
+        t("experience.title") === "Experiência Profissional"
+          ? "APIs robustas e sistemas escaláveis"
+          : "Robust APIs and scalable systems",
+    },
+    {
+      title:
+        t("experience.title") === "Experiência Profissional"
+          ? "Integração de Sistemas"
+          : "System Integration",
+      description:
+        t("experience.title") === "Experiência Profissional"
+          ? "Conexão perfeita entre diferentes plataformas"
+          : "Seamless connection between different platforms",
+    },
+  ];
+
+  const certificates = [
+    {
+      name: "AWS Certified Cloud Practitioner",
+      issuer: "Amazon Web Services",
+      issueDate: "2024",
+    },
+    {
+      name: "Microsoft Certified: Azure Fundamentals",
+      issuer: "Microsoft",
+      issueDate: "2024",
+    },
+    {
+      name: "Meta Front-End Developer",
+      issuer: "Meta",
+      issueDate: "2023",
+    },
+    {
+      name: "Microsoft Certified: TypeScript",
+      issuer: "Microsoft",
+      issueDate: "2023",
+    },
+    {
+      name: "OpenJS Node.js Application Developer",
+      issuer: "OpenJS Foundation",
+      issueDate: "2023",
+    },
+    {
+      name: "Zend Certified PHP Engineer",
+      issuer: "Zend Technologies",
+      issueDate: "2022",
+    },
+  ];
 
   return (
-    <div ref={ref} className="printable-resume">
-      {/* Compact Header */}
-      <header className="print-header">
-        <div className="print-header-left">
-          <h1 className="print-name">{profile.name}</h1>
-          <h2 className="print-title">{profile.title}</h2>
+    <div
+      ref={ref}
+      className="w-[210mm] h-[297mm] mx-auto bg-white text-black p-8 font-sans"
+    >
+      {/* Header */}
+      <div className="flex justify-between items-start mb-6 pb-4 border-b-2 border-gray-300">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 mb-1">
+            {t("profile.name")}
+          </h1>
+          <h2 className="text-xl text-blue-600 font-semibold">
+            {t("profile.title")}
+          </h2>
         </div>
-        <div className="print-header-right">
-          <p>{profile.email}</p>
-          <p>{profile.phone}</p>
-          <p>{profile.location}</p>
+        <div className="text-right text-sm">
+          <p className="mb-1">{t("profile.email")}</p>
+          <p className="mb-1">{t("profile.phone")}</p>
+          <p className="mb-1">{t("profile.location")}</p>
           <p>Age: {age}</p>
         </div>
-      </header>
+      </div>
 
-      <div className="print-content">
-        <div className="print-left-column">
-          {/* About Section - Condensed */}
-          <section className="print-section compact">
-            <h3 className="print-section-title">Professional Summary</h3>
-            <p className="print-summary">{condensedAbout}</p>
-          </section>
+      {/* Content Grid */}
+      <div className="grid grid-cols-3 gap-6 min-h-[180mm]">
+        {/* Left Column - Experience & Education */}
+        <div className="col-span-2 space-y-4">
+          {/* Professional Summary */}
+          <div>
+            <h3 className="text-lg font-bold text-gray-900 mb-2 uppercase tracking-wide">
+              {t("resume.professionalSummary")}
+            </h3>
+            <p className="text-sm text-gray-700 leading-relaxed">
+              {condensedAbout}
+            </p>
+          </div>
 
           {/* Experience */}
-          <section className="print-section">
-            <h3 className="print-section-title">Experience</h3>
-            <div className="print-timeline">
-              {profile.resume.experience.map((item, index) => (
-                <div key={index} className="print-timeline-item compact">
-                  <div className="print-timeline-header">
-                    <h4 className="print-timeline-title">{item.title}</h4>
-                    <span className="print-timeline-period">{item.period}</span>
+          <div>
+            <h3 className="text-lg font-bold text-gray-900 mb-3 uppercase tracking-wide">
+              {t("resume.experience")}
+            </h3>
+            <div className="space-y-3">
+              {experience.map((item, index) => (
+                <div key={index} className="relative pl-4">
+                  <div className="absolute left-0 top-2 w-2 h-2 bg-blue-600 rounded-full"></div>
+                  <div className="flex justify-between items-start mb-1">
+                    <h4 className="font-semibold text-gray-900">
+                      {item.title}
+                    </h4>
+                    <span className="text-sm text-gray-600">{item.period}</span>
                   </div>
-                  <p className="print-timeline-company">{item.company}</p>
-                  <p className="print-timeline-description condensed">
-                    {item.description}
+                  <p className="text-sm font-medium text-blue-600 mb-1">
+                    {item.company}
                   </p>
+                  <p className="text-sm text-gray-700">{item.description}</p>
                 </div>
               ))}
             </div>
-          </section>
+          </div>
 
           {/* Education */}
-          <section className="print-section">
-            <h3 className="print-section-title">Education</h3>
-            <div className="print-timeline">
-              {profile.resume.education.map((item, index) => (
-                <div key={index} className="print-timeline-item compact">
-                  <div className="print-timeline-header">
-                    <h4 className="print-timeline-title">{item.title}</h4>
-                    <span className="print-timeline-period">{item.period}</span>
+          <div>
+            <h3 className="text-lg font-bold text-gray-900 mb-3 uppercase tracking-wide">
+              {t("resume.education")}
+            </h3>
+            <div className="space-y-2">
+              {education.map((item, index) => (
+                <div key={index}>
+                  <div className="flex justify-between items-start mb-1">
+                    <h4 className="font-semibold text-gray-900">
+                      {item.title}
+                    </h4>
+                    <span className="text-sm text-gray-600">{item.period}</span>
                   </div>
-                  <p className="print-timeline-description condensed">
-                    {item.description}
-                  </p>
+                  <p className="text-sm text-gray-700">{item.description}</p>
                 </div>
               ))}
             </div>
-          </section>
+          </div>
         </div>
 
-        <div className="print-right-column">
-          {/* Skills - More compact */}
-          <section className="print-section">
-            <h3 className="print-section-title">Technical Skills</h3>
-            <div className="print-skills compact">
-              {profile.resume.skills.map((skill, index) => (
-                <div key={index} className="print-skill-item compact">
-                  <span className="print-skill-name">{skill.name}</span>
-                  <span className="print-skill-level">{skill.value}%</span>
+        {/* Right Column - Skills, Competencies, Certifications */}
+        <div className="space-y-4">
+          {/* Technical Skills */}
+          <div>
+            <h3 className="text-lg font-bold text-gray-900 mb-3 uppercase tracking-wide">
+              {t("resume.technicalSkills")}
+            </h3>
+            <div className="space-y-2">
+              {skills.map((skill, index) => (
+                <div key={index} className="flex justify-between items-center">
+                  <span className="text-sm text-gray-900">{skill.name}</span>
+                  <div className="flex-1 mx-2 bg-gray-200 rounded-full h-2">
+                    <div
+                      className="bg-blue-600 h-2 rounded-full"
+                      style={{ width: `${skill.value}%` }}
+                    ></div>
+                  </div>
+                  <span className="text-xs text-gray-600 w-8">
+                    {skill.value}%
+                  </span>
                 </div>
               ))}
             </div>
-          </section>
-
+          </div>
           {/* Core Competencies */}
-          <section className="print-section">
-            <h3 className="print-section-title">Core Competencies</h3>
-            <div className="print-competencies">
-              {profile.services.map((service, index) => (
-                <div key={index} className="print-competency-item">
-                  <h4 className="print-competency-title">{service.title}</h4>
-                  <p className="print-competency-description">
-                    {service.description}
-                  </p>
+          <div>
+            <h3 className="text-lg font-bold text-gray-900 mb-3 uppercase tracking-wide">
+              {t("resume.coreCompetencies")}
+            </h3>
+            <div className="space-y-2">
+              {services.map((service, index) => (
+                <div key={index} className="mb-3">
+                  <h4 className="font-semibold text-gray-900 text-sm mb-1">
+                    {service.title}
+                  </h4>
+                  <p className="text-xs text-gray-700">{service.description}</p>
                 </div>
               ))}
             </div>
-          </section>
-
-          {/* Key Certifications - Reduced to most relevant */}
-          <section className="print-section">
-            <h3 className="print-section-title">Key Certifications</h3>
-            <div className="print-certificates compact">
-              {profile.certificates.slice(0, 6).map((cert, index) => (
-                <div key={index} className="print-cert-item compact">
-                  <h4 className="print-cert-name">{cert.name}</h4>
-                  <p className="print-cert-details">
+          </div>
+          {/* Key Certifications */}
+          {/* <div>
+            <h3 className="text-lg font-bold text-gray-900 mb-3 uppercase tracking-wide">
+              {t("resume.keyCertifications")}
+            </h3>
+            <div className="space-y-2">
+              {certificates.slice(0, 6).map((cert, index) => (
+                <div key={index} className="mb-2">
+                  <h4 className="font-semibold text-gray-900 text-sm">
+                    {cert.name}
+                  </h4>
+                  <p className="text-xs text-gray-600">
                     {cert.issuer} • {cert.issueDate}
                   </p>
                 </div>
               ))}
-              {profile.certificates.length > 6 && (
-                <p className="print-more-certs">
-                  + {profile.certificates.length - 6} more certifications
-                  available
-                </p>
-              )}
             </div>
-          </section>
-
+          </div> */}
           {/* Contact Links */}
-          <section className="print-section">
-            <h3 className="print-section-title">Links</h3>
-            <div className="print-links">
+          <div>
+            <h3 className="text-lg font-bold text-gray-900 mb-3 uppercase tracking-wide">
+              {t("resume.links")}
+            </h3>
+            <div className="space-y-1 text-sm">
               <p>
-                <strong>LinkedIn:</strong> {profile.about.linkedin}
+                <strong>LinkedIn:</strong> {t("profile.linkedin")}
               </p>
               <p>
-                <strong>GitHub:</strong> {profile.about.github}
+                <strong>GitHub:</strong> {t("profile.github")}
               </p>
             </div>
-          </section>
+          </div>
         </div>
       </div>
     </div>
