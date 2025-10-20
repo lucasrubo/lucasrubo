@@ -38,7 +38,7 @@ const translations = {
 
     // About
     "about.title": "Sobre Mim",
-    "about.description1": `Hi, I'm Rubo, I'm ${getIdadeNascimento()} years old. I have ${getTempoExperiencia()} years of experience in web development.`,
+    "about.description1": `Olá, eu sou Rubo, tenho ${getIdadeNascimento()} anos. Possuo ${getTempoExperiencia()} anos de experiência em desenvolvimento web.`,
     "about.description2":
       "Apaixonado por criar soluções inovadoras e eficientes. Com experiência em desenvolvimento web moderno, busco constantemente novos desafios e oportunidades de aprendizado.",
     "about.description3":
@@ -79,8 +79,8 @@ const translations = {
     "profile.name": "Lucas Gabriel Rubo",
     "profile.title": "Desenvolvedor Web",
     "profile.email": "lucasrubo1@gmail.com",
-    "profile.phone": "+55 11 99999-9999",
-    "profile.location": "São Paulo, SP - Brasil",
+    "profile.phone": "+55 19 994019804",
+    "profile.location": "Valinhos, SP - Brasil",
     "profile.linkedin": "linkedin.com/in/lucasrubo",
     "profile.github": "github.com/lucasrubo",
 
@@ -127,7 +127,7 @@ const translations = {
 
     // About
     "about.title": "About Me",
-    "about.description1": `Olá, eu sou Rubo, tenho ${getIdadeNascimento()} anos. Possuo ${getTempoExperiencia()} anos de experiência em desenvolvimento web.`,
+    "about.description1": `Hi, I'm Rubo, I'm ${getIdadeNascimento()} years old. I have ${getTempoExperiencia()} years of experience in web development.`,
     "about.description2":
       "Web Developer passionate about creating innovative and efficient solutions. With experience in modern web development, I constantly seek new challenges and learning opportunities.",
     "about.description3":
@@ -168,8 +168,8 @@ const translations = {
     "profile.name": "Lucas Gabriel Rubo",
     "profile.title": "Web Developer",
     "profile.email": "lucasrubo1@gmail.com",
-    "profile.phone": "+55 11 99999-9999",
-    "profile.location": "São Paulo, SP - Brazil",
+    "profile.phone": "+55 19 994019804",
+    "profile.location": "Valinhos, SP - Brazil",
     "profile.linkedin": "linkedin.com/in/lucasrubo",
     "profile.github": "github.com/lucasrubo",
 

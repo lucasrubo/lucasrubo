@@ -2,7 +2,7 @@ import React from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const PrintableResume = React.forwardRef<HTMLDivElement>((_props, ref) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   // Calculate age dynamically
   const age = new Date().getFullYear() - 2000; // Born in 2000
@@ -179,7 +179,7 @@ const PrintableResume = React.forwardRef<HTMLDivElement>((_props, ref) => {
           <p className="mb-1">{t("profile.email")}</p>
           <p className="mb-1">{t("profile.phone")}</p>
           <p className="mb-1">{t("profile.location")}</p>
-          <p>Age: {age}</p>
+          <p>{language === "pt" ? `Idade: ${age}` : `Age: ${age}`}</p>
         </div>
       </div>
 
