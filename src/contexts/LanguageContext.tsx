@@ -120,7 +120,7 @@ const translations = {
     "profile.email": "lucasrubo1@gmail.com",
     "profile.phone": "+55 19 994019804",
     "profile.location": "Valinhos, SP - Brasil",
-    "profile.linkedin": "linkedin.com/in/lucasrubo",
+    "profile.linkedin": "linkedin.com/in/lucas-rubo/",
     "profile.github": "github.com/lucasrubo",
 
     // Resume Sections
@@ -209,7 +209,7 @@ const translations = {
     "profile.email": "lucasrubo1@gmail.com",
     "profile.phone": "+55 19 994019804",
     "profile.location": "Valinhos, SP - Brazil",
-    "profile.linkedin": "linkedin.com/in/lucasrubo",
+    "profile.linkedin": "linkedin.com/in/lucas-rubo/",
     "profile.github": "github.com/lucasrubo",
 
     // Resume Sections
