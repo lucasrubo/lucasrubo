@@ -22,7 +22,7 @@ const Index = () => {
         sparkCount={8}
         duration={400}
       >
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background overflow-x-hidden">
           <NavBar />
           <Hero />
           <About />
