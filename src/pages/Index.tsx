@@ -10,22 +10,31 @@ import Certificates from "@/components/Certificates";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Blog from "@/components/Blog";
+import ClickSpark from "@/components/ClickSpark";
 
 const Index = () => {
   return (
     <LanguageProvider>
-      <div className="min-h-screen bg-background">
-        <NavBar />
-        <Hero />
-        <About />
-        <Experience />
-        <Education />
-        <Skills />
-        <Projects />
-        <Certificates />
-        <Contact />
-        <Footer />
-      </div>
+      <ClickSpark
+        sparkColor="#00bfff"
+        sparkSize={10}
+        sparkRadius={15}
+        sparkCount={8}
+        duration={400}
+      >
+        <div className="min-h-screen bg-background">
+          <NavBar />
+          <Hero />
+          <About />
+          <Experience />
+          <Education />
+          <Skills />
+          <Projects />
+          <Certificates />
+          <Contact />
+          <Footer />
+        </div>
+      </ClickSpark>
     </LanguageProvider>
   );
 };
