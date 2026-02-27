@@ -5,7 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 // Static data — proper nouns don't need translation.
 // Only `description` is pulled from translations by index.
 const EXPERIENCE = [
-  { role: "Junior Development Analyst B", company: "Areco",  period: "2024 – Present", tech: ["C#", "Blazor", "Next.js", "SQL", "Delphi", "PHP"], current: true  },
+  { role: "Mid-level Development Analyst", company: "Areco",  period: "2024 – Present", tech: ["C#", "Blazor", "Next.js", "SQL", "Delphi", "PHP"], current: true  },
   { role: "Junior Developer",             company: "Areco",  period: "2023 – 2024",    tech: ["PHP", "SQL", "JavaScript", "HTML/CSS"],              current: false },
   { role: "Systems Developer Intern",     company: "IBM",    period: "2021 – 2022",    tech: ["Jenkins", "CI/CD", "Python", "Git"],                 current: false },
   { role: "Programming Assistant",        company: "NB41",   period: "2019 – 2021",    tech: ["PHP", "JavaScript", "HTML/CSS", "MySQL"],            current: false },

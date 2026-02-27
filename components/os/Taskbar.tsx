@@ -4,6 +4,7 @@ import { X } from "lucide-react";
 import { useWindows } from "@/contexts/WindowContext";
 
 const APP_ICONS: Record<string, string> = {
+  welcome:    "👋",
   about:      "👤",
   projects:   "📁",
   skills:     "⚡",
@@ -12,6 +13,7 @@ const APP_ICONS: Record<string, string> = {
   roteirum:   "🎬",
   erp:        "🏢",
   larissa:    "🎨",
+  portfolio:  "🔗",
   home:       "🦔",
   pricing:    "💰",
   signup:     "🚀",

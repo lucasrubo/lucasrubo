@@ -96,6 +96,24 @@ export default function DesktopIcon({ icon, position, onOpen, onDragEnd }: Deskt
 function IconGraphic({ icon }: { icon: DesktopIconDef }) {
   const { type, color = "#6b7280" } = icon;
 
+  // Custom icon override — emoji or image URL
+  if (icon.icon) {
+    const isUrl = icon.icon.startsWith("/") || icon.icon.startsWith("http");
+    return (
+      <div
+        className="w-full h-full rounded-xl flex items-center justify-center shadow-sm"
+        style={{ background: `linear-gradient(145deg, ${color}dd, ${color}99)` }}
+      >
+        {isUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={icon.icon} alt={icon.label} className="w-8 h-8 object-contain" />
+        ) : (
+          <span className="text-2xl leading-none">{icon.icon}</span>
+        )}
+      </div>
+    );
+  }
+
   if (type === "folder") {
     return (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-sm">

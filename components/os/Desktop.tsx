@@ -14,19 +14,28 @@ import ProjectsApp   from "@/components/apps/ProjectsApp";
 import SkillsApp     from "@/components/apps/SkillsApp";
 import ExperienceApp from "@/components/apps/ExperienceApp";
 import ContactApp    from "@/components/apps/ContactApp";
-import RoteirumApp   from "@/components/apps/RoteirumApp";
-import ERPApp        from "@/components/apps/ERPApp";
 import SignupApp     from "@/components/apps/SignupApp";
+import WelcomeApp    from "@/components/apps/WelcomeApp";
+import IframeApp     from "@/components/apps/IframeApp";
+import AprixChatWidget from "@/components/os/AprixChatWidget";
+import { AprixProvider, useAprix } from "@/contexts/AprixContext";
+
+// IDs that open as live iframes
+const IFRAME_URLS: Record<string, string> = {
+  portfolio: "https://lucasrubo.github.io/portfolio/",
+  roteirum:  "https://lucasrubo.github.io/Roteirum/",
+  erp:       "https://lucasrubo.github.io/ERP/dashboard",
+  larissa:       "https://larissaarendt.github.io/portfolio/",
+};
 
 function AppContent({ appId }: { appId: string }) {
+  if (IFRAME_URLS[appId])     return <IframeApp url={IFRAME_URLS[appId]} />;
+  if (appId === "welcome")    return <WelcomeApp />;
   if (appId === "about")      return <AboutApp />;
   if (appId === "projects")   return <ProjectsApp />;
   if (appId === "skills")     return <SkillsApp />;
   if (appId === "experience") return <ExperienceApp />;
   if (appId === "contact")    return <ContactApp />;
-  if (appId === "roteirum")   return <RoteirumApp />;
-  if (appId === "erp")        return <ERPApp />;
-  if (appId === "larissa")    return <ProjectsApp />;
   if (appId === "signup")     return <SignupApp />;
   return <AboutApp />;
 }
@@ -50,6 +59,7 @@ function buildDefaultPositions(containerWidth: number): IconPositions {
 
 function DesktopInner() {
   const { windows, activeAppId, openWindow } = useWindows();
+  const { openChat } = useAprix();
   const desktopRef = useRef<HTMLDivElement>(null);
 
   // ── Icon positions ──────────────────────────────────────────────────────────
@@ -90,14 +100,17 @@ function DesktopInner() {
 
   // ── Open default window ─────────────────────────────────────────────────────
   useEffect(() => {
-    openWindow("about", { title: "about.mdx", size: { width: 800, height: 600 } });
+    openWindow("welcome", { title: "welcome.app", size: { width: 480, height: 520 } });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleIconOpen = (appId: string, label: string, size?: { width: number; height: number }) => {
     if (appId === "github")   { window.open("https://github.com/lucasrubo", "_blank"); return; }
     if (appId === "linkedin") { window.open("https://linkedin.com/in/lucas-rubo", "_blank"); return; }
-    openWindow(appId, { title: label, size });
+    if (appId === "chatbot")  { openChat(); return; }
+    // Iframe apps get a wider window by default
+    const iframeSize = IFRAME_URLS[appId] ? { width: 1060, height: 700 } : size;
+    openWindow(appId, { title: label, size: iframeSize });
   };
 
   return (
@@ -150,6 +163,9 @@ function DesktopInner() {
       </div>
 
       <Taskbar />
+
+      {/* Aprix floating chat widget */}
+      <AprixChatWidget />
 
       {/* Context menu — fixed positioning, no offset math needed */}
       {contextMenu && (
@@ -228,7 +244,9 @@ export default function Desktop() {
   return (
     <LanguageProvider>
       <WindowProvider>
-        <DesktopInner />
+        <AprixProvider>
+          <DesktopInner />
+        </AprixProvider>
       </WindowProvider>
     </LanguageProvider>
   );

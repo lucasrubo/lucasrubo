@@ -73,7 +73,7 @@ export const PRICING_PLANS = [
       "Unlimited team members",
       "No credit card required",
     ],
-    cta: "Get started - free",
+    cta: "Talk to Aprix",
     ctaHref: "/signup",
   },
   {

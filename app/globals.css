@@ -4,27 +4,73 @@
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* PostHog Colors */
+  /* Brand / accent colors — ph-* kept for backward compat, now mapped to new palette */
   --color-ph-orange: #f54e00;
-  --color-ph-blue: #6e8cf9;
-  --color-ph-brown: #822802;
+  --color-ph-blue:   #6e8cf9;
+  --color-ph-brown:  #822802;
   --color-ph-purple: #987cb0;
-  --color-ph-dark: #1d1b17;
-  --color-ph-cream: #fffaf3;
+  --color-ph-dark:   oklch(0.141 0.005 285.823);
+  --color-ph-cream:  oklch(0.985 0 0);
 
   /* Fonts */
   --font-sans: var(--font-ibm-plex-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-source-code-pro), ui-monospace, "Courier New", monospace;
 }
 
+/* ── Semantic tokens (light) ─────────────────────────────────────────────── */
 :root {
-  --background: #fffaf3;
-  --foreground: #1d1b17;
+  --radius: 0.65rem;
+
+  --background:           oklch(1 0 0);
+  --foreground:           oklch(0.141 0.005 285.823);
+  --card:                 oklch(1 0 0);
+  --card-foreground:      oklch(0.141 0.005 285.823);
+  --popover:              oklch(1 0 0);
+  --popover-foreground:   oklch(0.141 0.005 285.823);
+
+  --primary:              oklch(0.577 0.245 27.325);
+  --primary-foreground:   oklch(0.971 0.013 17.38);
+
+  --secondary:            oklch(0.967 0.001 286.375);
+  --secondary-foreground: oklch(0.21 0.006 285.885);
+
+  --muted:                oklch(0.967 0.001 286.375);
+  --muted-foreground:     oklch(0.552 0.016 285.938);
+
+  --accent:               oklch(0.967 0.001 286.375);
+  --accent-foreground:    oklch(0.21 0.006 285.885);
+
+  --destructive:          oklch(0.577 0.245 27.325);
+  --border:               oklch(0.92 0.004 286.32);
+  --input:                oklch(0.92 0.004 286.32);
+  --ring:                 oklch(0.704 0.191 22.216);
 }
 
+/* ── Semantic tokens (dark) ──────────────────────────────────────────────── */
 .dark {
-  --background: #1a1815;
-  --foreground: #f5f0e8;
+  --background:           oklch(0.141 0.005 285.823);
+  --foreground:           oklch(0.985 0 0);
+  --card:                 oklch(0.21 0.006 285.885);
+  --card-foreground:      oklch(0.985 0 0);
+  --popover:              oklch(0.21 0.006 285.885);
+  --popover-foreground:   oklch(0.985 0 0);
+
+  --primary:              oklch(0.637 0.237 25.331);
+  --primary-foreground:   oklch(0.971 0.013 17.38);
+
+  --secondary:            oklch(0.274 0.006 286.033);
+  --secondary-foreground: oklch(0.985 0 0);
+
+  --muted:                oklch(0.274 0.006 286.033);
+  --muted-foreground:     oklch(0.705 0.015 286.067);
+
+  --accent:               oklch(0.274 0.006 286.033);
+  --accent-foreground:    oklch(0.985 0 0);
+
+  --destructive:          oklch(0.704 0.191 22.216);
+  --border:               oklch(1 0 0 / 10%);
+  --input:                oklch(1 0 0 / 15%);
+  --ring:                 oklch(0.396 0.141 25.723);
 }
 
 body {
@@ -32,11 +78,23 @@ body {
   color: var(--foreground);
 }
 
-/* Desktop surface — color handled here so dark mode works via CSS cascade */
+/* ── Desktop surface ─────────────────────────────────────────────────────── */
 .desktop-surface {
-  background-color: #c8b89a;
+  background-color: oklch(0.88 0.018 70);
+}
+.dark .desktop-surface {
+  background-color: oklch(0.165 0.005 286);
 }
 
-.dark .desktop-surface {
-  background-color: #1e1c18;
+/* ── Scrollbar ───────────────────────────────────────────────────────────── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0.6 0 0 / 20%) transparent;
 }
+*::-webkit-scrollbar         { width: 6px; height: 6px; }
+*::-webkit-scrollbar-track   { background: transparent; }
+*::-webkit-scrollbar-thumb   { background: oklch(0.6 0 0 / 20%); border-radius: 999px; }
+*::-webkit-scrollbar-thumb:hover { background: oklch(0.6 0 0 / 35%); }
+
+.dark *::-webkit-scrollbar-thumb        { background: oklch(1 0 0 / 15%); }
+.dark *::-webkit-scrollbar-thumb:hover  { background: oklch(1 0 0 / 28%); }

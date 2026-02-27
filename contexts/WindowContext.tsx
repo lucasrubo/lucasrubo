@@ -33,6 +33,11 @@ interface WindowContextType {
   toggleMaximize: (appId: string) => void;
   focusWindow: (appId: string) => void;
   updatePosition: (appId: string, pos: { x: number; y: number }) => void;
+  updateSize: (
+    appId: string,
+    size: { width: number; height: number },
+    pos?: { x: number; y: number }
+  ) => void;
 }
 
 const WindowContext = createContext<WindowContextType | null>(null);
@@ -133,6 +138,23 @@ export function WindowProvider({ children }: { children: ReactNode }) {
     []
   );
 
+  const updateSize = useCallback(
+    (
+      appId: string,
+      size: { width: number; height: number },
+      pos?: { x: number; y: number }
+    ) => {
+      setWindows((prev) =>
+        prev.map((w) =>
+          w.appId === appId
+            ? { ...w, size, ...(pos ? { position: pos } : {}) }
+            : w
+        )
+      );
+    },
+    []
+  );
+
   return (
     <WindowContext.Provider
       value={{
@@ -144,6 +166,7 @@ export function WindowProvider({ children }: { children: ReactNode }) {
         toggleMaximize,
         focusWindow,
         updatePosition,
+        updateSize,
       }}
     >
       {children}

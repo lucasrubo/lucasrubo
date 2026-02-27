@@ -5,7 +5,7 @@
 
 ## Dono
 - **Nome:** Lucas Gabriel Rubo · Valinhos, SP, Brasil
-- **Cargo:** Junior Development Analyst B @ Areco
+- **Cargo:** Mid-level Development Analyst @ Areco
 - **Email:** lucasrubo1@gmail.com | **Tel:** +55 (19) 9940-1980
 - **GitHub:** github.com/lucasrubo | **LinkedIn:** linkedin.com/in/lucas-rubo | **IG:** instagram.com/lucas.rubo
 - **Portfolio v1:** https://lucasrubo.github.io/lucasrubo/

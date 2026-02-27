@@ -30,7 +30,7 @@ export default function Hero() {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
               <Button href="/signup" variant="primary" size="lg">
-                Get started - free
+                Talk to Aprix
               </Button>
               <Button href="/demo" variant="outline" size="lg">
                 Book a demo

@@ -56,7 +56,7 @@ export default function HomeApp() {
             onClick={() => openWindow("signup", { title: "Sign up – PostHog", size: { width: 480, height: 520 } })}
             className="bg-ph-orange text-white text-sm font-semibold px-4 py-2 rounded-md hover:bg-[#d94400] transition-colors"
           >
-            Get started - free
+            Talk to Aprix
           </button>
           <button className="border border-gray-200 text-sm font-medium px-4 py-2 rounded-md hover:bg-gray-50 transition-colors">
             Install with AI

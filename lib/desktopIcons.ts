@@ -6,6 +6,8 @@ export interface DesktopIconDef {
   type: IconType;
   color?: string;
   appId: string;
+  /** Custom icon override: emoji ("🚀") or image URL ("/icons/app.png"). Replaces the default SVG. */
+  icon?: string;
 }
 
 // Left column — main portfolio sections
@@ -18,6 +20,8 @@ export const LEFT_ICONS: DesktopIconDef[] = [
   { id: "roteirum-app", label: "Roteirum.app",     type: "mov",    color: "#987cb0", appId: "roteirum"   },
   { id: "erp-app",      label: "ERP.app",          type: "app",    color: "#36C5F0", appId: "erp"        },
   { id: "larissa-app",  label: "larissa-portfolio",type: "app",    color: "#E01E5A", appId: "larissa"    },
+  { id: "portfolio",    label: "Portfolio",        type: "link",   color: "#6e8cf9", appId: "portfolio"  },
+  { id: "chatbot",      label: "Aprix",            type: "app",    color: "#987cb0", appId: "chatbot"    },
 ];
 
 // Right column — links & utilities

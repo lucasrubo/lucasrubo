@@ -72,7 +72,7 @@ export interface Translations {
     sectionWork: string;
     sectionEducation: string;
     jobs: [
-      { description: string },  // Junior Development Analyst B
+      { description: string },  
       { description: string },  // Junior Developer
       { description: string },  // Systems Developer Intern
       { description: string },  // Programming Assistant
@@ -149,7 +149,7 @@ const en: Translations = {
   },
 
   appWindow: {
-    getStarted: "Get started - free",
+    getStarted: "Talk to Aprix",
   },
 
   desktop: {
@@ -159,7 +159,7 @@ const en: Translations = {
   },
 
   about: {
-    role: "Web Developer · Junior Development Analyst B @ Areco",
+    role: "Web Developer · Mid-level Development Analyst @ Areco",
     sectionAbout: "About",
     bio: {
       part1: "Computer Science graduate specializing in front-end development. Currently at ",
@@ -276,7 +276,7 @@ const ptBR: Translations = {
   },
 
   appWindow: {
-    getStarted: "Começar - grátis",
+    getStarted: "Fale com Aprix",
   },
 
   desktop: {
@@ -286,7 +286,7 @@ const ptBR: Translations = {
   },
 
   about: {
-    role: "Desenvolvedor Web · Analista de Desenvolvimento Júnior B @ Areco",
+    role: "Desenvolvedor Web · Analista de Desenvolvimento Pleno @ Areco",
     sectionAbout: "Sobre",
     bio: {
       part1: "Formado em Ciência da Computação com foco em desenvolvimento front-end. Atualmente na ",

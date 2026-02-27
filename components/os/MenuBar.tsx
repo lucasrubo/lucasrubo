@@ -1,8 +1,9 @@
 "use client";
 
-import { Github, Linkedin, Download } from "lucide-react";
+import { Github, Linkedin, Download, MessageCircle } from "lucide-react";
 import { useWindows } from "@/contexts/WindowContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAprix } from "@/contexts/AprixContext";
 
 const NAV_IDS = [
   { appId: "about",      title: "about.mdx"     },
@@ -23,6 +24,7 @@ function LRMark() {
 export default function MenuBar() {
   const { openWindow } = useWindows();
   const { locale, toggleLocale, t } = useLanguage();
+  const { toggleChat, apiOnline } = useAprix();
 
   // Nav labels in the current locale — same order as NAV_IDS
   const navLabels = [
@@ -98,10 +100,14 @@ export default function MenuBar() {
         <div className="w-px h-4 bg-white/15 mx-1" />
 
         <button
-          onClick={() => openWindow("contact", { title: "contact.mdx", size: { width: 640, height: 520 } })}
-          className="text-[12.5px] font-semibold bg-ph-orange text-white px-3.5 py-1.5 rounded hover:bg-[#d94400] transition-colors"
+          onClick={toggleChat}
+          className="flex items-center gap-1.5 text-[12.5px] font-semibold bg-ph-purple text-white px-3.5 py-1.5 rounded hover:bg-[#7d659a] transition-colors relative"
         >
-          {t.menuBar.hireMe}
+          <MessageCircle size={13} />
+          Aprix
+          {apiOnline && (
+            <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-green-400 border border-[#1a1815]" />
+          )}
         </button>
       </div>
     </header>
