@@ -104,7 +104,7 @@ export default function MenuBar() {
           onClick={toggleChat}
           className="flex items-center gap-1.5 text-[12.5px] font-semibold bg-white text-black px-3.5 py-1.5 rounded hover:bg-black/10 cursor-pointer transition-colors relative"
         >
-          <Image src="./Aprix.png" alt="Aprix" width={14} height={14} />          
+          <Image src="/Aprix.png" alt="Aprix" width={14} height={14} />          
           {apiOnline && (
             <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-green-400 border border-[#1a1815]" />
           )}
