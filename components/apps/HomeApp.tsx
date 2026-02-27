@@ -23,7 +23,7 @@ const TABS = ["Startup / Side project", "Growth", "Scale"] as const;
 type Tab = (typeof TABS)[number];
 
 const APPS = [
-  { id: "ai",          label: "PostHog AI",        icon: Sparkles,      color: "#6e8cf9" },
+  { id: "ai",          label: "AprixOS AI",        icon: Sparkles,      color: "#6e8cf9" },
   { id: "replay",      label: "Session Replay",    icon: PlayCircle,    color: "#2EB67D" },
   { id: "analytics",   label: "Web Analytics",     icon: Globe,         color: "#36C5F0" },
   { id: "product",     label: "Product Analytics", icon: BarChart2,     color: "#ECB22E" },
@@ -46,14 +46,14 @@ export default function HomeApp() {
       <div className="px-8 pt-8 pb-6 border-b border-gray-100">
         <div className="flex items-center gap-2.5 mb-3">
           <PHLogo />
-          <span className="text-2xl font-bold tracking-tight">PostHog</span>
+          <span className="text-2xl font-bold tracking-tight">AprixOS</span>
         </div>
         <p className="text-sm text-gray-500 mb-5 max-w-md">
           We make dev tools that help product engineers build successful products.
         </p>
         <div className="flex flex-wrap gap-2">
           <button
-            onClick={() => openWindow("signup", { title: "Sign up – PostHog", size: { width: 480, height: 520 } })}
+            onClick={() => openWindow("signup", { title: "Sign up – AprixOS", size: { width: 480, height: 520 } })}
             className="bg-ph-orange text-white text-sm font-semibold px-4 py-2 rounded-md hover:bg-[#d94400] transition-colors"
           >
             Talk to Aprix
@@ -131,7 +131,7 @@ export default function HomeApp() {
                 app={APPS.find((a) => a.id === selectedApp)!}
                 onOpen={() =>
                   openWindow(selectedApp, {
-                    title: `${APPS.find((a) => a.id === selectedApp)?.label} – PostHog`,
+                    title: `${APPS.find((a) => a.id === selectedApp)?.label} – AprixOS`,
                   })
                 }
               />
@@ -150,7 +150,7 @@ function AIPanel() {
       <div className="flex items-center justify-between px-4 py-2.5 bg-[#1d4ed8]">
         <div className="flex items-center gap-2">
           <Sparkles size={14} className="text-white" />
-          <span className="text-sm font-semibold text-white">PostHog AI</span>
+          <span className="text-sm font-semibold text-white">AprixOS AI</span>
           <span className="text-xs text-blue-200 ml-1 hidden sm:inline">
             Ask questions about how people use your product
           </span>

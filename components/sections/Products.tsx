@@ -28,7 +28,7 @@ export default function Products() {
             Everything you need, in one platform
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            Stop stitching together a dozen different tools. PostHog gives you
+            Stop stitching together a dozen different tools. AprixOS gives you
             all the insights you need to build a better product.
           </p>
         </div>

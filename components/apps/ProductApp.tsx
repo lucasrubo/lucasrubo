@@ -103,14 +103,14 @@ const PRODUCT_DATA: Record<
     name: "Data Warehouse",
     tagline: "One source of truth for all your data",
     description:
-      "Sync PostHog with your data warehouse. Combine product data with CRM, billing, and other sources.",
+      "Sync AprixOS with your data warehouse. Combine product data with CRM, billing, and other sources.",
     color: "#f54e00",
     icon: Database,
     features: [
       { icon: Database, title: "Sync to any warehouse", desc: "BigQuery, Snowflake, Redshift, S3 and more." },
       { icon: Zap, title: "Real-time Pipelines", desc: "Data flows in minutes, not hours." },
       { icon: Users, title: "External Data Sources", desc: "Import from Stripe, Hubspot, Salesforce." },
-      { icon: BarChart3, title: "SQL Access", desc: "Query your PostHog data with SQL directly." },
+      { icon: BarChart3, title: "SQL Access", desc: "Query your AprixOS data with SQL directly." },
     ],
   },
 };

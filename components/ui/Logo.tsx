@@ -16,7 +16,7 @@ export default function Logo({ className = "", light = false }: LogoProps) {
         viewBox="0 0 30 30"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        aria-label="PostHog hedgehog logo"
+        aria-label="AprixOS logo"
       >
         {/* Body */}
         <ellipse cx="15" cy="20" rx="11" ry="8" fill="#f54e00" />
@@ -37,7 +37,7 @@ export default function Logo({ className = "", light = false }: LogoProps) {
         <ellipse cx="24.5" cy="20" rx="1.5" ry="1" fill="#1d1b17" />
       </svg>
       <span className={`font-bold text-[17px] tracking-tight ${textColor}`}>
-        PostHog
+        AprixOS
       </span>
     </Link>
   );

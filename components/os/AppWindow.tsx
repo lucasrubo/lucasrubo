@@ -211,45 +211,50 @@ export default function AppWindow({
         </div>
 
         {/* Row 2: Toolbar */}
-        <div className={`flex items-center h-9 px-2 gap-0.5 shrink-0 border-b ${
+        <div className={`max-w-full overflow-x-auto overflow-y-hidden flex items-center gap-0.5 shrink-0 ${
           isActive
-            ? "bg-[#f5f5f5] dark:bg-[#222018] border-black/8 dark:border-white/6"
-            : "bg-[#f9f9f9] dark:bg-[#1c1a17] border-black/5 dark:border-white/4"
+            ? "bg-[#f5f5f5] dark:bg-[#222018]"
+            : "bg-[#f9f9f9] dark:bg-[#1c1a17]"
         }`}>
-          <ToolBtn icon={Undo2}   label="Undo" />
-          <ToolBtn icon={Redo2}   label="Redo" />
-          <Divider />
-          <button className="flex items-center gap-1 px-2 py-1 text-[11px] text-gray-500 dark:text-white/40
-                             hover:bg-black/5 dark:hover:bg-white/6 hover:text-gray-700 dark:hover:text-white/65
-                             rounded transition-colors">
-            Zoom <ChevronDown size={10} />
-          </button>
-          <Divider />
-          <ToolBtn icon={Bold}      label="Bold" />
-          <ToolBtn icon={Italic}    label="Italic" />
-          <ToolBtn icon={Underline} label="Underline" />
-          <Divider />
-          <ToolBtn icon={AlignLeft}   label="Align left" />
-          <ToolBtn icon={AlignCenter} label="Center" />
-          <ToolBtn icon={AlignRight}  label="Align right" />
-          <Divider />
-          <ToolBtn icon={Link}          label="Add link" />
-          <ToolBtn icon={MessageSquare} label="Comment" />
-          <Divider />
-          <ToolBtn icon={Search}   label="Search" />
-          <ToolBtn icon={Settings} label="Settings" />
-          <div className="flex-1" />
+          <div className={`flex items-center h-9 px-2 gap-0.5 shrink-0 border-b ${
+            isActive
+              ? "bg-[#f5f5f5] dark:bg-[#222018] border-black/8 dark:border-white/6"
+              : "bg-[#f9f9f9] dark:bg-[#1c1a17] border-black/5 dark:border-white/4"
+          }`} >
+            <ToolBtn icon={Undo2}   label="Undo" />
+            <ToolBtn icon={Redo2}   label="Redo" />
+            <Divider />
+            <button className="flex items-center gap-1 px-2 py-1 text-[11px] text-gray-500 dark:text-white/40
+                              hover:bg-black/5 dark:hover:bg-white/6 hover:text-gray-700 dark:hover:text-white/65
+                              rounded transition-colors">
+              Zoom <ChevronDown size={10} />
+            </button>
+            <Divider />
+            <ToolBtn icon={Bold}      label="Bold" />
+            <ToolBtn icon={Italic}    label="Italic" />
+            <ToolBtn icon={Underline} label="Underline" />
+            <Divider />
+            <ToolBtn icon={AlignLeft}   label="Align left" />
+            <ToolBtn icon={AlignCenter} label="Center" />
+            <ToolBtn icon={AlignRight}  label="Align right" />
+            <Divider />
+            <ToolBtn icon={Link}          label="Add link" />
+            <ToolBtn icon={MessageSquare} label="Comment" />
+            <Divider />
+            <ToolBtn icon={Search}   label="Search" />
+            <ToolBtn icon={Settings} label="Settings" />
+            <div className="flex-1" />
 
-          {/* CTA — opens Aprix chat */}
-          <button
-            onClick={toggleChat}
-            className="text-[11.5px] font-semibold bg-ph-purple text-white px-3 py-1 rounded
-                       hover:bg-[#7d659a] transition-colors shrink-0"
-          >
-            {t.appWindow.getStarted}
-          </button>
+            {/* CTA — opens Aprix chat */}
+            <button
+              onClick={toggleChat}
+              className="text-[11.5px] font-semibold bg-ph-purple text-white px-3 py-1 rounded
+                        hover:bg-[#7d659a] transition-colors shrink-0"
+            >
+              {t.appWindow.getStarted}
+            </button>
+          </div>
         </div>
-
         {/* Content */}
         <div className="flex-1 overflow-y-auto overflow-x-hidden bg-white dark:bg-[#1d1b17]">
           {children}

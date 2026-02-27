@@ -51,7 +51,7 @@ export const PRODUCTS = [
   {
     name: "Data Warehouse",
     description:
-      "Sync PostHog data with external sources. Build a complete picture of your customers.",
+      "Sync AprixOS data with external sources. Build a complete picture of your customers.",
     icon: "Database",
     color: "#f54e00",
     href: "/data-warehouse",
@@ -143,7 +143,7 @@ export const FOOTER_LINKS: Record<string, { label: string; href: string }[]> = {
     { label: "Docs", href: "/docs" },
     { label: "API", href: "/docs/api" },
     { label: "Changelog", href: "/changelog" },
-    { label: "Status", href: "https://status.posthog.com" },
+    { label: "Status", href: "https://status.AprixOS.com" },
   ],
   Company: [
     { label: "About", href: "/about" },
@@ -156,7 +156,7 @@ export const FOOTER_LINKS: Record<string, { label: string; href: string }[]> = {
     { label: "Questions", href: "/questions" },
     { label: "Newsletter", href: "/newsletter" },
     { label: "Merch", href: "/merch" },
-    { label: "GitHub", href: "https://github.com/PostHog/posthog" },
-    { label: "Discord", href: "https://posthog.com/slack" },
+    { label: "GitHub", href: "https://github.com/lucasrubo" },
+    { label: "Discord", href: "#" },
   ],
 };

@@ -5,7 +5,7 @@ import { PRICING_PLANS } from "@/lib/constants";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Pricing – PostHog",
+  title: "Pricing – AprixOS",
   description:
     "Start for free. Upgrade only when you need more. No per-seat pricing, ever.",
 };

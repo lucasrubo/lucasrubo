@@ -15,7 +15,7 @@ const sourceCodePro = Source_Code_Pro({
 });
 
 export const metadata: Metadata = {
-  title: "PostHog – The only all-in-one platform built for developers",
+  title: "AprixOS – The only all-in-one platform built for developers",
   description:
     "Product analytics, session replay, feature flags, A/B testing, surveys and data warehouse. All in one platform.",
 };

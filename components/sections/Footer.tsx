@@ -16,7 +16,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-3 mt-5">
               <a
-                href="https://github.com/PostHog/posthog"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/35 hover:text-white transition-colors"
@@ -25,7 +25,7 @@ export default function Footer() {
                 <Github size={17} />
               </a>
               <a
-                href="https://twitter.com/PostHog"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/35 hover:text-white transition-colors"
@@ -34,7 +34,7 @@ export default function Footer() {
                 <Twitter size={17} />
               </a>
               <a
-                href="https://linkedin.com/company/posthog"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/35 hover:text-white transition-colors"
@@ -70,7 +70,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-white/35 text-sm">
-            © {new Date().getFullYear()} PostHog, Inc.
+            © {new Date().getFullYear()} AprixOS, Inc.
           </p>
           <div className="flex gap-6">
             {["Privacy", "Terms", "Security", "Cookie Policy"].map((label) => (

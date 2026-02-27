@@ -44,7 +44,7 @@ export default function MenuBar() {
         onClick={() => openWindow("about", { title: "about.mdx", size: { width: 800, height: 600 } })}
       >
         <LRMark />
-        <span className="text-white/85 text-[13px] font-semibold tracking-tight">Aprix OS</span>
+        <span className="text-white/85 text-[13px] font-semibold tracking-tight">AprixOS</span>
       </button>
 
       <div className="w-px h-4 bg-white/15 mx-1" />

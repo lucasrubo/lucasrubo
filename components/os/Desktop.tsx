@@ -26,6 +26,7 @@ const IFRAME_URLS: Record<string, string> = {
   roteirum:  "https://lucasrubo.github.io/Roteirum/",
   erp:       "https://lucasrubo.github.io/ERP/dashboard",
   larissa:       "https://larissaarendt.github.io/portfolio/",
+  finance:      "https://finance.rubo.tec.br",
 };
 
 function AppContent({ appId }: { appId: string }) {

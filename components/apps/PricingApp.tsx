@@ -94,7 +94,7 @@ export default function PricingApp() {
           {[
             ["Do you offer a free plan?", "Yes! Our free tier includes 1M events, 5K session recordings, and 1M feature flag requests per month — forever."],
             ["Is there per-seat pricing?", "No. All plans include unlimited team members and tracked users. You only pay for usage."],
-            ["Can I self-host PostHog?", "Yes! PostHog is open-source. You can self-host for free or use our cloud offering."],
+            ["Can I self-host AprixOS?", "Yes! AprixOS is open-source. You can self-host for free or use our cloud offering."],
             ["How does billing work?", "You're billed monthly based on usage. No upfront commitments. Cancel anytime."],
           ].map(([q, a]) => (
             <div key={q}>
