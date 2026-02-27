@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:posthog.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(curl -s \"https://api.github.com/repos/PostHog/posthog.com\")",
+      "WebFetch(domain:raw.githubusercontent.com)"
+    ]
+  }
+}

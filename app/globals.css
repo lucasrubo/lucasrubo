@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+/* Enable class-based dark mode */
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* PostHog Colors */
+  --color-ph-orange: #f54e00;
+  --color-ph-blue: #6e8cf9;
+  --color-ph-brown: #822802;
+  --color-ph-purple: #987cb0;
+  --color-ph-dark: #1d1b17;
+  --color-ph-cream: #fffaf3;
+
+  /* Fonts */
+  --font-sans: var(--font-ibm-plex-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-source-code-pro), ui-monospace, "Courier New", monospace;
+}
+
+:root {
+  --background: #fffaf3;
+  --foreground: #1d1b17;
+}
+
+.dark {
+  --background: #1a1815;
+  --foreground: #f5f0e8;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Desktop surface — color handled here so dark mode works via CSS cascade */
+.desktop-surface {
+  background-color: #c8b89a;
+}
+
+.dark .desktop-surface {
+  background-color: #1e1c18;
+}
