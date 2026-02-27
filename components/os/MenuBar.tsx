@@ -4,6 +4,7 @@ import { Github, Linkedin, Download, MessageCircle } from "lucide-react";
 import { useWindows } from "@/contexts/WindowContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAprix } from "@/contexts/AprixContext";
+import Image from 'next/image'
 
 const NAV_IDS = [
   { appId: "about",      title: "about.mdx"     },
@@ -15,8 +16,8 @@ const NAV_IDS = [
 
 function LRMark() {
   return (
-    <div className="w-6 h-6 rounded-md bg-ph-orange flex items-center justify-center">
-      <span className="text-white font-bold text-[11px] tracking-tight leading-none">LR</span>
+    <div className="w-6 h-6 rounded-md bg-white/80 flex items-center justify-center">
+      <Image src="/icon.png" alt="Lucas Rubo" width={14} height={14} />
     </div>
   );
 }
@@ -43,7 +44,7 @@ export default function MenuBar() {
         onClick={() => openWindow("about", { title: "about.mdx", size: { width: 800, height: 600 } })}
       >
         <LRMark />
-        <span className="text-white/85 text-[13px] font-semibold tracking-tight">Lucas Rubo</span>
+        <span className="text-white/85 text-[13px] font-semibold tracking-tight">Aprix OS</span>
       </button>
 
       <div className="w-px h-4 bg-white/15 mx-1" />
@@ -101,10 +102,9 @@ export default function MenuBar() {
 
         <button
           onClick={toggleChat}
-          className="flex items-center gap-1.5 text-[12.5px] font-semibold bg-ph-purple text-white px-3.5 py-1.5 rounded hover:bg-[#7d659a] transition-colors relative"
+          className="flex items-center gap-1.5 text-[12.5px] font-semibold bg-white text-black px-3.5 py-1.5 rounded hover:bg-black/10 cursor-pointer transition-colors relative"
         >
-          <MessageCircle size={13} />
-          Aprix
+          <Image src="/aprix.png" alt="Aprix" width={14} height={14} />          
           {apiOnline && (
             <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-green-400 border border-[#1a1815]" />
           )}

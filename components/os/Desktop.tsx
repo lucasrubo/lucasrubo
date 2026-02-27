@@ -7,7 +7,7 @@ import DesktopIcon from "./DesktopIcon";
 import Taskbar from "./Taskbar";
 import { WindowProvider, useWindows } from "@/contexts/WindowContext";
 import { LanguageProvider, useLanguage } from "@/contexts/LanguageContext";
-import { LEFT_ICONS, RIGHT_ICONS } from "@/lib/desktopIcons";
+import { LEFT_ICONS, RIGHT_ICONS, MIDDLE_ICONS } from "@/lib/desktopIcons";
 
 import AboutApp      from "@/components/apps/AboutApp";
 import ProjectsApp   from "@/components/apps/ProjectsApp";
@@ -41,7 +41,7 @@ function AppContent({ appId }: { appId: string }) {
 }
 
 const ICON_H = 78; // approx height per icon row (76px icon + 2px gap)
-const ALL_ICONS = [...LEFT_ICONS, ...RIGHT_ICONS];
+const ALL_ICONS = [...LEFT_ICONS, ...RIGHT_ICONS, ...MIDDLE_ICONS];
 
 type IconPositions = Record<string, { x: number; y: number }>;
 
@@ -53,6 +53,14 @@ function buildDefaultPositions(containerWidth: number): IconPositions {
   RIGHT_ICONS.forEach((icon, i) => {
     // right-aligned: 8px from right edge, icon is 56px wide → left = w - 64
     positions[icon.id] = { x: containerWidth - 64, y: 12 + i * ICON_H };
+  });
+  MIDDLE_ICONS.forEach((icon, i) => {
+    // center-aligned horizontally with spacing
+    const iconWidth = 56; // width of each icon
+    const spacing = 80; // spacing between icons
+    const totalWidth = MIDDLE_ICONS.length * spacing;
+    const startX = (containerWidth - totalWidth) / 2;
+    positions[icon.id] = { x: startX + i * spacing, y: 12 };
   });
   return positions;
 }
