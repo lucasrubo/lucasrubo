@@ -27,7 +27,7 @@ export const RIGHT_ICONS: DesktopIconDef[] = [
 ];
 
 export const MIDDLE_ICONS: DesktopIconDef[] = [
-  { id: "chatbot",      label: "Aprix",            type: "app",    color: "#ffffff", appId: "chatbot", icon: "/aprix.png"    },
+  { id: "chatbot",      label: "Aprix",            type: "app",    color: "#ffffff", appId: "chatbot", icon: "/Aprix.png"    },
   { id: "finance-app",    label: "Finance",        type: "app",   color: "#6e8cf9", appId: "finance"  },
   { id: "portfolio-app",    label: "Portfolio",        type: "app",   color: "#6e8cf9", appId: "portfolio"  },
   { id: "larissa-app",  label: "larissa-portfolio",type: "app",    color: "#E01E5A", appId: "larissa"    },
