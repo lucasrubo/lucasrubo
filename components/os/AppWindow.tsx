@@ -211,12 +211,12 @@ export default function AppWindow({
         </div>
 
         {/* Row 2: Toolbar */}
-        <div className={`max-w-full overflow-x-auto overflow-y-hidden flex items-center gap-0.5 shrink-0 ${
+        <div className={`flex max-w-full overflow-x-auto overflow-y-hidden items-center gap-0.5 shrink-0 ${
           isActive
             ? "bg-[#f5f5f5] dark:bg-[#222018]"
             : "bg-[#f9f9f9] dark:bg-[#1c1a17]"
         }`}>
-          <div className={`flex items-center h-9 px-2 gap-0.5 shrink-0 border-b ${
+          <div className={`flex flex-1 items-center h-9 px-2 gap-0.5 shrink-0 border-b ${
             isActive
               ? "bg-[#f5f5f5] dark:bg-[#222018] border-black/8 dark:border-white/6"
               : "bg-[#f9f9f9] dark:bg-[#1c1a17] border-black/5 dark:border-white/4"
