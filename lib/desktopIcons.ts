@@ -30,7 +30,6 @@ export const MIDDLE_ICONS: DesktopIconDef[] = [
   { id: "chatbot",      label: "Aprix",            type: "app",    color: "#ffffff", appId: "chatbot", icon: "/Aprix.png"    },
   { id: "finance-app",    label: "Finance",        type: "app",   color: "#6e8cf9", appId: "finance"  },
   { id: "portfolio-app",    label: "Portfolio",        type: "app",   color: "#6e8cf9", appId: "portfolio"  },
-  { id: "larissa-app",  label: "larissa-portfolio",type: "app",    color: "#E01E5A", appId: "larissa"    },
-  { id: "erp-app",      label: "ERP.app",          type: "app",    color: "#36C5F0", appId: "erp"        },
-  { id: "roteirum-app", label: "Roteirum.app",     type: "mov",    color: "#987cb0", appId: "roteirum"   }
 ];
+
+export const ALL_ICONS: DesktopIconDef[] = [...LEFT_ICONS, ...RIGHT_ICONS, ...MIDDLE_ICONS];

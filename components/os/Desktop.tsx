@@ -17,7 +17,7 @@ import ContactApp    from "@/components/apps/ContactApp";
 import SignupApp     from "@/components/apps/SignupApp";
 import WelcomeApp    from "@/components/apps/WelcomeApp";
 import IframeApp     from "@/components/apps/IframeApp";
-import AprixChatWidget from "@/components/os/AprixChatWidget";
+import ChatApp from "@/components/apps/ChatApp";
 import { AprixProvider, useAprix } from "@/contexts/AprixContext";
 
 // IDs that open as live iframes
@@ -32,6 +32,7 @@ const IFRAME_URLS: Record<string, string> = {
 function AppContent({ appId }: { appId: string }) {
   if (IFRAME_URLS[appId])     return <IframeApp url={IFRAME_URLS[appId]} />;
   if (appId === "welcome")    return <WelcomeApp />;
+  if (appId === "chatbot")    return <ChatApp />;
   if (appId === "about")      return <AboutApp />;
   if (appId === "projects")   return <ProjectsApp />;
   if (appId === "skills")     return <SkillsApp />;
@@ -68,7 +69,7 @@ function buildDefaultPositions(containerWidth: number): IconPositions {
 
 function DesktopInner() {
   const { windows, activeAppId, openWindow } = useWindows();
-  const { openChat } = useAprix();
+  const { apiOnline } = useAprix();
   const desktopRef = useRef<HTMLDivElement>(null);
 
   // ── Icon positions ──────────────────────────────────────────────────────────
@@ -116,7 +117,11 @@ function DesktopInner() {
   const handleIconOpen = (appId: string, label: string, clickPos: { x: number; y: number }, size?: { width: number; height: number }) => {
     if (appId === "github")   { window.open("https://github.com/lucasrubo", "_blank"); return; }
     if (appId === "linkedin") { window.open("https://linkedin.com/in/lucas-rubo", "_blank"); return; }
-    if (appId === "chatbot")  { openChat(); return; }
+    // Chatbot opens as a proper window
+    if (appId === "chatbot")  {
+      openWindow("chatbot", { title: "Aprix.app", size: { width: 400, height: 540 }, launchOrigin: clickPos });
+      return;
+    }
     // Iframe apps get a wider window by default
     const iframeSize = IFRAME_URLS[appId] ? { width: 1060, height: 700 } : size;
     openWindow(appId, { title: label, size: iframeSize, launchOrigin: clickPos });
@@ -149,6 +154,9 @@ function DesktopInner() {
               position={pos}
               onOpen={(clickPos) => handleIconOpen(icon.appId, icon.label, clickPos)}
               onDragEnd={(newPos) => handleIconDragEnd(icon.id, newPos)}
+              badge={icon.appId === "chatbot" && apiOnline ? (
+                <span className="w-2.5 h-2.5 rounded-full bg-green-400 block ring-2 ring-white/60 dark:ring-[#1a1b18]/60" />
+              ) : undefined}
             />
           );
         })}
@@ -173,9 +181,6 @@ function DesktopInner() {
       </div>
 
       <Taskbar />
-
-      {/* Aprix floating chat widget */}
-      <AprixChatWidget />
 
       {/* Context menu — fixed positioning, no offset math needed */}
       {contextMenu && (

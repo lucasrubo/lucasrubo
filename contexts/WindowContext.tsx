@@ -5,8 +5,10 @@ import {
   useContext,
   useState,
   useCallback,
+  useRef,
   ReactNode,
 } from "react";
+import type React from "react";
 
 export interface WindowState {
   appId: string;
@@ -40,6 +42,9 @@ interface WindowContextType {
     size: { width: number; height: number },
     pos?: { x: number; y: number }
   ) => void;
+  /** Ref map: appId → center position of the taskbar button (no re-renders). */
+  taskbarBoundsRef: React.MutableRefObject<Record<string, { x: number; y: number }>>;
+  setTaskbarBound: (appId: string, pos: { x: number; y: number }) => void;
 }
 
 const WindowContext = createContext<WindowContextType | null>(null);
@@ -68,6 +73,10 @@ function calcCenter(w: number, h: number, existingCount: number) {
 export function WindowProvider({ children }: { children: ReactNode }) {
   const [windows, setWindows] = useState<WindowState[]>([]);
   const [activeAppId, setActiveAppId] = useState<string | null>(null);
+  const taskbarBoundsRef = useRef<Record<string, { x: number; y: number }>>({});
+  const setTaskbarBound = useCallback((appId: string, pos: { x: number; y: number }) => {
+    taskbarBoundsRef.current[appId] = pos;
+  }, []);
 
   const openWindow = useCallback((appId: string, opts?: OpenWindowOptions) => {
     setWindows((prev) => {
@@ -170,6 +179,8 @@ export function WindowProvider({ children }: { children: ReactNode }) {
         focusWindow,
         updatePosition,
         updateSize,
+        taskbarBoundsRef,
+        setTaskbarBound,
       }}
     >
       {children}

@@ -10,7 +10,6 @@ import {
 } from "lucide-react";
 import { useWindows } from "@/contexts/WindowContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useAprix } from "@/contexts/AprixContext";
 
 interface AppWindowProps {
   appId: string;
@@ -44,10 +43,9 @@ export default function AppWindow({
   appId, title, position, size,
   isMinimized, isMaximized, zIndex, isActive, launchOrigin, children,
 }: AppWindowProps) {
-  const { closeWindow, minimizeWindow, toggleMaximize, focusWindow, updatePosition, updateSize } =
+  const { closeWindow, minimizeWindow, toggleMaximize, focusWindow, updatePosition, updateSize, taskbarBoundsRef, openWindow } =
     useWindows();
   const { t } = useLanguage();
-  const { toggleChat } = useAprix();
   const isDragging = useRef(false);
 
   // ── Drag (title bar) ─────────────────────────────────────────────────────
@@ -127,6 +125,48 @@ export default function AppWindow({
     [appId, closeWindow]
   );
 
+  // ── Minimize fly-to-taskbar animation ────────────────────────────────────
+  const [isMinimizing, setIsMinimizing] = useState(false);
+  const [minimizeStyle, setMinimizeStyle] = useState<React.CSSProperties>({});
+
+  const handleMinimize = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      const target = taskbarBoundsRef.current[appId];
+      const windowCenterX = position.x + size.width / 2;
+      const windowCenterY = position.y + size.height / 2;
+      const dx = target ? target.x - windowCenterX : 0;
+      const dy = target
+        ? target.y - windowCenterY
+        : (typeof window !== "undefined" ? window.innerHeight : 800) - windowCenterY;
+
+      setMinimizeStyle({
+        transform: `translate(${dx}px, ${dy}px) scale(0.06)`,
+        opacity: 0,
+        transition: "transform 0.32s cubic-bezier(0.4,0,1,1), opacity 0.22s ease",
+        pointerEvents: "none",
+      });
+      setIsMinimizing(true);
+      setTimeout(() => {
+        minimizeWindow(appId);
+        setIsMinimizing(false);
+        setMinimizeStyle({});
+      }, 340);
+    },
+    [appId, minimizeWindow, position, size, taskbarBoundsRef]
+  );
+
+  // ── Maximize animation ────────────────────────────────────────────────────
+  const prevMaxRef = useRef(isMaximized);
+  const [maxAnim, setMaxAnim] = useState<"expand" | "restore" | null>(null);
+  useEffect(() => {
+    if (prevMaxRef.current === isMaximized) return;
+    prevMaxRef.current = isMaximized;
+    setMaxAnim(isMaximized ? "expand" : "restore");
+    const t = setTimeout(() => setMaxAnim(null), 340);
+    return () => clearTimeout(t);
+  }, [isMaximized]);
+
   // ── Opening animation ─────────────────────────────────────────────────────
   // 3 phases when launchOrigin is set:
   //   'init' → tiny dot at click position (no transition)
@@ -202,13 +242,14 @@ export default function AppWindow({
     };
   })();
 
-  if (isMinimized) return null;
+  if (isMinimized && !isMinimizing) return null;
 
   // Outer div carries only positioning (no overflow-hidden, for resize handles)
   const outerStyle: React.CSSProperties = isMaximized
-    ? { position: "absolute", inset: 0, zIndex, ...animStyle }
+    ? { position: "absolute", inset: 0, bottom: "4rem", zIndex, ...(isMinimizing ? minimizeStyle : animStyle) }
     : { position: "absolute", top: position.y, left: position.x,
-        width: size.width, height: size.height, zIndex, ...animStyle };
+        width: size.width, height: size.height, zIndex,
+        ...(isMinimizing ? minimizeStyle : animStyle) };
 
   return (
     <div
@@ -232,6 +273,13 @@ export default function AppWindow({
             ? "shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
             : "shadow-[0_8px_28px_rgba(0,0,0,0.30)]"
         }`}
+        style={
+          maxAnim === "expand"
+            ? { animation: "maximize-expand 0.32s cubic-bezier(0.34,1.56,0.64,1) forwards" }
+            : maxAnim === "restore"
+              ? { animation: "maximize-restore 0.28s cubic-bezier(0.34,1.56,0.64,1) forwards" }
+              : undefined
+        }
       >
         {/* Row 1: Title bar */}
         <div
@@ -255,7 +303,7 @@ export default function AppWindow({
               <X size={8} strokeWidth={2.5} className="text-white" />
             </button>
             <button
-              onClick={(e) => { e.stopPropagation(); minimizeWindow(appId); }}
+              onClick={handleMinimize}
               title="Minimize"
               className="w-3.5 h-3.5 rounded bg-amber-400 flex items-center justify-center
                          hover:brightness-125 hover:scale-110 active:scale-95
@@ -284,7 +332,7 @@ export default function AppWindow({
         </div>
 
         {/* Row 2: Toolbar */}
-        <div className={`flex max-w-full overflow-x-auto overflow-y-hidden items-center gap-0.5 shrink-0 ${
+        {appId !== "chatbot" && <div className={`flex max-w-full overflow-x-auto overflow-y-hidden items-center gap-0.5 shrink-0 ${
           isActive
             ? "bg-[#f5f5f5] dark:bg-[#222018]"
             : "bg-[#f9f9f9] dark:bg-[#1c1a17]"
@@ -318,16 +366,16 @@ export default function AppWindow({
             <ToolBtn icon={Settings} label="Settings" />
             <div className="flex-1" />
 
-            {/* CTA — opens Aprix chat */}
+            {/* CTA — opens Aprix as a window */}
             <button
-              onClick={toggleChat}
+              onClick={() => openWindow("chatbot", { title: "Aprix.app", size: { width: 400, height: 540 } })}
               className="text-[11.5px] font-semibold bg-ph-purple text-white px-3 py-1 rounded
                         hover:bg-[#7d659a] transition-colors shrink-0"
             >
               {t.appWindow.getStarted}
             </button>
           </div>
-        </div>
+        </div>}
         {/* Content */}
         <div className="flex-1 overflow-y-auto overflow-x-hidden bg-white dark:bg-[#1d1b17]">
           {children}
