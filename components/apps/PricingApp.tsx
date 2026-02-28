@@ -2,8 +2,10 @@
 
 import { Check, Zap } from "lucide-react";
 import { PRICING_PLANS } from "@/lib/constants";
+import { useAprix } from "@/contexts/AprixContext";
 
 export default function PricingApp() {
+  const { toggleChat } = useAprix();
   return (
     <div className="min-h-full bg-white">
       {/* Header */}
@@ -53,6 +55,7 @@ export default function PricingApp() {
               </div>
 
               <button
+                onClick={plan.cta === "Talk to Aprix" ? toggleChat : undefined}
                 className={`w-full py-2 rounded-md text-sm font-semibold mb-5 transition-colors ${
                   plan.highlight
                     ? "bg-ph-orange text-white hover:bg-[#d94400]"

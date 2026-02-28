@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import { X, Send } from "lucide-react";
 import { useAprix } from "@/contexts/AprixContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function AprixChatWidget() {
   const { isOpen, isClosing, messages, isLoading, apiOnline, toggleChat, sendMessage } = useAprix();
@@ -81,7 +82,8 @@ export default function AprixChatWidget() {
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-3 py-3 space-y-3">
+      <ScrollArea className="flex-1 px-3 py-3">
+        <div className="space-y-3">
         {messages.length === 0 && (
           <div className="text-center text-white/25 text-xs mt-10 px-4 font-mono leading-relaxed">
             {locale === "ptBR"
@@ -126,8 +128,9 @@ export default function AprixChatWidget() {
           </div>
         )}
 
-        <div ref={messagesEndRef} />
-      </div>
+          <div ref={messagesEndRef} />
+        </div>
+      </ScrollArea>
 
       {/* Input */}
       <div className="shrink-0 px-3 pb-3 pt-2 border-t border-white/8 flex gap-2 items-end">

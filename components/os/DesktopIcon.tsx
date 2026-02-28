@@ -7,7 +7,7 @@ import type { DesktopIconDef } from "@/lib/desktopIcons";
 interface DesktopIconProps {
   icon: DesktopIconDef;
   position: { x: number; y: number };
-  onOpen: () => void;
+  onOpen: (clickPos: { x: number; y: number }) => void;
   onDragEnd: (pos: { x: number; y: number }) => void;
 }
 
@@ -53,8 +53,8 @@ export default function DesktopIcon({ icon, position, onOpen, onDragEnd }: Deskt
     document.addEventListener("mouseup", onUp);
   };
 
-  const handleClick = () => {
-    if (!hasDragged.current) onOpen();
+  const handleClick = (e: React.MouseEvent) => {
+    if (!hasDragged.current) onOpen({ x: e.clientX, y: e.clientY });
     hasDragged.current = false;
   };
 

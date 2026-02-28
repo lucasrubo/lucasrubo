@@ -21,6 +21,7 @@ interface AppWindowProps {
   isMaximized: boolean;
   zIndex: number;
   isActive: boolean;
+  launchOrigin?: { x: number; y: number };
   children: React.ReactNode;
 }
 
@@ -41,7 +42,7 @@ const RESIZE_HANDLES = [
 
 export default function AppWindow({
   appId, title, position, size,
-  isMinimized, isMaximized, zIndex, isActive, children,
+  isMinimized, isMaximized, zIndex, isActive, launchOrigin, children,
 }: AppWindowProps) {
   const { closeWindow, minimizeWindow, toggleMaximize, focusWindow, updatePosition, updateSize } =
     useWindows();
@@ -115,31 +116,103 @@ export default function AppWindow({
     [appId, isMaximized, position, size, focusWindow, updateSize]
   );
 
+  // ── Close animation ───────────────────────────────────────────────────────
+  const [isClosing, setIsClosing] = useState(false);
+  const handleClose = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      setIsClosing(true);
+      setTimeout(() => closeWindow(appId), 180);
+    },
+    [appId, closeWindow]
+  );
+
   // ── Opening animation ─────────────────────────────────────────────────────
-  const [ready, setReady] = useState(false);
+  // 3 phases when launchOrigin is set:
+  //   'init' → tiny dot at click position (no transition)
+  //   'fly'  → slides to window center, grows to 0.88 scale
+  //   'open' → bouncy scale to 1 (final)
+  // Without launchOrigin: skip 'fly', just 'init' → 'open'
+  type AnimPhase = "init" | "fly" | "open";
+  const [animPhase, setAnimPhase] = useState<AnimPhase>("init");
+  const [offset, setOffset] = useState<{ dx: number; dy: number }>({ dx: 0, dy: 0 });
+  const windowRef = useRef<HTMLDivElement>(null);
+  const hasAnimated = useRef(false);
+
   useEffect(() => {
-    const id = requestAnimationFrame(() => setReady(true));
-    return () => cancelAnimationFrame(id);
+    if (hasAnimated.current) return;
+    hasAnimated.current = true;
+
+    if (!launchOrigin) {
+      // Simple scale-up animation (menu bar, links inside apps, etc.)
+      requestAnimationFrame(() => setAnimPhase("open"));
+      return;
+    }
+
+    const el = windowRef.current;
+    if (!el) { requestAnimationFrame(() => setAnimPhase("open")); return; }
+
+    // Compute translation from click origin to window visual center
+    const rect = el.getBoundingClientRect();
+    const dx = launchOrigin.x - (rect.left + rect.width / 2);
+    const dy = launchOrigin.y - (rect.top + rect.height / 2);
+    setOffset({ dx, dy });
+
+    // Wait for the offset re-render to paint (double rAF), then fly
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => {
+        setAnimPhase("fly");
+        // After fly animation finishes, bounce open
+        setTimeout(() => setAnimPhase("open"), 320);
+      })
+    );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Compute animation styles for current phase
+  const animStyle: React.CSSProperties = (() => {
+    if (isClosing)
+      return {
+        transform: "scale(0.85)",
+        opacity: 0,
+        transition: "transform 0.18s ease-in, opacity 0.15s ease-in",
+        pointerEvents: "none",
+      };
+    if (!launchOrigin) {
+      if (animPhase === "init")
+        return { transform: "scale(0.88)", opacity: 0, transition: "none" };
+      return {
+        transform: "scale(1)", opacity: 1,
+        transition: "transform 0.28s cubic-bezier(0.34,1.56,0.64,1), opacity 0.16s ease",
+      };
+    }
+    if (animPhase === "init")
+      return {
+        transform: `translate(${offset.dx}px, ${offset.dy}px) scale(0.08)`,
+        opacity: 0, transition: "none",
+      };
+    if (animPhase === "fly")
+      return {
+        transform: "scale(0.88)", opacity: 1,
+        transition: "transform 0.32s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.2s ease",
+      };
+    return {
+      transform: "scale(1)", opacity: 1,
+      transition: "transform 0.28s cubic-bezier(0.34,1.56,0.64,1)",
+    };
+  })();
 
   if (isMinimized) return null;
 
   // Outer div carries only positioning (no overflow-hidden, for resize handles)
   const outerStyle: React.CSSProperties = isMaximized
-    ? { position: "absolute", inset: 0, zIndex,
-        transform: ready ? "scale(1)" : "scale(0.88)",
-        opacity: ready ? 1 : 0,
-        transition: ready ? "transform 0.28s cubic-bezier(0.34,1.56,0.64,1), opacity 0.16s ease" : "none",
-      }
+    ? { position: "absolute", inset: 0, zIndex, ...animStyle }
     : { position: "absolute", top: position.y, left: position.x,
-        width: size.width, height: size.height, zIndex,
-        transform: ready ? "scale(1)" : "scale(0.88)",
-        opacity: ready ? 1 : 0,
-        transition: ready ? "transform 0.28s cubic-bezier(0.34,1.56,0.64,1), opacity 0.16s ease" : "none",
-      };
+        width: size.width, height: size.height, zIndex, ...animStyle };
 
   return (
     <div
+      ref={windowRef}
       style={outerStyle}
       onMouseDown={() => focusWindow(appId)}
     >
@@ -154,7 +227,7 @@ export default function AppWindow({
 
       {/* ── Visual window (fills outer, has rounded corners + overflow-hidden) ── */}
       <div
-        className={`absolute inset-0 flex flex-col ${isMaximized ? "" : "rounded-xl"} overflow-hidden ${
+        className={`absolute inset-0 flex flex-col ${isMaximized ? "" : "rounded"} overflow-hidden ${
           isActive
             ? "shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
             : "shadow-[0_8px_28px_rgba(0,0,0,0.30)]"
@@ -173,7 +246,7 @@ export default function AppWindow({
           {/* Window controls */}
           <div className="flex items-center gap-1.5 shrink-0 z-10">
             <button
-              onClick={(e) => { e.stopPropagation(); closeWindow(appId); }}
+              onClick={handleClose}
               title="Close"
               className="w-3.5 h-3.5 rounded bg-ph-orange flex items-center justify-center
                          hover:brightness-125 hover:scale-110 active:scale-95

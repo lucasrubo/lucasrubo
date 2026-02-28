@@ -113,13 +113,13 @@ function DesktopInner() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleIconOpen = (appId: string, label: string, size?: { width: number; height: number }) => {
+  const handleIconOpen = (appId: string, label: string, clickPos: { x: number; y: number }, size?: { width: number; height: number }) => {
     if (appId === "github")   { window.open("https://github.com/lucasrubo", "_blank"); return; }
     if (appId === "linkedin") { window.open("https://linkedin.com/in/lucas-rubo", "_blank"); return; }
     if (appId === "chatbot")  { openChat(); return; }
     // Iframe apps get a wider window by default
     const iframeSize = IFRAME_URLS[appId] ? { width: 1060, height: 700 } : size;
-    openWindow(appId, { title: label, size: iframeSize });
+    openWindow(appId, { title: label, size: iframeSize, launchOrigin: clickPos });
   };
 
   return (
@@ -147,7 +147,7 @@ function DesktopInner() {
               key={icon.id}
               icon={icon}
               position={pos}
-              onOpen={() => handleIconOpen(icon.appId, icon.label)}
+              onOpen={(clickPos) => handleIconOpen(icon.appId, icon.label, clickPos)}
               onDragEnd={(newPos) => handleIconDragEnd(icon.id, newPos)}
             />
           );
@@ -165,6 +165,7 @@ function DesktopInner() {
             isMaximized={win.isMaximized}
             zIndex={win.zIndex}
             isActive={win.appId === activeAppId}
+            launchOrigin={win.launchOrigin}
           >
             <AppContent appId={win.appId} />
           </AppWindow>

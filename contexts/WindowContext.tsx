@@ -16,12 +16,14 @@ export interface WindowState {
   isMinimized: boolean;
   isMaximized: boolean;
   zIndex: number;
+  launchOrigin?: { x: number; y: number };
 }
 
 interface OpenWindowOptions {
   title?: string;
   position?: { x: number; y: number };
   size?: { width: number; height: number };
+  launchOrigin?: { x: number; y: number };
 }
 
 interface WindowContextType {
@@ -71,10 +73,10 @@ export function WindowProvider({ children }: { children: ReactNode }) {
     setWindows((prev) => {
       const existing = prev.find((w) => w.appId === appId);
       if (existing) {
-        // Already open: unminimize and bring to front
+        // Already open: unminimize and bring to front (clear launchOrigin so animation doesn't replay)
         return prev.map((w) =>
           w.appId === appId
-            ? { ...w, isMinimized: false, zIndex: ++zCounter }
+            ? { ...w, isMinimized: false, zIndex: ++zCounter, launchOrigin: undefined }
             : w
         );
       }
@@ -92,6 +94,7 @@ export function WindowProvider({ children }: { children: ReactNode }) {
           isMinimized: false,
           isMaximized: false,
           zIndex: ++zCounter,
+          launchOrigin: opts?.launchOrigin,
         },
       ];
     });

@@ -1,47 +1,53 @@
-[![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/lucasrubo)](https://github.com/lucasrubo)
-[![Linkedin Badge](https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/lucas-rubo/)](https://www.linkedin.com/in/lucas-rubo/)
+<div align="center">
 
-## Hey There, Welcome
+# Rubo
 
-### :large_blue_diamond: About Me
+**web developer · valinhos, brasil**
 
-<hr>
+I build interfaces — from enterprise systems in C# - Next - PHP Blazor to experimental projects<br/>
+like **AprixOS**, a browser-based operating system I use to centralize my work.
 
-I started working with programming in 2019. I worked at IBM Brasil as a Systems Developer intern in the CI/CD team.
-In my private life I like to pratice sports and in my free time I play Games. I constantly seek to improve my skills and knowledge in technology to contribute to the projects I work on.
+[![LinkedIn](https://img.shields.io/badge/linkedin-lucas--rubo-0a66c2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lucas-rubo/)
+[![Portfolio](https://img.shields.io/badge/portfolio-lucasrubo.github.io-111?style=flat-square)](https://lucasrubo.github.io/portfolio/)
+[![Email](https://img.shields.io/badge/email-lucasrubo1@gmail.com-ea4335?style=flat-square&logo=gmail&logoColor=white)](mailto:lucasrubo1@gmail.com)
 
-I hold a degree in Computer Science and aim to gain practical experience in the market and expand my knowledge in the field of development. I am eager to contribute with my technical ability and commitment to teamwork to achieve challenging goals.
-
-### :computer: Stack
-
-Languages that I like to learn and study :arrow_down:
-
-- 👨 Front-End: HTML, CSS, JavaScript, React.js, Next.js
-- :computer: Back-End: JavaScript(NodeJS), C#, Python, Java and PHP
-- :umbrella: Frameworks: React, Laravel, .Net Core, Asp.Net MVC and Asp.Net WebForms
-- :cloud: Cloud: Amazon Web Services (AWS)
-- :thought_balloon: IDEs: Visual Studio, Visual Studio Code
-- :wrench: Jenkins Pipelines
-
-### 🚀 Hall OS - My Flagship Project
-
-**Hall OS** is my most ambitious project - a complete web-based operating system built entirely with modern web technologies. This project represents the culmination of my skills and vision for what's possible on the web platform.
-
-#### 🎯 Why I Built This
-- **Technical Challenge**: Push the boundaries of what's possible in browsers
-- **Portfolio Showcase**: Demonstrate advanced React, TypeScript, and UI skills
-- **Innovation**: Create something unique that stands out from typical web apps
-- **Learning**: Master complex state management, performance optimization, and UX patterns
-
-#### 🛠️ Technologies Used
-- **Frontend**: Next.js 16, React 19, TypeScript, Tailwind CSS
-- **Architecture**: Component-based design with Context API
-- **Features**: Advanced window management, drag & drop, resize, animations
-- **Performance**: Optimized rendering and smooth interactions
-
-This project is not just code - it's my vision for the future of web applications, proving that browsers can handle complex, desktop-like experiences.
+</div>
 
 ---
 
-**Check out my OS:**
-https://rubo.tec.br
+## AprixOS
+
+> A Next.js application that runs as a desktop OS in the browser.
+
+The idea started simple: instead of a portfolio page, I wanted a **living environment** — one where you can open my projects as windowed apps, talk to an AI assistant, and navigate everything from a single interface, without ever leaving the browser.
+
+**AprixOS** has a windowed app system, a global AI chat (Aprix), desktop icons, a menubar, a taskbar, and an iframe-based app launcher. Each project I build gets a window inside it.
+
+```
+Next.js 16 · React 19 · TypeScript · Tailwind CSS v4
+```
+
+---
+
+## stack
+
+<img src="https://img.shields.io/badge/C%23-239120?style=flat-square&logo=csharp&logoColor=white"/> <img src="https://img.shields.io/badge/Blazor-512BD4?style=flat-square&logo=blazor&logoColor=white"/> <img src="https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB"/> <img src="https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white"/> <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white"/> <img src="https://img.shields.io/badge/SQL-CC2927?style=flat-square&logo=microsoftsqlserver&logoColor=white"/> <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white"/> <img src="https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white"/>
+
+---
+
+## experience
+
+**mid-level development analyst** · Areco · 2024 – present
+C# Blazor ERP systems, Delphi/PHP integrations, SQL, CI/CD
+
+**junior developer** · Areco · 2023 – 2024
+PHP, database modeling, dynamic web interfaces
+
+**systems developer intern** · IBM · 2021 – 2022
+CI/CD pipelines, Jenkins, Docker, test automation
+
+---
+
+<div align="center">
+<sub>cs graduate · universidade paulista · 2023</sub>
+</div>
