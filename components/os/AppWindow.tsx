@@ -28,15 +28,16 @@ const MIN_W = 320;
 const MIN_H = 200;
 
 // Resize handles — dir encodes which edges to move
+// z-10 keeps them above the inner visual window div (same stacking context, later in DOM)
 const RESIZE_HANDLES = [
-  { dir: "n",  style: "absolute top-0    left-2    right-2   h-1.5 cursor-n-resize"  },
-  { dir: "s",  style: "absolute bottom-0 left-2    right-2   h-1.5 cursor-s-resize"  },
-  { dir: "e",  style: "absolute top-2    right-0   bottom-2  w-1.5 cursor-e-resize"  },
-  { dir: "w",  style: "absolute top-2    left-0    bottom-2  w-1.5 cursor-w-resize"  },
-  { dir: "nw", style: "absolute top-0    left-0    w-3       h-3   cursor-nw-resize" },
-  { dir: "ne", style: "absolute top-0    right-0   w-3       h-3   cursor-ne-resize" },
-  { dir: "sw", style: "absolute bottom-0 left-0    w-3       h-3   cursor-sw-resize" },
-  { dir: "se", style: "absolute bottom-0 right-0   w-3       h-3   cursor-se-resize" },
+  { dir: "n",  style: "absolute top-0    left-4    right-4   h-2   cursor-n-resize  z-10" },
+  { dir: "s",  style: "absolute bottom-0 left-4    right-4   h-2   cursor-s-resize  z-10" },
+  { dir: "e",  style: "absolute top-4    right-0   bottom-4  w-2   cursor-e-resize  z-10" },
+  { dir: "w",  style: "absolute top-4    left-0    bottom-4  w-2   cursor-w-resize  z-10" },
+  { dir: "nw", style: "absolute top-0    left-0    w-5       h-5   cursor-nw-resize z-10" },
+  { dir: "ne", style: "absolute top-0    right-0   w-5       h-5   cursor-ne-resize z-10" },
+  { dir: "sw", style: "absolute bottom-0 left-0    w-5       h-5   cursor-sw-resize z-10" },
+  { dir: "se", style: "absolute bottom-0 right-0   w-5       h-5   cursor-se-resize z-10" },
 ] as const;
 
 export default function AppWindow({
@@ -283,7 +284,7 @@ export default function AppWindow({
       >
         {/* Row 1: Title bar */}
         <div
-          className={`flex items-center h-8 px-3 shrink-0 border-b relative ${
+          className={`flex items-center h-8 px-3 shrink-0 border-b relative justify-between ${
             isActive
               ? "bg-[#ddd] dark:bg-[#2c2a27] border-black/12 dark:border-white/8"
               : "bg-[#ebebeb] dark:bg-[#232120] border-black/7 dark:border-white/5"
@@ -291,17 +292,18 @@ export default function AppWindow({
           onMouseDown={handleTitleBarMouseDown}
           style={{ cursor: isMaximized ? "default" : "grab" }}
         >
+          <div></div>
+          {/* Title centered */}
+          <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-1 pointer-events-none">
+            <span className={`text-[12px] font-medium ${
+              isActive ? "text-black/60 dark:text-white/55" : "text-black/40 dark:text-white/35"
+            }`}>{title}</span>
+            <ChevronDown size={11} className={isActive ? "text-black/40 dark:text-white/35" : "text-black/25 dark:text-white/20"} />
+          </div>
+
+          
           {/* Window controls */}
           <div className="flex items-center gap-1.5 shrink-0 z-10">
-            <button
-              onClick={handleClose}
-              title="Close"
-              className="w-3.5 h-3.5 rounded bg-ph-orange flex items-center justify-center
-                         hover:brightness-125 hover:scale-110 active:scale-95
-                         transition-all duration-100 shadow-sm"
-            >
-              <X size={8} strokeWidth={2.5} className="text-white" />
-            </button>
             <button
               onClick={handleMinimize}
               title="Minimize"
@@ -320,14 +322,15 @@ export default function AppWindow({
             >
               <Maximize2 size={7} strokeWidth={2.5} className="text-white" />
             </button>
-          </div>
-
-          {/* Title centered */}
-          <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-1 pointer-events-none">
-            <span className={`text-[12px] font-medium ${
-              isActive ? "text-black/60 dark:text-white/55" : "text-black/40 dark:text-white/35"
-            }`}>{title}</span>
-            <ChevronDown size={11} className={isActive ? "text-black/40 dark:text-white/35" : "text-black/25 dark:text-white/20"} />
+            <button
+              onClick={handleClose}
+              title="Close"
+              className="w-3.5 h-3.5 rounded bg-ph-orange flex items-center justify-center
+                         hover:brightness-125 hover:scale-110 active:scale-95
+                         transition-all duration-100 shadow-sm"
+            >
+              <X size={8} strokeWidth={2.5} className="text-white" />
+            </button>
           </div>
         </div>
 

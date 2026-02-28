@@ -45,6 +45,10 @@ interface WindowContextType {
   /** Ref map: appId → center position of the taskbar button (no re-renders). */
   taskbarBoundsRef: React.MutableRefObject<Record<string, { x: number; y: number }>>;
   setTaskbarBound: (appId: string, pos: { x: number; y: number }) => void;
+  /** Register a parameterless minimize callback for an AppWindow (called by AppWindow on mount). */
+  registerMinimizeCallback: (appId: string, cb: () => void) => void;
+  /** Trigger the registered minimize animation on an AppWindow (called by Taskbar). */
+  triggerMinimize: (appId: string) => void;
 }
 
 const WindowContext = createContext<WindowContextType | null>(null);
@@ -62,7 +66,6 @@ function calcCenter(w: number, h: number, existingCount: number) {
   const screenH = window.innerHeight;
   const usableH = screenH - MENU_BAR_H - TASK_BAR_H;
 
-  // Slight cascade offset so stacked windows are still visible
   const cascade = existingCount * 28;
   return {
     x: Math.max(60, Math.round((screenW - w) / 2) + cascade),
@@ -74,15 +77,24 @@ export function WindowProvider({ children }: { children: ReactNode }) {
   const [windows, setWindows] = useState<WindowState[]>([]);
   const [activeAppId, setActiveAppId] = useState<string | null>(null);
   const taskbarBoundsRef = useRef<Record<string, { x: number; y: number }>>({});
+  const minimizeCallbacksRef = useRef<Record<string, () => void>>({});
+
   const setTaskbarBound = useCallback((appId: string, pos: { x: number; y: number }) => {
     taskbarBoundsRef.current[appId] = pos;
+  }, []);
+
+  const registerMinimizeCallback = useCallback((appId: string, cb: () => void) => {
+    minimizeCallbacksRef.current[appId] = cb;
+  }, []);
+
+  const triggerMinimize = useCallback((appId: string) => {
+    minimizeCallbacksRef.current[appId]?.();
   }, []);
 
   const openWindow = useCallback((appId: string, opts?: OpenWindowOptions) => {
     setWindows((prev) => {
       const existing = prev.find((w) => w.appId === appId);
       if (existing) {
-        // Already open: unminimize and bring to front (clear launchOrigin so animation doesn't replay)
         return prev.map((w) =>
           w.appId === appId
             ? { ...w, isMinimized: false, zIndex: ++zCounter, launchOrigin: undefined }
@@ -181,6 +193,8 @@ export function WindowProvider({ children }: { children: ReactNode }) {
         updateSize,
         taskbarBoundsRef,
         setTaskbarBound,
+        registerMinimizeCallback,
+        triggerMinimize,
       }}
     >
       {children}

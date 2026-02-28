@@ -6,9 +6,9 @@ const PROJECTS = [
   {
     id: "roteirum",
     name: "Roteirum",
-    tagline: "Social network for cinematic creation with AI",
     description:
-      "Innovative platform where creators build synopses, generate posters and AI-powered images for film and TV projects. Think Instagram meets screenplay writing.",
+      "Rede social inovadora para criação cinematográfica com IA. Crie sinopses, cartazes e imagens com inteligência artificial, compita no ranking e ganhe reconhecimento.",
+    image: "https://lucasrubo.github.io/portfolio/images/roteirum.png",
     tech: ["React", "TypeScript", "Tailwind CSS", "Vite", "React Query", "Radix UI"],
     demo: "https://lucasrubo.github.io/Roteirum/",
     github: "https://github.com/lucasrubo/Roteirum",
@@ -19,9 +19,9 @@ const PROJECTS = [
   {
     id: "erp",
     name: "ERP Multi-Empresa",
-    tagline: "Modern multi-company ERP system",
     description:
-      "Responsive administrative dashboard with order creation, sales management, and multi-company support. Full CRUD with role-based access control.",
+      "Dashboard administrativo moderno e responsivo com criação de pedidos, gestão de vendas e suporte multi-empresa. CRUD completo com controle de acesso por perfil.",
+    image: "https://lucasrubo.github.io/portfolio/images/erp.png",
     tech: ["React", "TypeScript", "Tailwind CSS", "Zustand", "TanStack Query", "React Hook Form"],
     demo: "https://lucasrubo.github.io/ERP/dashboard",
     github: "https://github.com/lucasrubo/ERP",
@@ -31,13 +31,13 @@ const PROJECTS = [
   },
   {
     id: "larissa",
-    name: "Larissa Arendt Portfolio",
-    tagline: "Modern and elegant personal portfolio",
+    name: "Larissa Arendt",
     description:
-      "Clean, professional portfolio site built for a client. Focuses on elegant typography, smooth animations and accessibility.",
+      "Portfólio pessoal moderno e elegante desenvolvido para cliente. Tipografia refinada, animações suaves e design totalmente responsivo.",
+    image: "https://lucasrubo.github.io/portfolio/images/portfolio.png",
     tech: ["React", "TypeScript", "Tailwind CSS", "Vite", "Radix UI"],
-    demo: "#",
-    github: "#",
+    demo: "https://larissaarendt.github.io/portfolio/",
+    github: "https://github.com/larissaarendt/portfolio",
     color: "#E01E5A",
     emoji: "🎨",
     featured: false,
@@ -46,84 +46,98 @@ const PROJECTS = [
 
 export default function ProjectsApp() {
   return (
-    <div className="min-h-full bg-white">
+    <div className="min-h-full bg-white dark:bg-ph-dark overflow-auto">
       {/* Header */}
-      <div className="px-8 pt-8 pb-5 border-b border-gray-100 bg-gradient-to-b from-ph-cream/40 to-white">
-        <h1 className="text-2xl font-bold text-ph-dark tracking-tight mb-1">
+      <div className="px-8 pt-8 pb-5 border-b border-gray-100 dark:border-white/8 bg-linear-to-b from-ph-cream/40 to-white dark:from-transparent dark:to-ph-dark">
+        <h1 className="text-2xl font-bold text-ph-dark dark:text-white/90 tracking-tight mb-1">
           Projects
         </h1>
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-500 dark:text-white/45">
           Featured work — {PROJECTS.length} projects
         </p>
       </div>
 
-      {/* Projects */}
-      <div className="px-8 py-6 space-y-5">
+      {/* Grid */}
+      <div className="px-6 py-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {PROJECTS.map((p) => (
           <div
             key={p.id}
-            className="group relative border border-gray-100 rounded-xl hover:border-gray-200 hover:shadow-md transition-all bg-white overflow-hidden"
+            className="group border border-gray-100 dark:border-white/8 rounded-xl hover:border-gray-300 dark:hover:border-white/20 hover:shadow-lg dark:hover:shadow-black/40 transition-all bg-white dark:bg-white/4 flex flex-col overflow-hidden"
           >
-            {/* Color accent bar */}
-            <div
-              className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl"
-              style={{ backgroundColor: p.color }}
-            />
+            {/* Image banner */}
+            <div className="relative h-40 overflow-hidden bg-gray-50 dark:bg-white/5">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={p.image}
+                alt={p.name}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                onError={(e) => {
+                  const el = e.currentTarget;
+                  el.style.display = "none";
+                  const parent = el.parentElement!;
+                  parent.style.background = `linear-gradient(135deg, ${p.color}33, ${p.color}11)`;
+                  const fb = document.createElement("span");
+                  fb.textContent = p.emoji;
+                  fb.className = "text-5xl absolute inset-0 flex items-center justify-center";
+                  parent.appendChild(fb);
+                }}
+              />
+              {/* gradient overlay */}
+              <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
+              {/* Featured badge */}
+              {p.featured && (
+                <span className="absolute top-3 right-3 flex items-center gap-0.5 text-[10px] font-bold text-yellow-700 bg-yellow-100/90 backdrop-blur-sm px-2 py-0.5 rounded-full shadow-sm">
+                  <Star size={9} className="fill-yellow-500 text-yellow-500" /> Featured
+                </span>
+              )}
+            </div>
 
-            <div className="pl-6 pr-6 py-5">
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xl">{p.emoji}</span>
-                    <h2 className="text-base font-bold text-ph-dark">{p.name}</h2>
-                    {p.featured && (
-                      <span className="flex items-center gap-0.5 text-[10px] font-bold text-yellow-600 bg-yellow-50 px-2 py-0.5 rounded-full">
-                        <Star size={9} className="fill-yellow-500 text-yellow-500" /> Featured
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-xs font-semibold text-gray-400 mb-2">
-                    {p.tagline}
-                  </p>
-                  <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                    {p.description}
-                  </p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {p.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="text-[11px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded font-medium"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+            {/* Content */}
+            <div className="p-5 flex flex-col flex-1">
+              {/* Title */}
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-1 h-5 rounded-full shrink-0" style={{ backgroundColor: p.color }} />
+                <h2 className="text-base font-bold text-ph-dark dark:text-white/85 leading-tight">
+                  {p.name}
+                </h2>
+              </div>
 
-                {/* Actions */}
-                <div className="flex flex-col gap-2 shrink-0">
-                  {p.demo !== "#" && (
-                    <a
-                      href={p.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-[11px] font-semibold text-white px-3 py-1.5 rounded-md transition-colors"
-                      style={{ backgroundColor: p.color }}
-                    >
-                      Live demo <ExternalLink size={10} />
-                    </a>
-                  )}
-                  {p.github !== "#" && (
-                    <a
-                      href={p.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-[11px] font-semibold border border-gray-200 text-gray-600 px-3 py-1.5 rounded-md hover:bg-gray-50 transition-colors"
-                    >
-                      <Github size={11} /> Code
-                    </a>
-                  )}
-                </div>
+              {/* Description */}
+              <p className="text-sm text-gray-500 dark:text-white/45 leading-relaxed mb-4 flex-1">
+                {p.description}
+              </p>
+
+              {/* Tech badges */}
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {p.tech.map((t) => (
+                  <span
+                    key={t}
+                    className="text-[10px] bg-gray-100 dark:bg-white/8 text-gray-600 dark:text-white/50 px-2 py-0.5 rounded font-medium"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              {/* Action buttons */}
+              <div className="flex gap-2">
+                <a
+                  href={p.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-1.5 text-[11px] font-semibold border border-gray-200 dark:border-white/12 text-gray-600 dark:text-white/60 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors"
+                >
+                  <Github size={12} /> Code
+                </a>
+                <a
+                  href={p.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-1.5 text-[11px] font-semibold text-white py-2 rounded-lg transition-colors"
+                  style={{ backgroundColor: p.color }}
+                >
+                  <ExternalLink size={11} /> Live demo
+                </a>
               </div>
             </div>
           </div>
@@ -131,12 +145,12 @@ export default function ProjectsApp() {
       </div>
 
       {/* More on GitHub */}
-      <div className="px-8 pb-8">
+      <div className="px-6 pb-8">
         <a
           href="https://github.com/lucasrubo"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 w-full py-3 border border-dashed border-gray-200 rounded-xl text-sm text-gray-400 hover:border-ph-orange/40 hover:text-ph-orange transition-colors"
+          className="flex items-center justify-center gap-2 w-full py-3 border border-dashed border-gray-200 dark:border-white/12 rounded-xl text-sm text-gray-400 dark:text-white/30 hover:border-ph-orange/40 hover:text-ph-orange transition-colors"
         >
           <Github size={15} /> More projects on GitHub
         </a>

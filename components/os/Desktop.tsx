@@ -11,6 +11,7 @@ import { LEFT_ICONS, RIGHT_ICONS, MIDDLE_ICONS } from "@/lib/desktopIcons";
 
 import AboutApp      from "@/components/apps/AboutApp";
 import ProjectsApp   from "@/components/apps/ProjectsApp";
+import CoursesApp   from "@/components/apps/CoursesApp";
 import SkillsApp     from "@/components/apps/SkillsApp";
 import ExperienceApp from "@/components/apps/ExperienceApp";
 import ContactApp    from "@/components/apps/ContactApp";
@@ -35,6 +36,7 @@ function AppContent({ appId }: { appId: string }) {
   if (appId === "chatbot")    return <ChatApp />;
   if (appId === "about")      return <AboutApp />;
   if (appId === "projects")   return <ProjectsApp />;
+  if (appId === "courses")    return <CoursesApp />;
   if (appId === "skills")     return <SkillsApp />;
   if (appId === "experience") return <ExperienceApp />;
   if (appId === "contact")    return <ContactApp />;

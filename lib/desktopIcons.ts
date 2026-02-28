@@ -14,7 +14,8 @@ export interface DesktopIconDef {
 export const LEFT_ICONS: DesktopIconDef[] = [
   { id: "about-mdx",    label: "about.mdx",      type: "mdx",    color: "#6e8cf9", appId: "about"      },
   { id: "projects-dir", label: "projects/",       type: "folder", color: "#f54e00", appId: "projects"   },
-  { id: "skills-txt",   label: "skills.txt",      type: "mdx",    color: "#2EB67D", appId: "skills"     },
+  { id: "courses-dir",  label: "courses/",        type: "folder", color: "#2EB67D", appId: "courses"    },
+  { id: "skills-txt",   label: "skills.txt",      type: "mdx",    color: "#987cb0", appId: "skills"     },
   { id: "experience",   label: "experience.mdx",  type: "mdx",    color: "#ECB22E", appId: "experience" },
   { id: "contact-mdx",  label: "contact.mdx",     type: "mdx",    color: "#E01E5A", appId: "contact"    },
 ];
