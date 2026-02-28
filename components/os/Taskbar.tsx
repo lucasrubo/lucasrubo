@@ -246,7 +246,7 @@ export default function Taskbar() {
 	const { windows } = useWindows();
 
 	return (
-		<div className="shrink-0 flex items-center justify-center px-4 absolute left-0 right-0 bottom-0 z-[9999]">
+		<div className="shrink-0 flex items-center justify-center px-4 absolute left-0 right-0 bottom-0 z-9999 rounded-b-none">
 			{windows.length > 0 && (
 				<div
 					className="
