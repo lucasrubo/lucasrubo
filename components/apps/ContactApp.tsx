@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, Phone, MapPin, Github, Linkedin, Instagram, ExternalLink } from "lucide-react";
+import { Mail, Phone, MapPin, Github, Linkedin, Instagram, ExternalLink, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -69,7 +69,7 @@ export default function ContactApp() {
         <div className="flex-1">
           {sent ? (
             <div className="flex flex-col items-center justify-center h-full gap-3 text-center py-12">
-              <span className="text-4xl">✅</span>
+              <CheckCircle2 size={40} className="text-green-500" />
               <p className="font-bold text-ph-dark dark:text-white/85">{c.success.title}</p>
               <p className="text-sm text-gray-500 dark:text-white/45">{c.success.body}</p>
               <button onClick={() => setSent(false)} className="text-xs text-ph-orange hover:underline mt-2">

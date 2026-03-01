@@ -138,13 +138,45 @@ export interface Translations {
       { title: string; desc: string },
     ];
   };
+
+  // ProjectsApp
+  projects: {
+    title: string;
+    subtitleWork: string;
+    projectsCount: string;
+    featured: string;
+    code: string;
+    liveDemo: string;
+    moreOnGithub: string;
+    items: [
+      { description: string },   // Roteirum
+      { description: string },   // ERP Multi-Empresa
+      { description: string },   // Larissa Arendt
+    ];
+  };
+
+  // CoursesApp
+  courses: {
+    title: string;
+    of: string;
+    certificates: string;
+    all: string;
+    types: {
+      "Web Development": string;
+      "Database": string;
+      "Architecture": string;
+      "Best Practices": string;
+      "Programming": string;
+      "DevOps": string;
+    };
+  };
 }
 
 // ─── English ──────────────────────────────────────────────────────────────────
 
 const en: Translations = {
   menuBar: {
-    hireMe: "Hire me",
+    hireMe: "Contact",
     langLabel: "Switch language",
   },
 
@@ -155,7 +187,7 @@ const en: Translations = {
   desktop: {
     sortIcons: "Sort Icons",
     toggleTheme: "Toggle Theme",
-    hireMe: "Hire me →",
+    hireMe: "Contact →",
   },
 
   about: {
@@ -178,7 +210,7 @@ const en: Translations = {
       { label: "Experience", desc: "5 years"     },
       { label: "Contact",    desc: "Let's talk"  },
     ],
-    hireMe: "Hire me →",
+    hireMe: "Contact →",
   },
 
   skills: {
@@ -265,13 +297,43 @@ const en: Translations = {
       { title: "Access Control",   desc: "Role-based permissions per company and user" },
     ],
   },
+
+  projects: {
+    title: "Projects",
+    subtitleWork: "Featured work",
+    projectsCount: "projects",
+    featured: "Featured",
+    code: "Code",
+    liveDemo: "Live demo",
+    moreOnGithub: "More projects on GitHub",
+    items: [
+      { description: "Innovative social network for cinematic creation with AI. Create synopses, posters and images with artificial intelligence, compete in rankings and earn recognition." },
+      { description: "Modern responsive admin dashboard with order creation, sales management and multi-company support. Full CRUD with role-based access control." },
+      { description: "Modern and elegant personal portfolio built for a client. Refined typography, smooth animations and fully responsive design." },
+    ],
+  },
+
+  courses: {
+    title: "Courses & Certificates",
+    of: "of",
+    certificates: "certificates",
+    all: "All",
+    types: {
+      "Web Development": "Web Development",
+      "Database":        "Database",
+      "Architecture":    "Architecture",
+      "Best Practices":  "Best Practices",
+      "Programming":     "Programming",
+      "DevOps":          "DevOps",
+    },
+  },
 };
 
 // ─── Portuguese (Brazil) ─────────────────────────────────────────────────────
 
 const ptBR: Translations = {
   menuBar: {
-    hireMe: "Contrate-me",
+    hireMe: "Contato",
     langLabel: "Mudar idioma",
   },
 
@@ -282,7 +344,7 @@ const ptBR: Translations = {
   desktop: {
     sortIcons: "Organizar Ícones",
     toggleTheme: "Alternar Tema",
-    hireMe: "Contrate-me →",
+    hireMe: "Contato →",
   },
 
   about: {
@@ -305,7 +367,7 @@ const ptBR: Translations = {
       { label: "Experiência", desc: "5 anos"          },
       { label: "Contato",     desc: "Vamos conversar" },
     ],
-    hireMe: "Contrate-me →",
+    hireMe: "Contato →",
   },
 
   skills: {
@@ -391,6 +453,36 @@ const ptBR: Translations = {
       { title: "Dashboard de Vendas", desc: "KPIs em tempo real e análise de vendas" },
       { title: "Controle de Acesso",  desc: "Permissões por perfil por empresa e usuário" },
     ],
+  },
+
+  projects: {
+    title: "Projetos",
+    subtitleWork: "Trabalho em destaque",
+    projectsCount: "projetos",
+    featured: "Destaque",
+    code: "Código",
+    liveDemo: "Demo ao vivo",
+    moreOnGithub: "Mais projetos no GitHub",
+    items: [
+      { description: "Rede social inovadora para criação cinematográfica com IA. Crie sinopses, cartazes e imagens com inteligência artificial, compita no ranking e ganhe reconhecimento." },
+      { description: "Dashboard administrativo moderno e responsivo com criação de pedidos, gestão de vendas e suporte multi-empresa. CRUD completo com controle de acesso por perfil." },
+      { description: "Portfólio pessoal moderno e elegante desenvolvido para cliente. Tipografia refinada, animações suaves e design totalmente responsivo." },
+    ],
+  },
+
+  courses: {
+    title: "Cursos & Certificados",
+    of: "de",
+    certificates: "certificados",
+    all: "Todos",
+    types: {
+      "Web Development": "Desenvolvimento Web",
+      "Database":        "Banco de Dados",
+      "Architecture":    "Arquitetura",
+      "Best Practices":  "Boas Práticas",
+      "Programming":     "Programação",
+      "DevOps":          "DevOps",
+    },
   },
 };
 

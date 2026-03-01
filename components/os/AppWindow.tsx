@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback, useState, useEffect } from "react";
+import { useRef, useCallback, useState, useEffect, useLayoutEffect } from "react";
 import {
   X, Minus, Maximize2,
   Undo2, Redo2, ChevronDown,
@@ -44,10 +44,19 @@ export default function AppWindow({
   appId, title, position, size,
   isMinimized, isMaximized, zIndex, isActive, launchOrigin, children,
 }: AppWindowProps) {
-  const { closeWindow, minimizeWindow, toggleMaximize, focusWindow, updatePosition, updateSize, taskbarBoundsRef, openWindow } =
-    useWindows();
+  const {
+    closeWindow, minimizeWindow, toggleMaximize, focusWindow,
+    updatePosition, updateSize, taskbarBoundsRef, openWindow,
+    registerMinimizeCallback,
+  } = useWindows();
   const { t } = useLanguage();
   const isDragging = useRef(false);
+
+  // Stable refs so doMinimize doesn't depend on position/size (avoids stale closure)
+  const positionRef = useRef(position);
+  positionRef.current = position;
+  const sizeRef = useRef(size);
+  sizeRef.current = size;
 
   // ── Drag (title bar) ─────────────────────────────────────────────────────
   const handleTitleBarMouseDown = useCallback(
@@ -116,6 +125,8 @@ export default function AppWindow({
   );
 
   // ── Close animation ───────────────────────────────────────────────────────
+  const [toolbarVisible, setToolbarVisible] = useState(true);
+
   const [isClosing, setIsClosing] = useState(false);
   const handleClose = useCallback(
     (e: React.MouseEvent) => {
@@ -130,32 +141,71 @@ export default function AppWindow({
   const [isMinimizing, setIsMinimizing] = useState(false);
   const [minimizeStyle, setMinimizeStyle] = useState<React.CSSProperties>({});
 
-  const handleMinimize = useCallback(
-    (e: React.MouseEvent) => {
-      e.stopPropagation();
-      const target = taskbarBoundsRef.current[appId];
-      const windowCenterX = position.x + size.width / 2;
-      const windowCenterY = position.y + size.height / 2;
-      const dx = target ? target.x - windowCenterX : 0;
-      const dy = target
-        ? target.y - windowCenterY
-        : (typeof window !== "undefined" ? window.innerHeight : 800) - windowCenterY;
+  // Stable version — uses refs so it can be registered as a callback without stale closure
+  const doMinimize = useCallback(() => {
+    const target = taskbarBoundsRef.current[appId];
+    const windowCenterX = positionRef.current.x + sizeRef.current.width / 2;
+    const windowCenterY = positionRef.current.y + sizeRef.current.height / 2;
+    const dx = target ? target.x - windowCenterX : 0;
+    const dy = target
+      ? target.y - windowCenterY
+      : (typeof window !== "undefined" ? window.innerHeight : 800) - windowCenterY;
 
-      setMinimizeStyle({
-        transform: `translate(${dx}px, ${dy}px) scale(0.06)`,
-        opacity: 0,
-        transition: "transform 0.32s cubic-bezier(0.4,0,1,1), opacity 0.22s ease",
-        pointerEvents: "none",
-      });
-      setIsMinimizing(true);
-      setTimeout(() => {
-        minimizeWindow(appId);
-        setIsMinimizing(false);
-        setMinimizeStyle({});
-      }, 340);
-    },
-    [appId, minimizeWindow, position, size, taskbarBoundsRef]
+    setMinimizeStyle({
+      transform: `translate(${dx}px, ${dy}px) scale(0.06)`,
+      opacity: 0,
+      transition: "transform 0.32s cubic-bezier(0.4,0,1,1), opacity 0.22s ease",
+      pointerEvents: "none",
+    });
+    setIsMinimizing(true);
+    setTimeout(() => {
+      minimizeWindow(appId);
+      setIsMinimizing(false);
+      setMinimizeStyle({});
+    }, 340);
+  }, [appId, minimizeWindow, taskbarBoundsRef]);
+
+  const handleMinimize = useCallback(
+    (e: React.MouseEvent) => { e.stopPropagation(); doMinimize(); },
+    [doMinimize]
   );
+
+  // Register so Taskbar can trigger minimize animation from outside
+  useEffect(() => {
+    registerMinimizeCallback(appId, doMinimize);
+  }, [appId, doMinimize, registerMinimizeCallback]);
+
+  // ── Restore animation: fly from taskbar back to window ────────────────────
+  type RestorePhase = "init" | "fly" | "done" | null;
+  const [restorePhase, setRestorePhase] = useState<RestorePhase>(null);
+  const restoreOffset = useRef({ dx: 0, dy: 0 });
+  const prevIsMinimized = useRef(isMinimized);
+
+  useLayoutEffect(() => {
+    const was = prevIsMinimized.current;
+    prevIsMinimized.current = isMinimized;
+
+    if (was && !isMinimized) {
+      // Transition: minimized → visible — animate from taskbar position
+      const target = taskbarBoundsRef.current[appId];
+      const cx = positionRef.current.x + sizeRef.current.width / 2;
+      const cy = positionRef.current.y + sizeRef.current.height / 2;
+      restoreOffset.current = {
+        dx: target ? target.x - cx : 0,
+        dy: target ? target.y - cy : 200,
+      };
+      setRestorePhase("init");
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          setRestorePhase("fly");
+          setTimeout(() => {
+            setRestorePhase("done");
+            setTimeout(() => setRestorePhase(null), 300);
+          }, 330);
+        })
+      );
+    }
+  }, [isMinimized, appId, taskbarBoundsRef]);
 
   // ── Maximize animation ────────────────────────────────────────────────────
   const prevMaxRef = useRef(isMaximized);
@@ -219,6 +269,27 @@ export default function AppWindow({
         transition: "transform 0.18s ease-in, opacity 0.15s ease-in",
         pointerEvents: "none",
       };
+
+    // Restore from taskbar animation (takes priority over open animation)
+    if (restorePhase === "init")
+      return {
+        transform: `translate(${restoreOffset.current.dx}px, ${restoreOffset.current.dy}px) scale(0.06)`,
+        opacity: 0,
+        transition: "none",
+      };
+    if (restorePhase === "fly")
+      return {
+        transform: "scale(0.88)",
+        opacity: 1,
+        transition: "transform 0.33s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.2s ease",
+      };
+    if (restorePhase === "done")
+      return {
+        transform: "scale(1)",
+        opacity: 1,
+        transition: "transform 0.28s cubic-bezier(0.34,1.56,0.64,1)",
+      };
+
     if (!launchOrigin) {
       if (animPhase === "init")
         return { transform: "scale(0.88)", opacity: 0, transition: "none" };
@@ -292,13 +363,21 @@ export default function AppWindow({
           onMouseDown={handleTitleBarMouseDown}
           style={{ cursor: isMaximized ? "default" : "grab" }}
         >
-          <div></div>
+          
+            <button
+              onClick={(e) => { e.stopPropagation(); setToolbarVisible(v => !v); }}
+              className="pointer-events-auto rounded hover:bg-black/8 dark:hover:bg-white/8 transition-colors p-0.5"
+            >
+              <ChevronDown
+                size={11}
+                className={`transition-transform duration-200 ${toolbarVisible ? "" : "-rotate-90"} ${isActive ? "text-black/40 dark:text-white/35" : "text-black/25 dark:text-white/20"}`}
+              />
+            </button>
           {/* Title centered */}
           <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-1 pointer-events-none">
             <span className={`text-[12px] font-medium ${
               isActive ? "text-black/60 dark:text-white/55" : "text-black/40 dark:text-white/35"
             }`}>{title}</span>
-            <ChevronDown size={11} className={isActive ? "text-black/40 dark:text-white/35" : "text-black/25 dark:text-white/20"} />
           </div>
 
           
@@ -335,7 +414,7 @@ export default function AppWindow({
         </div>
 
         {/* Row 2: Toolbar */}
-        {appId !== "chatbot" && <div className={`flex max-w-full overflow-x-auto overflow-y-hidden items-center gap-0.5 shrink-0 ${
+        {appId !== "chatbot" && toolbarVisible && <div className={`flex max-w-full overflow-x-auto overflow-y-hidden items-center gap-0.5 shrink-0 ${
           isActive
             ? "bg-[#f5f5f5] dark:bg-[#222018]"
             : "bg-[#f9f9f9] dark:bg-[#1c1a17]"

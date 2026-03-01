@@ -1,6 +1,6 @@
 "use client";
 
-import { User, Folder, Zap, Briefcase, Mail, Film } from "lucide-react";
+import { User, Folder, Zap, Briefcase, Mail, Film, ArrowUpRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useWindows } from "@/contexts/WindowContext";
 
@@ -10,7 +10,7 @@ const SHORTCUTS = [
   { appId: "skills",     title: "skills.txt",     Icon: Zap,       color: "#2EB67D", labelEN: "Skills",     labelPT: "Habilidades" },
   { appId: "experience", title: "experience.mdx", Icon: Briefcase, color: "#ECB22E", labelEN: "Experience", labelPT: "Experiência" },
   { appId: "contact",    title: "contact.mdx",    Icon: Mail,      color: "#E01E5A", labelEN: "Contact",    labelPT: "Contato"     },
-  { appId: "roteirum",   title: "Roteirum.app",   Icon: Film,      color: "#987cb0", labelEN: "Roteirum",   labelPT: "Roteirum"    },
+  { appId: "finance",   title: "Finance.app",   Icon: Film,      color: "#987cb0", labelEN: "Finance",   labelPT: "Finanças"    },
 ] as const;
 
 export default function WelcomeApp() {
@@ -83,7 +83,8 @@ export default function WelcomeApp() {
                    dark:border-white/15 dark:hover:border-white/35
                    pb-0.5 transition-all uppercase"
       >
-        {isPT ? "↗ abrir aprix" : "↗ open aprix"}
+        <ArrowUpRight size={11} className="inline mr-0.5" />
+        {isPT ? "abrir aprix" : "open aprix"}
       </button>
     </div>
   );

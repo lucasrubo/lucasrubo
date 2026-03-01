@@ -1,12 +1,15 @@
 "use client";
 
+import { UserPlus } from "lucide-react";
+
 export default function SignupApp() {
   return (
     <div className="min-h-full bg-white flex flex-col items-center justify-center px-10 py-12">
       <div className="w-full max-w-sm">
-        {/* Hedgehog mini */}
         <div className="text-center mb-6">
-          <span className="text-5xl">🦔</span>
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-ph-orange/10 mb-1">
+            <UserPlus size={28} className="text-ph-orange" />
+          </div>
           <h1 className="text-2xl font-bold text-ph-dark mt-3">
             Create your account
           </h1>

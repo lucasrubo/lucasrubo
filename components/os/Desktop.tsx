@@ -71,7 +71,6 @@ function buildDefaultPositions(containerWidth: number): IconPositions {
 
 function DesktopInner() {
   const { windows, activeAppId, openWindow } = useWindows();
-  const { apiOnline } = useAprix();
   const desktopRef = useRef<HTMLDivElement>(null);
 
   // ── Icon positions ──────────────────────────────────────────────────────────
@@ -117,8 +116,10 @@ function DesktopInner() {
   }, []);
 
   const handleIconOpen = (appId: string, label: string, clickPos: { x: number; y: number }, size?: { width: number; height: number }) => {
-    if (appId === "github")   { window.open("https://github.com/lucasrubo", "_blank"); return; }
-    if (appId === "linkedin") { window.open("https://linkedin.com/in/lucas-rubo", "_blank"); return; }
+    if (appId === "github")    { window.open("https://github.com/lucasrubo", "_blank"); return; }
+    if (appId === "linkedin")  { window.open("https://linkedin.com/in/lucas-rubo", "_blank"); return; }
+    if (appId === "whatsapp")  { window.open("https://wa.me/5519994019804", "_blank"); return; }
+    if (appId === "instagram") { window.open("https://instagram.com/lucas.rubo", "_blank"); return; }
     // Chatbot opens as a proper window
     if (appId === "chatbot")  {
       openWindow("chatbot", { title: "Aprix.app", size: { width: 400, height: 540 }, launchOrigin: clickPos });
@@ -156,9 +157,6 @@ function DesktopInner() {
               position={pos}
               onOpen={(clickPos) => handleIconOpen(icon.appId, icon.label, clickPos)}
               onDragEnd={(newPos) => handleIconDragEnd(icon.id, newPos)}
-              badge={icon.appId === "chatbot" && apiOnline ? (
-                <span className="w-2.5 h-2.5 rounded-full bg-green-400 block ring-2 ring-white/60 dark:ring-[#1a1b18]/60" />
-              ) : undefined}
             />
           );
         })}

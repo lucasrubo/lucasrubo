@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ExternalLink } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type CourseType = "Web Development" | "Database" | "Architecture" | "Best Practices" | "Programming" | "DevOps";
 
@@ -51,14 +52,16 @@ const ISSUER_STYLE: Record<string, { bg: string; label: string }> = {
   "Udemy":            { bg: "#a435f0", label: "Udemy"  },
 };
 
-// Ordered types for the filter bar
 const ALL_TYPES = Array.from(new Set(CERTIFICATES.map((c) => c.type))) as CourseType[];
 
 export default function CoursesApp() {
+  const { t } = useLanguage();
+  const c = t.courses;
+
   const [activeFilter, setActiveFilter] = useState<CourseType | null>(null);
 
   const filtered = activeFilter
-    ? CERTIFICATES.filter((c) => c.type === activeFilter)
+    ? CERTIFICATES.filter((cert) => cert.type === activeFilter)
     : CERTIFICATES;
 
   return (
@@ -66,17 +69,19 @@ export default function CoursesApp() {
       {/* Header */}
       <div className="px-8 pt-8 pb-5 border-b border-gray-100 dark:border-white/8 bg-linear-to-b from-ph-cream/40 to-white dark:from-transparent dark:to-ph-dark">
         <h1 className="text-2xl font-bold text-ph-dark dark:text-white/90 tracking-tight mb-1">
-          Courses &amp; Certificates
+          {c.title}
         </h1>
         <p className="text-sm text-gray-500 dark:text-white/45">
-          {filtered.length} of {CERTIFICATES.length} certificates
-          {activeFilter && <> · <span style={{ color: TYPE_COLORS[activeFilter] }}>{activeFilter}</span></>}
+          {filtered.length} {c.of} {CERTIFICATES.length} {c.certificates}
+          {activeFilter && (
+            <> · <span style={{ color: TYPE_COLORS[activeFilter] }}>{c.types[activeFilter]}</span></>
+          )}
         </p>
       </div>
 
       {/* Filter bar */}
       <div className="px-6 pt-4 pb-2 flex flex-wrap gap-2">
-        {/* All button */}
+        {/* All */}
         <button
           onClick={() => setActiveFilter(null)}
           className={`text-[11px] font-semibold px-3 py-1.5 rounded-full border transition-all ${
@@ -85,7 +90,7 @@ export default function CoursesApp() {
               : "text-gray-500 dark:text-white/50 border-gray-200 dark:border-white/12 hover:border-gray-300 dark:hover:border-white/25 hover:text-gray-700 dark:hover:text-white/75"
           }`}
         >
-          All
+          {c.all}
         </button>
 
         {ALL_TYPES.map((type) => {
@@ -99,11 +104,7 @@ export default function CoursesApp() {
               style={
                 isActive
                   ? { backgroundColor: color, color: "white", borderColor: "transparent" }
-                  : {
-                      color: "var(--filter-text)",
-                      borderColor: `${color}44`,
-                      backgroundColor: `${color}0f`,
-                    }
+                  : { borderColor: `${color}44`, backgroundColor: `${color}0f` }
               }
               onMouseEnter={(e) => {
                 if (!isActive) {
@@ -122,7 +123,7 @@ export default function CoursesApp() {
                 className="w-1.5 h-1.5 rounded-full shrink-0"
                 style={{ backgroundColor: isActive ? "white" : color }}
               />
-              <span style={{ color: isActive ? "white" : color }}>{type}</span>
+              <span style={{ color: isActive ? "white" : color }}>{c.types[type]}</span>
             </button>
           );
         })}
@@ -141,40 +142,32 @@ export default function CoursesApp() {
               rel="noopener noreferrer"
               className="group flex items-start gap-3 border border-gray-100 dark:border-white/8 rounded-xl p-4 hover:border-gray-200 dark:hover:border-white/20 hover:shadow-md dark:hover:shadow-black/30 transition-all bg-white dark:bg-white/4"
             >
-              {/* Color dot */}
               <div
                 className="mt-0.5 w-2 h-2 rounded-full shrink-0"
                 style={{ backgroundColor: typeColor }}
               />
-
-              {/* Content */}
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-semibold text-ph-dark dark:text-white/85 leading-snug mb-1.5 group-hover:text-ph-orange transition-colors">
                   {cert.name}
                 </p>
                 <div className="flex items-center gap-2 flex-wrap">
-                  {/* Issuer badge */}
                   <span
                     className="text-[10px] font-bold px-2 py-0.5 rounded-full text-white"
                     style={{ backgroundColor: issuerStyle.bg }}
                   >
                     {issuerStyle.label}
                   </span>
-                  {/* Type badge */}
                   <span
                     className="text-[10px] font-medium px-2 py-0.5 rounded-full"
                     style={{ backgroundColor: `${typeColor}22`, color: typeColor }}
                   >
-                    {cert.type}
+                    {c.types[cert.type]}
                   </span>
-                  {/* Date */}
                   <span className="text-[10px] text-gray-400 dark:text-white/30 ml-auto shrink-0">
                     {cert.issueDate}
                   </span>
                 </div>
               </div>
-
-              {/* Arrow */}
               <ExternalLink
                 size={13}
                 className="shrink-0 mt-0.5 text-gray-300 dark:text-white/20 group-hover:text-ph-orange transition-colors"

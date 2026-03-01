@@ -1,6 +1,7 @@
 "use client";
 
-import { MapPin, Mail, ExternalLink } from "lucide-react";
+import Image from "next/image";
+import { MapPin, Mail, ExternalLink, Folder, Zap, Briefcase } from "lucide-react";
 import { useWindows } from "@/contexts/WindowContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -11,10 +12,10 @@ export default function AboutApp() {
   const b = a.bio;
 
   const exploreApps = [
-    { appId: "projects",   title: "projects/",      emoji: "📁" },
-    { appId: "skills",     title: "skills.txt",     emoji: "⚡" },
-    { appId: "experience", title: "experience.mdx", emoji: "💼" },
-    { appId: "contact",    title: "contact.mdx",    emoji: "✉️" },
+    { appId: "projects",   title: "projects/",      Icon: Folder,   color: "#f54e00" },
+    { appId: "skills",     title: "skills.txt",     Icon: Zap,      color: "#2EB67D" },
+    { appId: "experience", title: "experience.mdx", Icon: Briefcase,color: "#ECB22E" },
+    { appId: "contact",    title: "contact.mdx",    Icon: Mail,     color: "#E01E5A" },
   ] as const;
 
   return (
@@ -23,7 +24,7 @@ export default function AboutApp() {
       <div className="px-8 pt-8 pb-6 border-b border-gray-100 dark:border-white/8 bg-linear-to-br from-ph-cream/50 to-white dark:from-ph-orange/5 dark:to-ph-dark">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
           <div className="w-20 h-20 rounded-2xl bg-linear-to-br from-ph-orange to-[#d94400] flex items-center justify-center text-white text-3xl font-bold shadow-lg shrink-0">
-            LR
+            <Image src="/avatar.jpg" alt="Avatar" width={80} height={80} className="rounded-2xl object-cover" />
           </div>
           <div>
             <h1 className="text-2xl font-bold text-ph-dark dark:text-white/90 tracking-tight">
@@ -67,7 +68,7 @@ export default function AboutApp() {
           {a.sectionExplore}
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {exploreApps.map(({ appId, title, emoji }, i) => {
+          {exploreApps.map(({ appId, title, Icon, color }, i) => {
             const item = a.exploreItems[i];
             return (
               <button
@@ -79,7 +80,7 @@ export default function AboutApp() {
                            hover:shadow-md dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)]
                            bg-white dark:bg-[#252320] transition-all text-center"
               >
-                <span className="text-2xl">{emoji}</span>
+                <Icon size={24} style={{ color }} />
                 <span className="text-sm font-bold text-ph-dark dark:text-white/85 group-hover:text-ph-orange transition-colors">
                   {item.label}
                 </span>
