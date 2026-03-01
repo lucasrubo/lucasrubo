@@ -53,11 +53,17 @@ function TaskbarIcon({ appId }: { appId: string }) {
 		return (
 			<div
 				className="w-full h-full rounded-lg flex items-center justify-center"
-				style={{ background: `linear-gradient(145deg, ${color}cc, ${color}77)` }}
+				style={{
+					background: `linear-gradient(145deg, ${color}cc, ${color}77)`,
+				}}
 			>
 				{isUrl ? (
 					// eslint-disable-next-line @next/next/no-img-element
-					<img src={customIcon} alt={label} className="w-[68%] h-[68%] object-contain" />
+					<img
+						src={customIcon}
+						alt={label}
+						className="w-[68%] h-[68%] object-contain"
+					/>
 				) : (
 					<span className="text-base leading-none">{customIcon}</span>
 				)}
@@ -68,8 +74,15 @@ function TaskbarIcon({ appId }: { appId: string }) {
 	if (type === "folder") {
 		return (
 			<svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
-				<path d="M4 16 Q4 12 8 12 H18 L22 8 H40 Q44 8 44 12 V36 Q44 40 40 40 H8 Q4 40 4 36 Z" fill={color} />
-				<path d="M4 18 H44 V36 Q44 40 40 40 H8 Q4 40 4 36 Z" fill={color} opacity="0.8" />
+				<path
+					d="M4 16 Q4 12 8 12 H18 L22 8 H40 Q44 8 44 12 V36 Q44 40 40 40 H8 Q4 40 4 36 Z"
+					fill={color}
+				/>
+				<path
+					d="M4 18 H44 V36 Q44 40 40 40 H8 Q4 40 4 36 Z"
+					fill={color}
+					opacity="0.8"
+				/>
 				<path d="M6 18 H42 V22 Q24 24 6 22 Z" fill="white" opacity="0.15" />
 			</svg>
 		);
@@ -79,16 +92,23 @@ function TaskbarIcon({ appId }: { appId: string }) {
 		return (
 			<div
 				className="w-full h-full rounded-lg flex items-center justify-center"
-				style={{ background: `linear-gradient(145deg, ${color}cc, ${color}77)` }}
+				style={{
+					background: `linear-gradient(145deg, ${color}cc, ${color}77)`,
+				}}
 			>
-				<span className="text-white font-bold text-[9px] tracking-tight">.mdx</span>
+				<span className="text-white font-bold text-[9px] tracking-tight">
+					.mdx
+				</span>
 			</div>
 		);
 	}
 
 	if (type === "mov") {
 		return (
-			<div className="w-full h-full rounded-lg flex items-center justify-center bg-[#1d1b17]" style={{ outline: `1px solid ${color}44` }}>
+			<div
+				className="w-full h-full rounded-lg flex items-center justify-center bg-[#1d1b17]"
+				style={{ outline: `1px solid ${color}44` }}
+			>
 				<Play size={14} className="text-white/80 fill-white/80" />
 			</div>
 		);
@@ -96,7 +116,10 @@ function TaskbarIcon({ appId }: { appId: string }) {
 
 	const IconComp = type === "link" ? Link : Monitor;
 	return (
-		<div className="w-full h-full rounded-lg flex items-center justify-center" style={{ background: `linear-gradient(145deg, ${color}cc, ${color}77)` }}>
+		<div
+			className="w-full h-full rounded-lg flex items-center justify-center"
+			style={{ background: `linear-gradient(145deg, ${color}cc, ${color}77)` }}
+		>
 			<IconComp size={15} className="text-white drop-shadow" />
 		</div>
 	);
@@ -104,12 +127,20 @@ function TaskbarIcon({ appId }: { appId: string }) {
 
 // ── Separator ────────────────────────────────────────────────────────────────
 function TaskbarSep() {
-	return <div className="w-px h-5 bg-black/15 dark:bg-white/15 mx-0.5 self-center shrink-0" />;
+	return (
+		<div className="w-px h-5 bg-black/15 dark:bg-white/15 mx-0.5 self-center shrink-0" />
+	);
 }
 
 // ── Single taskbar item ──────────────────────────────────────────────────────
 function TaskbarItem({ win }: { win: WindowState }) {
-	const { activeAppId, focusWindow, closeWindow, setTaskbarBound, triggerMinimize } = useWindows();
+	const {
+		activeAppId,
+		focusWindow,
+		closeWindow,
+		setTaskbarBound,
+		triggerMinimize,
+	} = useWindows();
 	const isActive = win.appId === activeAppId && !win.isMinimized;
 	const itemRef = useRef<HTMLDivElement>(null);
 
@@ -117,7 +148,10 @@ function TaskbarItem({ win }: { win: WindowState }) {
 		const update = () => {
 			if (!itemRef.current) return;
 			const rect = itemRef.current.getBoundingClientRect();
-			setTaskbarBound(win.appId, { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 });
+			setTaskbarBound(win.appId, {
+				x: rect.left + rect.width / 2,
+				y: rect.top + rect.height / 2,
+			});
 		};
 		update();
 		window.addEventListener("resize", update);
@@ -135,37 +169,65 @@ function TaskbarItem({ win }: { win: WindowState }) {
 			ref={itemRef}
 			role="button"
 			tabIndex={0}
-			onClick={() => { if (isActive) triggerMinimize(win.appId); else focusWindow(win.appId); }}
-			onKeyDown={(e) => { if (e.key !== "Enter") return; if (isActive) triggerMinimize(win.appId); else focusWindow(win.appId); }}
+			onClick={() => {
+				if (isActive) triggerMinimize(win.appId);
+				else focusWindow(win.appId);
+			}}
+			onKeyDown={(e) => {
+				if (e.key !== "Enter") return;
+				if (isActive) triggerMinimize(win.appId);
+				else focusWindow(win.appId);
+			}}
 			title={win.title}
 			className={`
         group relative flex flex-col items-center gap-0.75 cursor-default select-none
         ${bounced ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}
         ${isActive ? "scale-105" : "hover:scale-110 active:scale-95"}
       `}
-			style={{ transition: bounced ? "transform 0.15s ease, opacity 0.2s ease" : "none" }}
+			style={{
+				transition: bounced
+					? "transform 0.15s ease, opacity 0.2s ease"
+					: "none",
+			}}
 		>
-			<div className={`w-9 h-9 relative overflow-hidden rounded-xl transition-all duration-150 ${
-				isActive
-					? "shadow-[0_0_0_1.5px_rgba(255,255,255,0.25),0_4px_16px_rgba(0,0,0,0.5)]"
-					: win.isMinimized ? "opacity-55" : "opacity-85 group-hover:opacity-100"
-			}`}>
+			<div
+				className={`w-9 h-9 relative overflow-hidden rounded-xl transition-all duration-150 ${
+					isActive
+						? "shadow-[0_0_0_1.5px_rgba(255,255,255,0.25),0_4px_16px_rgba(0,0,0,0.5)]"
+						: win.isMinimized
+							? "opacity-55"
+							: "opacity-85 group-hover:opacity-100"
+				}`}
+			>
 				<TaskbarIcon appId={win.appId} />
 			</div>
 
-			<div className={`w-1.25 h-1.25 rounded-full transition-all duration-200 ${
-				isActive ? "bg-white/90" : win.isMinimized ? "bg-amber-400" : "bg-white/35"
-			}`} />
+			<div
+				className={`w-1.25 h-1.25 rounded-full transition-all duration-200 ${
+					isActive
+						? "bg-white/90"
+						: win.isMinimized
+							? "bg-amber-400"
+							: "bg-white/35"
+				}`}
+			/>
 
 			{/* Tooltip */}
 			<div className="absolute bottom-full mb-2 px-2.5 py-1 z-50 bg-[#1a1814]/95 backdrop-blur-sm text-white/85 text-[11px] font-medium rounded-lg border border-white/8 shadow-xl opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 whitespace-nowrap -translate-x-1/2 left-1/2">
 				{win.title}
-				{win.isMinimized && <span className="ml-1.5 text-yellow-400/80 text-[9px]">minimizado</span>}
+				{win.isMinimized && (
+					<span className="ml-1.5 text-yellow-400/80 text-[9px]">
+						minimizado
+					</span>
+				)}
 			</div>
 
 			{/* Close button */}
 			<button
-				onClick={(e) => { e.stopPropagation(); closeWindow(win.appId); }}
+				onClick={(e) => {
+					e.stopPropagation();
+					closeWindow(win.appId);
+				}}
 				className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-ph-orange flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-150 hover:brightness-110 shadow-md z-10"
 				aria-label={`Fechar ${win.title}`}
 			>
@@ -197,21 +259,28 @@ export default function Taskbar() {
 	return (
 		<div className="shrink-0 flex items-center justify-center px-4 absolute left-0 right-0 bottom-0 z-9999">
 			<div className="rounded-b-none flex items-end gap-2 px-3 pt-2 pb-1.5 bg-black/8 dark:bg-white/6 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.12)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.06)] flex-wrap justify-center max-w-[calc(100vw-2rem)]">
-
 				{/* ── Fixed left: Aprix button ── */}
 				<div className="group relative flex flex-col items-center gap-0.75 cursor-default select-none hover:scale-110 active:scale-95 transition-transform duration-150">
 					<div className="relative">
 						<button
-							onClick={() => isMobile
-								? window.open("https://aprix-five.vercel.app", "_blank")
-								: openWindow("chatbot", { title: "Aprix.app", size: { width: 400, height: 540 } })
+							onClick={() =>
+								isMobile
+									? window.open("https://aprix-five.vercel.app", "_blank")
+									: openWindow("chatbot", {
+											title: "Aprix.app",
+											size: { width: 400, height: 540 },
+										})
 							}
 							className="w-9 h-9 relative overflow-hidden rounded-xl  bg-white opacity-85 group-hover:opacity-100 transition-opacity duration-150"
 							title="Aprix"
 						>
 							<div className="w-full h-full rounded-xl flex items-center justify-center bg-white/10">
 								{/* eslint-disable-next-line @next/next/no-img-element */}
-								<img src="/Aprix.png" alt="Aprix" className="w-[68%] h-[68%] object-contain" />
+								<img
+									src="/Aprix.png"
+									alt="Aprix"
+									className="w-[68%] h-[68%] object-contain"
+								/>
 							</div>
 						</button>
 						{apiOnline && (
@@ -244,7 +313,10 @@ export default function Taskbar() {
 								title={allMinimized ? "Maximize all" : "Minimize all"}
 								className="w-9 h-9 rounded-xl flex items-center justify-center bg-white/8 hover:bg-white/14 opacity-70 hover:opacity-100 transition-all duration-150"
 							>
-								<Layers size={15} className={allMinimized ? "text-white/90" : "text-white/70"} />
+								<Layers
+									size={15}
+									className={allMinimized ? "text-white/90" : "text-white/70"}
+								/>
 							</button>
 							<div className="w-1.25 h-1.25 rounded-full bg-white/0" />
 							<div className="absolute bottom-full mb-2 px-2.5 py-1 z-50 bg-[#1a1814]/95 backdrop-blur-sm text-white/85 text-[11px] font-medium rounded-lg border border-white/8 shadow-xl opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 whitespace-nowrap -translate-x-1/2 left-1/2">
