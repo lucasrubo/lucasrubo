@@ -20,6 +20,16 @@ export const metadata: Metadata = {
 	title: "AprixOS – Portfolio and Playground",
 	description:
 		"AprixOS is a portfolio, blog, and playground all in one. Built by Lucas Rubo with Next.js, Tailwind CSS, and TypeScript.",
+	manifest: "/manifest.webmanifest",
+	appleWebApp: {
+		capable: true,
+		statusBarStyle: "black-translucent",
+		title: "AprixOS",
+	},
+	icons: {
+		icon: "/icon.png",
+		apple: "/icon.png",
+	},
 };
 
 export default function RootLayout({

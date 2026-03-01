@@ -5,9 +5,35 @@ import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ContactApp() {
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { t } = useLanguage();
   const c = t.contact;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error();
+      setSent(true);
+    } catch {
+      setError("Erro ao enviar. Tente novamente.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-full bg-white dark:bg-ph-dark">
@@ -77,11 +103,11 @@ export default function ContactApp() {
               </button>
             </div>
           ) : (
-            <form className="space-y-3" onSubmit={(e) => { e.preventDefault(); setSent(true); }}>
+            <form className="space-y-3" onSubmit={handleSubmit}>
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-gray-600 dark:text-white/55 mb-1">{c.form.nameLabel}</label>
-                  <input required
+                  <input required name="name" value={form.name} onChange={handleChange}
                     className="w-full border border-gray-200 dark:border-white/10 rounded-md px-3 py-2 text-sm
                                bg-white dark:bg-white/5 text-ph-dark dark:text-white/85
                                placeholder:text-gray-400 dark:placeholder:text-white/25
@@ -90,7 +116,7 @@ export default function ContactApp() {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-600 dark:text-white/55 mb-1">{c.form.emailLabel}</label>
-                  <input required type="email"
+                  <input required type="email" name="email" value={form.email} onChange={handleChange}
                     className="w-full border border-gray-200 dark:border-white/10 rounded-md px-3 py-2 text-sm
                                bg-white dark:bg-white/5 text-ph-dark dark:text-white/85
                                placeholder:text-gray-400 dark:placeholder:text-white/25
@@ -100,7 +126,7 @@ export default function ContactApp() {
               </div>
               <div>
                 <label className="block text-xs font-semibold text-gray-600 dark:text-white/55 mb-1">{c.form.subjectLabel}</label>
-                <input
+                <input name="subject" value={form.subject} onChange={handleChange}
                   className="w-full border border-gray-200 dark:border-white/10 rounded-md px-3 py-2 text-sm
                              bg-white dark:bg-white/5 text-ph-dark dark:text-white/85
                              placeholder:text-gray-400 dark:placeholder:text-white/25
@@ -109,16 +135,20 @@ export default function ContactApp() {
               </div>
               <div>
                 <label className="block text-xs font-semibold text-gray-600 dark:text-white/55 mb-1">{c.form.messageLabel}</label>
-                <textarea required rows={5}
+                <textarea required rows={5} name="message" value={form.message} onChange={handleChange}
                   className="w-full border border-gray-200 dark:border-white/10 rounded-md px-3 py-2 text-sm
                              bg-white dark:bg-white/5 text-ph-dark dark:text-white/85
                              placeholder:text-gray-400 dark:placeholder:text-white/25
                              focus:outline-none focus:ring-2 focus:ring-ph-orange/30 focus:border-ph-orange resize-none"
                   placeholder={c.form.messagePlaceholder} />
               </div>
-              <button type="submit"
-                className="w-full bg-ph-orange text-white font-semibold py-2.5 rounded-md text-sm hover:bg-[#d94400] transition-colors">
-                {c.form.submit}
+              {error && (
+                <p className="text-xs text-red-500 dark:text-red-400">{error}</p>
+              )}
+              <button type="submit" disabled={loading}
+                className="w-full bg-ph-orange text-white font-semibold py-2.5 rounded-md text-sm
+                           hover:bg-[#d94400] transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
+                {loading ? "Enviando…" : c.form.submit}
               </button>
             </form>
           )}

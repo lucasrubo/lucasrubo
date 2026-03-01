@@ -124,6 +124,20 @@ export default function AppWindow({
     [appId, isMaximized, position, size, focusWindow, updateSize]
   );
 
+  // ── Zoom ──────────────────────────────────────────────────────────────────
+  const [zoom, setZoom] = useState(100);
+  const [zoomOpen, setZoomOpen] = useState(false);
+  const ZOOM_OPTIONS = [75, 100, 125, 150, 175, 200];
+
+  useEffect(() => {
+    if (!zoomOpen) return;
+    const raf = requestAnimationFrame(() => {
+      const close = () => setZoomOpen(false);
+      document.addEventListener("click", close, { once: true });
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [zoomOpen]);
+
   // ── Close animation ───────────────────────────────────────────────────────
   const [toolbarVisible, setToolbarVisible] = useState(true);
 
@@ -414,7 +428,7 @@ export default function AppWindow({
         </div>
 
         {/* Row 2: Toolbar */}
-        {appId !== "chatbot" && toolbarVisible && <div className={`flex max-w-full overflow-x-auto overflow-y-hidden items-center gap-0.5 shrink-0 ${
+        {appId !== "chatbot" && appId !== "welcome" && toolbarVisible && <div className={`flex max-w-full items-center gap-0.5 shrink-0 ${
           isActive
             ? "bg-[#f5f5f5] dark:bg-[#222018]"
             : "bg-[#f9f9f9] dark:bg-[#1c1a17]"
@@ -427,11 +441,36 @@ export default function AppWindow({
             <ToolBtn icon={Undo2}   label="Undo" />
             <ToolBtn icon={Redo2}   label="Redo" />
             <Divider />
-            <button className="flex items-center gap-1 px-2 py-1 text-[11px] text-gray-500 dark:text-white/40
-                              hover:bg-black/5 dark:hover:bg-white/6 hover:text-gray-700 dark:hover:text-white/65
-                              rounded transition-colors">
-              Zoom <ChevronDown size={10} />
-            </button>
+            <div className="relative">
+              <button
+                onClick={(e) => { e.stopPropagation(); setZoomOpen(v => !v); }}
+                className="flex items-center gap-1 px-2 py-1 text-[11px] text-gray-500 dark:text-white/40
+                           hover:bg-black/5 dark:hover:bg-white/6 hover:text-gray-700 dark:hover:text-white/65
+                           rounded transition-colors"
+              >
+                {zoom}% <ChevronDown size={10} className={`transition-transform duration-150 ${zoomOpen ? "rotate-180" : ""}`} />
+              </button>
+              {zoomOpen && (
+                <div
+                  className="absolute top-full left-0 mt-0.5 bg-[#2a2724]/96 backdrop-blur-xl
+                             border border-white/10 rounded-lg shadow-[0_8px_24px_rgba(0,0,0,0.5)]
+                             z-50 py-1 min-w-16 overflow-hidden"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {ZOOM_OPTIONS.map(z => (
+                    <button
+                      key={z}
+                      onClick={() => { setZoom(z); setZoomOpen(false); }}
+                      className={`w-full text-left px-3 py-1 text-[11px] transition-colors
+                                 hover:bg-white/10
+                                 ${z === zoom ? "text-ph-orange font-semibold" : "text-white/75"}`}
+                    >
+                      {z}%
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
             <Divider />
             <ToolBtn icon={Bold}      label="Bold" />
             <ToolBtn icon={Italic}    label="Italic" />
@@ -459,8 +498,10 @@ export default function AppWindow({
           </div>
         </div>}
         {/* Content */}
-        <div className="flex-1 overflow-y-auto overflow-x-hidden bg-white dark:bg-[#1d1b17]">
-          {children}
+        <div className="flex-1 overflow-y-auto overflow-x-hidden bg-white dark:bg-[#1d1b17] flex flex-col">
+          <div className="flex-1" style={{ zoom: zoom / 100 }}>
+            {children}
+          </div>
         </div>
       </div>
     </div>

@@ -31,6 +31,7 @@ export default function DesktopIcon({ icon, position, onOpen, onDragEnd, badge }
       const dist = Math.abs(ev.clientX - e.clientX) + Math.abs(ev.clientY - e.clientY);
       if (!hasDragged.current && dist > 4) hasDragged.current = true;
       if (hasDragged.current) {
+        // Raw position during drag — fluid, no snapping
         setDragPos({
           x: Math.max(0, ev.clientX - startX),
           y: Math.max(0, ev.clientY - startY),
@@ -42,6 +43,7 @@ export default function DesktopIcon({ icon, position, onOpen, onDragEnd, badge }
       document.removeEventListener("mousemove", onMove);
       document.removeEventListener("mouseup", onUp);
       if (hasDragged.current) {
+        // Pass raw position — parent applies grid snap
         onDragEnd({
           x: Math.max(0, ev.clientX - startX),
           y: Math.max(0, ev.clientY - startY),
@@ -66,6 +68,9 @@ export default function DesktopIcon({ icon, position, onOpen, onDragEnd, badge }
         left: displayPos.x,
         top: displayPos.y,
         zIndex: dragPos ? 1000 : 10,
+        transition: dragPos
+          ? "none"
+          : "left 0.18s cubic-bezier(0.25,0.46,0.45,0.94), top 0.18s cubic-bezier(0.25,0.46,0.45,0.94)",
       }}
       className="group flex flex-col items-center gap-1 w-14 p-1 rounded-lg
                  hover:bg-black/10 dark:hover:bg-white/8

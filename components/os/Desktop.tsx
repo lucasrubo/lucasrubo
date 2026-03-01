@@ -48,7 +48,15 @@ export function AppContent({ appId }: { appId: string }) {
 }
 
 const ICON_H = 78; // approx height per icon row (76px icon + 2px gap)
+const GRID = { x: 8, y: 12, stepX: 80, stepY: ICON_H }; // matches buildDefaultPositions
 const ALL_ICONS = [...LEFT_ICONS, ...RIGHT_ICONS, ...MIDDLE_ICONS];
+
+function snapToGrid(pos: { x: number; y: number }): { x: number; y: number } {
+  return {
+    x: Math.max(0, GRID.x + Math.round((pos.x - GRID.x) / GRID.stepX) * GRID.stepX),
+    y: Math.max(0, GRID.y + Math.round((pos.y - GRID.y) / GRID.stepY) * GRID.stepY),
+  };
+}
 
 type IconPositions = Record<string, { x: number; y: number }>;
 
@@ -86,7 +94,7 @@ function DesktopInner() {
   }, []);
 
   const handleIconDragEnd = (iconId: string, pos: { x: number; y: number }) => {
-    setIconPositions((prev) => ({ ...prev, [iconId]: pos }));
+    setIconPositions((prev) => ({ ...prev, [iconId]: snapToGrid(pos) }));
   };
 
   // ── Context menu ────────────────────────────────────────────────────────────
