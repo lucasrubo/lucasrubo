@@ -173,6 +173,22 @@
   }
 }
 
+/* ── Mobile home screen ──────────────────────────────────────────────────── */
+.mobile-pages-scroll::-webkit-scrollbar { display: none; }
+
+@keyframes mobile-modal-in {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@media (max-width: 767px) {
+  .mobile-icon-tap:active {
+    transform: scale(0.88);
+    opacity: 0.75;
+    transition: transform 0.08s ease, opacity 0.08s ease;
+  }
+}
+
 /* ── Taskbar item pop-in ─────────────────────────────────────────────────── */
 @keyframes taskbar-item-in {
   0%   { transform: scale(0.4) translateY(10px); opacity: 0; }

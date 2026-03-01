@@ -34,10 +34,10 @@ const RESIZE_HANDLES = [
   { dir: "s",  style: "absolute bottom-0 left-4    right-4   h-2   cursor-s-resize  z-10" },
   { dir: "e",  style: "absolute top-4    right-0   bottom-4  w-2   cursor-e-resize  z-10" },
   { dir: "w",  style: "absolute top-4    left-0    bottom-4  w-2   cursor-w-resize  z-10" },
-  { dir: "nw", style: "absolute top-0    left-0    w-5       h-5   cursor-nw-resize z-10" },
-  { dir: "ne", style: "absolute top-0    right-0   w-5       h-5   cursor-ne-resize z-10" },
-  { dir: "sw", style: "absolute bottom-0 left-0    w-5       h-5   cursor-sw-resize z-10" },
-  { dir: "se", style: "absolute bottom-0 right-0   w-5       h-5   cursor-se-resize z-10" },
+  { dir: "nw", style: "absolute top-0    left-0    w-2       h-2   cursor-nw-resize z-10" },
+  { dir: "ne", style: "absolute top-0    right-0   w-2       h-2   cursor-ne-resize z-10" },
+  { dir: "sw", style: "absolute bottom-0 left-0    w-2       h-2   cursor-sw-resize z-10" },
+  { dir: "se", style: "absolute bottom-0 right-0   w-2       h-2   cursor-se-resize z-10" },
 ] as const;
 
 export default function AppWindow({

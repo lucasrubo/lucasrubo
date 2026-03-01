@@ -21,6 +21,8 @@ import WelcomeApp    from "@/components/apps/WelcomeApp";
 import IframeApp     from "@/components/apps/IframeApp";
 import ChatApp from "@/components/apps/ChatApp";
 import { AprixProvider, useAprix } from "@/contexts/AprixContext";
+import { useIsMobile } from "@/hooks/useIsMobile";
+import MobileHomeScreen from "./MobileHomeScreen";
 
 // IDs that open as live iframes
 const IFRAME_URLS: Record<string, string> = {
@@ -31,7 +33,7 @@ const IFRAME_URLS: Record<string, string> = {
   finance:      "https://finance.rubo.tec.br",
 };
 
-function AppContent({ appId }: { appId: string }) {
+export function AppContent({ appId }: { appId: string }) {
   if (IFRAME_URLS[appId])     return <IframeApp url={IFRAME_URLS[appId]} />;
   if (appId === "welcome")    return <WelcomeApp />;
   if (appId === "chatbot")    return <ChatApp />;
@@ -73,6 +75,7 @@ function buildDefaultPositions(containerWidth: number): IconPositions {
 function DesktopInner() {
   const { windows, activeAppId, openWindow } = useWindows();
   const desktopRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   // ── Icon positions ──────────────────────────────────────────────────────────
   const [iconPositions, setIconPositions] = useState<IconPositions>({});
@@ -112,6 +115,7 @@ function DesktopInner() {
 
   // ── Open default window ─────────────────────────────────────────────────────
   useEffect(() => {
+    if (window.matchMedia("(max-width: 767px)").matches) return;
     openWindow("welcome", { title: "welcome.app", size: { width: 480, height: 520 } });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -131,8 +135,18 @@ function DesktopInner() {
     openWindow(appId, { title: label, size: iframeSize, launchOrigin: clickPos });
   };
 
+  if (isMobile) {
+    return (
+      <div className="h-dvh flex flex-col overflow-hidden">
+        <MenuBar />
+        <MobileHomeScreen />
+        <Taskbar />
+      </div>
+    );
+  }
+
   return (
-    <div className="h-screen flex flex-col overflow-hidden">
+    <div className="h-dvh flex flex-col overflow-hidden">
       <MenuBar />
 
       {/* Desktop surface */}

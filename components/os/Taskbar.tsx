@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import { X, Monitor, Link, Layers, Play } from "lucide-react";
 import { useWindows } from "@/contexts/WindowContext";
 import { useAprix } from "@/contexts/AprixContext";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { ALL_ICONS, type DesktopIconDef } from "@/lib/desktopIcons";
 import type { WindowState } from "@/contexts/WindowContext";
 
@@ -178,6 +179,9 @@ function TaskbarItem({ win }: { win: WindowState }) {
 export default function Taskbar() {
 	const { windows, openWindow, triggerMinimize, focusWindow } = useWindows();
 	const { apiOnline } = useAprix();
+	const isMobile = useIsMobile();
+
+	if (isMobile) return null;
 
 	const visibleWindows = windows.filter((w) => !w.isMinimized);
 	const allMinimized = windows.length > 0 && visibleWindows.length === 0;
@@ -198,7 +202,10 @@ export default function Taskbar() {
 				<div className="group relative flex flex-col items-center gap-0.75 cursor-default select-none hover:scale-110 active:scale-95 transition-transform duration-150">
 					<div className="relative">
 						<button
-							onClick={() => openWindow("chatbot", { title: "Aprix.app", size: { width: 400, height: 540 } })}
+							onClick={() => isMobile
+								? window.open("https://aprix-five.vercel.app", "_blank")
+								: openWindow("chatbot", { title: "Aprix.app", size: { width: 400, height: 540 } })
+							}
 							className="w-9 h-9 relative overflow-hidden rounded-xl  bg-white opacity-85 group-hover:opacity-100 transition-opacity duration-150"
 							title="Aprix"
 						>

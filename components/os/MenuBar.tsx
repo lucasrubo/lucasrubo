@@ -47,41 +47,46 @@ export default function MenuBar() {
         <span className="text-white/85 text-[13px] font-semibold tracking-tight">AprixOS</span>
       </button>
 
-      <div className="w-px h-4 bg-white/15 mx-1" />
+      <div className="hidden md:block w-px h-4 bg-white/15 mx-1" />
 
-      {/* Nav items */}
-      {NAV_IDS.map((item, i) => (
-        <button
-          key={item.appId}
-          onClick={() => openWindow(item.appId, { title: item.title, size: { width: 800, height: 600 } })}
-          className="px-2.5 py-1 text-[13px] text-white/65 hover:text-white hover:bg-white/10 rounded transition-colors"
-        >
-          {navLabels[i]}
-        </button>
-      ))}
+      {/* Nav items — hidden on mobile */}
+      <div className="hidden md:flex items-center">
+        {NAV_IDS.map((item, i) => (
+          <button
+            key={item.appId}
+            onClick={() => openWindow(item.appId, { title: item.title, size: { width: 800, height: 600 } })}
+            className="px-2.5 py-1 text-[13px] text-white/65 hover:text-white hover:bg-white/10 rounded transition-colors"
+          >
+            {navLabels[i]}
+          </button>
+        ))}
+      </div>
 
       <div className="flex-1" />
 
       {/* Right side */}
       <div className="flex items-center gap-1">
-        <a href="https://github.com/lucasrubo" target="_blank" rel="noopener noreferrer"
-          className="p-1.5 text-white/50 hover:text-white hover:bg-white/10 rounded transition-colors"
-          aria-label="GitHub">
-          <Github size={14} />
-        </a>
-        <a href="https://linkedin.com/in/lucas-rubo" target="_blank" rel="noopener noreferrer"
-          className="p-1.5 text-white/50 hover:text-white hover:bg-white/10 rounded transition-colors"
-          aria-label="LinkedIn">
-          <Linkedin size={14} />
-        </a>
-        <button
-          onClick={() => openWindow("contact", { title: "contact.mdx", size: { width: 640, height: 520 } })}
-          className="p-1.5 text-white/50 hover:text-white hover:bg-white/10 rounded transition-colors"
-          aria-label="Download resume">
-          <Download size={14} />
-        </button>
+        {/* Icon links — hidden on mobile */}
+        <div className="hidden md:flex items-center gap-1">
+          <a href="https://github.com/lucasrubo" target="_blank" rel="noopener noreferrer"
+            className="p-1.5 text-white/50 hover:text-white hover:bg-white/10 rounded transition-colors"
+            aria-label="GitHub">
+            <Github size={14} />
+          </a>
+          <a href="https://linkedin.com/in/lucas-rubo" target="_blank" rel="noopener noreferrer"
+            className="p-1.5 text-white/50 hover:text-white hover:bg-white/10 rounded transition-colors"
+            aria-label="LinkedIn">
+            <Linkedin size={14} />
+          </a>
+          <button
+            onClick={() => openWindow("contact", { title: "contact.mdx", size: { width: 640, height: 520 } })}
+            className="p-1.5 text-white/50 hover:text-white hover:bg-white/10 rounded transition-colors"
+            aria-label="Download resume">
+            <Download size={14} />
+          </button>
+        </div>
 
-        <div className="w-px h-4 bg-white/15 mx-1" />
+        <div className="hidden md:block w-px h-4 bg-white/15 mx-1" />
 
         {/* Language switcher — EN · PT toggle */}
         <button
