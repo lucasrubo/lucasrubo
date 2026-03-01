@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import MenuBar from "./MenuBar";
 import AppWindow from "./AppWindow";
 import DesktopIcon from "./DesktopIcon";
@@ -139,7 +140,7 @@ function DesktopInner() {
         ref={desktopRef}
         className="flex-1 relative overflow-hidden desktop-surface"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E") `,
         }}
         onContextMenu={(e) => {
           e.preventDefault();
@@ -182,6 +183,7 @@ function DesktopInner() {
 
       <Taskbar />
 
+      <Image className="opacity-10 blur-sm pointer-events-none" src="/bg.jpg" alt="Background" layout="fill" objectFit="cover" />
       {/* Context menu — fixed positioning, no offset math needed */}
       {contextMenu && (
         <ContextMenu
