@@ -8,7 +8,7 @@ I build interfaces — from enterprise systems in C# - Next - PHP Blazor to expe
 like **AprixOS**, a browser-based operating system I use to centralize my work.
 
 [![LinkedIn](https://img.shields.io/badge/linkedin-lucas--rubo-0a66c2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lucas-rubo/)
-[![Portfolio](https://img.shields.io/badge/portfolio-lucasrubo.github.io-111?style=flat-square)](https://lucasrubo.github.io/portfolio/)
+[![Portfolio](https://img.shields.io/badge/portfolio-rubo.tec.br-111?style=flat-square)](https://rubo.tec.br)
 [![Email](https://img.shields.io/badge/email-lucasrubo1@gmail.com-ea4335?style=flat-square&logo=gmail&logoColor=white)](mailto:lucasrubo1@gmail.com)
 
 </div>
